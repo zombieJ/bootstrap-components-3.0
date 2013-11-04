@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/dialog/bootstrap-dialog.js"></script>
+	</head>
+	<body>
+		<script>
+			$(document).ready(function(){
+				$("#dlg").click(function(){
+					// dialog - alert
+					var $content = $('#sample > div').clone();
+
+					$.dialog({
+						title: "Sample Title",
+						content: $content,
+					});
+
+					$btn = $content.find('a.btn');
+					$btn.click(function(){
+						$.dialog({
+							title: "Sub Dialog",
+							content: "This is sub dialog",
+						});
+					});
+				});
+
+
+
+				// dialog - confirm
+				$("#dlg_confirm").click(function(){
+					$.dialog({
+						title: "Comfirm",
+						content: "Do You want to confirm?",
+						confirm: true,
+					}, function(ret){
+						$("#dlg_confirm_tips").html("You select: "+ret);
+					});
+				});
+
+				// dialog - dlg_customize
+				$("#dlg_customize").click(function(){
+					$.dialog({
+						title: "Customize",
+						content: "Buttons are made as customized!",
+						buttons: [
+							{name: "delete", class: "btn btn-danger", left: true},
+							{name: "Not Yet", value: -1},
+							{name: "That's Time!", class: "btn btn-primary"}
+						],
+					});
+				});
+
+				// dialog - confirm not close
+				$("#dlg_confirm_notClose").click(function(){
+					$.dialog({
+						title: "Comfirm",
+						content: "Click cancel will not close window.",
+						confirm: true,
+					}, function(ret){
+						return ret;
+					});
+				});
+			});
+		</script>
+		<!-- Button to trigger modal -->
+		<a id="dlg" class="btn btn-default">alert</a>
+		<a id="dlg_confirm" class="btn btn-default">confirm</a>
+		<a id="dlg_customize" class="btn btn-default">customize</a>
+		<span id="dlg_confirm_tips"></span>
+		<br /><br />
+		<a id="dlg_confirm_notClose" class="btn btn-default">confirm - Click cancel not close dialog</a>
+
+		<div id="sample" class="hide">
+			<div>
+				<p>This is a sample!</p>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<a class="btn">show2</a>
+			</div>
+		</div>
+	</body>
+</html>
