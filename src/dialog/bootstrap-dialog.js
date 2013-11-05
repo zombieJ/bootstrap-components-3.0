@@ -33,6 +33,7 @@ $.extend({
 
 		var _ret = null;
 
+		// generate modal
 		var $modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
 		var $modal_dialog = $('<div class="modal-dialog">');
 		var $modal_content = $('<div class="modal-content">');
@@ -42,6 +43,7 @@ $.extend({
 		var $modal_body = $('<div class="modal-body">');
 		var $modal_footer = $('<div class="modal-footer">');
 
+		$modal.appendTo("body");
 		$modal.append($modal_dialog);
 		$modal_dialog.append($modal_content);
 		$modal_content.append($modal_header);
@@ -73,7 +75,7 @@ $.extend({
 				$modal_footer.append($btn);
 			}
 		} else if(_confirm) {
-			var $btn_cancel = $('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>');
+			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>');
 			var $btn_confirm = $('<button type="button" class="btn btn-primary">Comfirm</button>');
 			$modal_footer.append($btn_cancel);
 			$modal_footer.append($btn_confirm);
@@ -82,10 +84,14 @@ $.extend({
 			$modal_footer.append($btn_close);
 		}
 
-		$modal.appendTo("body");
-
 		// show dialog with options
 		$modal.modal(_options);
+
+		// move modal-backdrop to top
+		var $back = $("body div.modal-backdrop:last");
+		$back.css("z-index", $._bc.vals.dialog.z_index);
+		$modal.css("z-index", $._bc.vals.dialog.z_index+1);
+		$._bc.vals.dialog.z_index += 2;
 
 		/**
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
