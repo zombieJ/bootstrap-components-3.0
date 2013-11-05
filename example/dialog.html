@@ -42,7 +42,7 @@
 						content: "Do You want to confirm?",
 						confirm: true,
 					}, function(ret){
-						$("#dlg_confirm_tips").html("You select: "+ret);
+						$("#dlg_confirm_tips").text("You select: " + ret);
 					});
 				});
 
@@ -57,7 +57,7 @@
 							{name: "That's Time!", class: "btn btn-primary"}
 						],
 					}, function(ret){
-						alert('Your Select Value: ' + ret);
+						$("#dlg_customize_tips").text('You select: ' + ret);
 					});
 				});
 
@@ -76,8 +76,10 @@
 		<!-- Button to trigger modal -->
 		<a id="dlg" class="btn btn-default">alert</a>
 		<a id="dlg_confirm" class="btn btn-default">confirm</a>
-		<a id="dlg_customize" class="btn btn-default">customize</a>
 		<span id="dlg_confirm_tips"></span>
+		<br /><br />
+		<a id="dlg_customize" class="btn btn-default">customize buttons & values</a>
+		<span id="dlg_customize_tips"></span>
 		<br /><br />
 		<a id="dlg_confirm_notClose" class="btn btn-default">confirm - Click cancel not close dialog</a>
 
