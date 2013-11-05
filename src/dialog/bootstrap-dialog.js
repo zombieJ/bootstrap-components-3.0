@@ -70,71 +70,33 @@ $.extend({
 				$btn.text(_name);
 				$btn.addClass(_class);
 				if(_left) $btn.addClass("pull-left");
-				$btn.val(_value);
-
+				$btn.data("value", _value);
 				$modal_footer.append($btn);
+
+				$btn.add($btn_confirm).click(function() {
+				_ret = $(this).data("value");
+				$modal.modal('hide');
+			});
 			}
 		} else if(_confirm) {
-			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>');
-			var $btn_confirm = $('<button type="button" class="btn btn-primary">Comfirm</button>');
+			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
+			var $btn_confirm = $('<button type="button" class="btn btn-primary">Comfirm</button>').data("value", true);
 			$modal_footer.append($btn_cancel);
 			$modal_footer.append($btn_confirm);
-		} else {
-			var $btn_close = $('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>');
-			$modal_footer.append($btn_close);
-		}
 
-		// show dialog with options
-		$modal.modal(_options);
-
-		// move modal-backdrop to top
-		var $back = $("body div.modal-backdrop:last");
-		$back.css("z-index", $._bc.vals.dialog.z_index);
-		$modal.css("z-index", $._bc.vals.dialog.z_index+1);
-		$._bc.vals.dialog.z_index += 2;
-
-		/**
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Save changes</button>
-
-		////
-		var $modal = $('<div class="modal hide fade"></div>');
-		var $header = $('<div class="modal-header"></div>');
-		var $content = $('<div class="modal-body"></div>');
-		var $footer = $('<div class="modal-footer"></div>');
-		$modal.append($header);
-		$modal.append($content);
-		$modal.append($footer);
-
-		// title
-		var $close = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>');
-		if(!_close) $close.css("visibility", "hidden");
-
-		$header.append($close);
-		$header.append('<h3 id="myModalLabel">'+_title+'</h3>');
-
-		// content
-		$content.append(_content);
-
-		// footer
-		if(_confirm) {
-			var $f_cancel = $('<button class="btn">Cancel</button>');
-			var $f_confirm = $('<button class="btn btn-primary">Confirm</button>');
-			$f_cancel.data("ret", false);
-			$f_confirm.data("ret", true);
-			$footer.append($f_cancel);
-			$footer.append($f_confirm);
-
-			$f_cancel.add($f_confirm).click(function(){
-				_ret = $(this).data("ret");
+			$btn_cancel.add($btn_confirm).click(function() {
+				_ret = $(this).data("value");
 				$modal.modal('hide');
 			});
 		} else {
-			var $f_close = $('<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>');
-			$footer.append($f_close);
-		}
+			var $btn_close = $('<button type="button" class="btn btn-default">Close</button>').data("value", true);
+			$modal_footer.append($btn_close);
 
-		$modal.appendTo("body");
+			$btn_close.click(function() {
+				_ret = $(this).data("value");
+				$modal.modal('hide');
+			});
+		}
 
 		// show dialog with options
 		$modal.modal(_options);
@@ -146,24 +108,17 @@ $.extend({
 		$._bc.vals.dialog.z_index += 2;
 
 		// begin hide window, return callback
-		$modal.on('hide', function () {
+		$modal.on('hide.bs.modal', function () {
 			if(_callback != null) {
-				var ret;
-				if(_ret != null) {
-					ret = _callback.call($modal, _ret);
-				} else {
-					ret = _callback.call($modal, false);
-				}
-				return ret;
+				return _callback.call($modal, _ret);
 			}
 		});
 
 		// when show hidden, remove it
-		$modal.on('hidden', function () {
+		$modal.on('hidden.bs.modal', function () {
 			$(this).remove();
 			$._bc.vals.dialog.z_index -= 2;
 		});
 		return $modal;
-		**/
 	}
 });
