@@ -1,0 +1,319 @@
+.bsc-datepicker {
+	background: white;
+	display: inline-block;
+	border: 1px solid #CCC;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* monthpicker */
+.bsc-datepicker > .monthpicker .monthpicker-header {
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-header button {
+	padding: 6px 7px;
+	line-height: 100%;
+	vertical-align: top;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-header button.month-minus {
+	float: left;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-header button.month-plus {
+	float: right;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-header h4 {
+	display: inline-block;
+	margin: 0;
+	padding: 5px 0 7px 0;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-body {
+	width: 238px;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-body span {
+	display: inline-block;
+	width: 55px;
+	padding: 5px 0;
+	margin: 3px 2px 0 2px;
+	float: left;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-body span:hover {
+	background: #EEE;
+}
+
+.bsc-datepicker > .monthpicker .monthpicker-body span.active {
+	color: white;
+	background: #3276b1;
+}
+
+/* datepicker */
+.bsc-datepicker > .datepicker .datepicker-header {
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.bsc-datepicker > .datepicker .datepicker-header button {
+	padding: 6px 7px;
+	line-height: 100%;
+	vertical-align: top;
+}
+
+.bsc-datepicker > .datepicker .datepicker-header button.date-minus {
+	float: left;
+}
+
+.bsc-datepicker > .datepicker .datepicker-header button.date-plus {
+	float: right;
+}
+
+.bsc-datepicker > .datepicker .datepicker-header h4 {
+	display: inline-block;
+	margin: 0;
+	padding: 5px 0 7px 0;
+}
+
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-date span,
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span {
+	display: inline-block;
+	width: 30px;
+	margin: 0 2px 0 2px;
+	float: left;
+	text-align: center;
+}
+
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 3px;
+	margin-top: 4px;
+	cursor: pointer;
+}
+
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.inactive,
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.inactive:hover {
+	color: gray;
+	background: white;
+	cursor: default;
+}
+
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.active,
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.active:hover {
+	color: white;
+	background: #3276b1;
+}
+
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span:hover {
+	background: #EEE;
+}
+
+.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value {
+	width: 238px;
+}
+
+/* timepicker */
+.bsc-datepicker > .timepicker .timepicker-group {
+	width: 60px;
+	float: left;
+}
+
+.bsc-datepicker > .timepicker .timepicker-group input {
+	font-size: 40px;
+	height: 65px;
+	text-align: center;
+	padding: 10px 0;
+	margin: 0 0 10px 0;
+}
+
+.bsc-datepicker > .timepicker .timepicker-group button {
+	padding: 6px 6px;
+	line-height: 100%;
+	vertical-align: top;
+}
+
+.bsc-datepicker > .timepicker .timepicker-group button.time-plus {
+	float: right;
+}
+
+.bsc-datepicker > .timepicker .timepicker-spliter {
+	float: left;
+	font-size: 45px;
+	font-weight: bolder;
+	display: inline-block;
+	width: 29px;
+	text-align: center;
+}
+
+/**.datepicker {
+	width: 242px;
+	margin: 0;
+	position: absolute;
+	white-space: normal;
+}
+
+.datepicker .btn,
+.datepicker .btn:last-child,
+.datepicker input[type='text'] {
+	border-radius: 4px;
+}
+
+/ ----- Date Picker ----- /
+.datepicker .datepicker-date {
+	padding: 0 0 5px 0;
+}
+
+.datepicker .datepicker-date .datepicker-head {
+	text-align: center;
+	position: relative;
+
+	padding: 4px 0 4px 0;
+	border: 1px solid gray;
+	background-color: #04c;
+	color: #fff;
+
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+	background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+	background-repeat: repeat-x;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	background-color: #006dcc;
+	background-image: -moz-linear-gradient(top,#08c,#04c);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#04c));
+	background-image: -webkit-linear-gradient(top,#08c,#04c);
+	background-image: -o-linear-gradient(top,#08c,#04c);
+	background-image: linear-gradient(to bottom,#08c,#04c);
+	background-repeat: repeat-x;
+	border-color: #04c #04c #002a80;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',endColorstr='#ff0044cc',GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.datepicker .datepicker-date .datepicker-head h5 {
+	margin: 0;
+	padding: 4px 0 2px 0;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.datepicker .datepicker-date .datepicker-head .datepicker-month-left,
+.datepicker .datepicker-date .datepicker-head .datepicker-month-right {
+	width: 26px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.datepicker .datepicker-date .datepicker-head .datepicker-month-left {
+	position: absolute;
+	left: 4px;
+}
+
+.datepicker .datepicker-date .datepicker-head .datepicker-month-right {
+	position: absolute;
+	right: 4px;
+}
+
+.datepicker .datepicker-date .datepicker-body .btn {
+	padding: 3px 0 3px 0;
+	width: 30px;
+	margin-top: 5px;
+	margin-left: 4px;
+}
+
+.datepicker .datepicker-date .datepicker-body .datepicker-days {
+	line-height: 100%;
+	padding-top: 3px;
+}
+
+.datepicker .datepicker-date .datepicker-body .datepicker-days span {
+	width: 30px;
+	display: inline-block;
+	margin-left: 4px;
+	padding-top: 5px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 100%;
+	color: gray;
+	margin-top: 0px;
+}
+
+/ ----- Picker Spilter ----- /
+.datepicker .datepicker-split {
+	border-top: 1px solid gray;
+	margin: 0 4px 0 4px;
+}
+
+/ ----- Time Picker ----- /
+.datepicker .datepicker-time {
+	padding: 5px 0 5px 0;
+	text-align: center;
+}
+
+.datepicker .datepicker-time .btn {
+	width: 28px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.datepicker .datepicker-time .datepicker-hour,
+.datepicker .datepicker-time .datepicker-minute,
+.datepicker .datepicker-time .datepicker-second {
+	display: inline-block;
+	width: 65px;
+}
+
+.datepicker .datepicker-time .datepicker-hour input,
+.datepicker .datepicker-time .datepicker-minute input,
+.datepicker .datepicker-time .datepicker-second input {
+	width: 56px;
+	font-size: 40px;
+	height: 40px;
+	text-align: center;
+	padding: 11px 0px 8px 0px;
+	margin-bottom: 5px;
+}
+
+.datepicker .datepicker-time .datepicker-hour .btn:last-child,
+.datepicker .datepicker-time .datepicker-minute .btn:last-child,
+.datepicker .datepicker-time .datepicker-second .btn:last-child {
+	margin-left: 4px;
+}
+
+.datepicker .datepicker-time .datepicker-hour {
+	position: absolute;
+	left: 2px;
+}
+
+.datepicker .datepicker-time .datepicker-second {
+	position: absolute;
+	right: 2px;
+}
+
+.datepicker .datepicker-time span {
+	vertical-align: top;
+	font-size: 50px;
+	padding: 20px 4px 0 3px;
+	display: inline-block;
+}**/

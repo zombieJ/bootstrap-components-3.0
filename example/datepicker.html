@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/datepicker/bootstrap-datepicker.js"></script>
+		<link href="../src/datepicker/bootstrap-datepicker.css" rel="stylesheet" media="screen">
+
+		<script>
+			$(document).ready(function(){
+				$("#appended_change").change(function(){
+					$("#lb_tips").html($(this).val());
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="input-group col-lg-3">
+			<input type="text" class="form-control">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button"
+				data-toggle="datepicker">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</button>
+			</span>
+		</div>
+
+<br/>
+<hr/>
+
+<div class="bsc-datepicker">
+	<div class="monthpicker">
+		<div class="monthpicker-header">
+			<button class="btn btn-default month-minus" type="button">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</button>
+			<h4>2013</h4>
+			<button class="btn btn-default month-plus" type="button">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+		</div>
+		<div class="monthpicker-body clearfix">
+			<span>Jan</span>
+			<span>Feb</span>
+			<span>Mar</span>
+			<span>Apr</span>
+			<span>May</span>
+			<span>June</span>
+			<span>July</span>
+			<span>Aug</span>
+			<span>Sept</span>
+			<span class="active">Oct</span>
+			<span>Nov</span>
+			<span>Dec</span>
+		</div>
+	</div>
+
+	<div class="datepicker">
+		<div class="datepicker-header">
+			<button class="btn btn-default date-minus" type="button">
+				<span class="glyphicon glyphicon-step-backward"></span>
+			</button>
+			<h4>2013-11</h4>
+			<button class="btn btn-default date-plus" type="button">
+				<span class="glyphicon glyphicon-step-forward"></span>
+			</button>
+		</div>
+		<div class="datepicker-body">
+			<div class="datepicker-body-date clearfix">
+				<span>Sun</span>
+				<span>Mon</span>
+				<span>Tue</span>
+				<span>Wed</span>
+				<span>Thur</span>
+				<span>Fri</span>
+				<span>Sat</span>
+			</div>
+			<div class="datepicker-body-value clearfix">
+				<span class="inactive">&nbsp;</span>
+				<span class="inactive">&nbsp;</span>
+				<span>01</span>
+				<span>02</span>
+				<span>03</span>
+				<span>04</span>
+				<span>05</span>
+				<span>06</span>
+				<span>07</span>
+				<span>08</span>
+				<span>09</span>
+				<span>10</span>
+				<span class="active">11</span>
+				<span>12</span>
+				<span>13</span>
+				<span>14</span>
+				<span>15</span>
+				<span>16</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="timepicker clearfix">
+		<div class="timepicker-group">
+			<input class="form-control" type="text" value="03" />
+			<button type="button" class="btn btn-default time-minus">
+				<span class="glyphicon glyphicon-minus"></span>
+			</button>
+			<button type="button" class="btn btn-default time-plus">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+		<span class="timepicker-spliter">:</span>
+		<div class="timepicker-group">
+			<input class="form-control" type="text" value="33" />
+			<button type="button" class="btn btn-default time-minus">
+				<span class="glyphicon glyphicon-minus"></span>
+			</button>
+			<button type="button" class="btn btn-default time-plus">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+		<span class="timepicker-spliter">:</span>
+		<div class="timepicker-group">
+			<input class="form-control" type="text" value="59" />
+			<button type="button" class="btn btn-default time-minus">
+				<span class="glyphicon glyphicon-minus"></span>
+			</button>
+			<button type="button" class="btn btn-default time-plus">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+		</div>
+	</div>
+</div>
+
+<hr/>
+
+		<div class="input-append">
+			<input id="datepicker" type="text" style="width: 140px;">
+			<button class="btn" data-toggle="datepicker" data-to="#datepicker"><i class="icon-calendar"></i></button>
+		</div>
+		<div class="input-append">
+			<input id="datepicker_date" type="text" style="width: 140px;">
+			<button class="btn" data-toggle="datepicker" data-to="#datepicker_date" data-type="dater"><i class="icon-calendar"></i></button>
+		</div>
+		<div class="input-append">
+			<input id="datepicker_time" type="text" style="width: 140px;">
+			<button class="btn" data-toggle="datepicker" data-to="#datepicker_time" data-type="timer"><i class="icon-time"></i></button>
+		</div>
+		<div>
+			<input id="appended_change" type="text" style="width: 140px;" data-toggle="datepicker">
+			<span id="lb_tips"></span>
+		</div>
+	</body>
+</html>
