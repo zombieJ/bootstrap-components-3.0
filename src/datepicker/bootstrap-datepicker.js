@@ -83,6 +83,7 @@ $._bc.vals.datepicker.index = 1;
 			}
 		var _date = my.attr("data-type");
 			var date = toDate(_date);
+			var dateShadow = new Date(date.getTime());		// an date which is display the current view
 
 		// generate datepicker component
 		var $container = $('<div class="bsc-datepicker">');
@@ -147,6 +148,7 @@ $._bc.vals.datepicker.index = 1;
 			$monthpicker.append($monthpicker_body);
 				$.each(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'], function(i, _month) {
 					var $element = $('<span>');
+					$element.attr("data-month", i);
 					$element.text(_month);
 					$monthpicker_body.append($element);
 				});
@@ -184,6 +186,48 @@ $._bc.vals.datepicker.index = 1;
 				$timepicker_group_seconds.append($timepicker_group_seconds_minus);
 				$timepicker_group_seconds.append($timepicker_group_seconds_plus);
 
+		// page change event handler
+		// year picker
+			$yearpicker_header_year_minus.click(function() {
+				var _month = dateShadow.getMonth();
+				dateShadow.setFullYear(dateShadow.getFullYear() - 20);
+				dateShadow.setMonth(_month);
+				draw();
+			});
+			$yearpicker_header_year_plus.click(function() {
+				var _month = dateShadow.getMonth();
+				dateShadow.setFullYear(dateShadow.getFullYear() + 20);
+				dateShadow.setMonth(_month);
+				draw();
+			});
+			$yearpicker_body.on("click", "span", function() {
+				var _month = dateShadow.getMonth();
+				var year = Number($(this).text());
+				dateShadow.setFullYear(year);
+				dateShadow.setMonth(_month);
+				draw();
+			});
+
+		// month picker
+			$monthpicker_header_year_minus.click(function() {
+				var _month = dateShadow.getMonth();
+				dateShadow.setFullYear(dateShadow.getFullYear() - 1);
+				dateShadow.setMonth(_month);
+				draw();
+			});
+			$monthpicker_header_year_plus.click(function() {
+				var _month = dateShadow.getMonth();
+				dateShadow.setFullYear(dateShadow.getFullYear() + 1);
+				dateShadow.setMonth(_month);
+				draw();
+			});
+			$monthpicker_body.on("click", "span", function() {
+				var _month = Number($(this).attr("data-month"));
+				dateShadow.setMonth(_month);
+				dateShadow.setMonth(_month);
+				draw();
+			});
+
 		// show needed components
 		/*var _displayComponents = [];
 		if(!enable_yearpicker) {
@@ -211,16 +255,16 @@ $._bc.vals.datepicker.index = 1;
 
 		// fill date in the view
 		function draw() {
-			var _year = date.getFullYear();
+			var _year = dateShadow.getFullYear();
 				var year_start = _year - _year % 20;
 				var year_end = year_start + 19;
-			var _month = date.getMonth();
+			var _month = dateShadow.getMonth();
 				var month = _month + 1;
-			var _date = date.getDate();
-				var days = getDaysOfMonth(date);
-			var _hours = date.getHours();
-			var _minutes = date.getMinutes();
-			var _seconds = date.getSeconds();
+			var _date = dateShadow.getDate();
+				var days = getDaysOfMonth(dateShadow);
+			var _hours = dateShadow.getHours();
+			var _minutes = dateShadow.getMinutes();
+			var _seconds = dateShadow.getSeconds();
 
 			// year picker
 			$yearpicker_header_title.text(year_start + " - " + year_end);
@@ -269,7 +313,7 @@ $._bc.vals.datepicker.index = 1;
 
 		// get date by view
 		function viewToDate() {
-			
+			var _year = $yearpicker_body.find("span.active");
 		}
 	});
 /**	$(document).on("click.bootstrapcomponent.datepicker", "[data-toggle='datepicker']", function(event){
