@@ -24,41 +24,38 @@
 
 	/* header */
 
-.bsc-datepicker .picker-group .header {
+.bsc-datepicker .picker-group .picker-header {
 	text-align: center;
 	margin-bottom: 5px;
 }
 
-.bsc-datepicker > .picker-group .header button {
+.bsc-datepicker > .picker-group .picker-header button {
 	padding: 6px 7px;
 	line-height: 100%;
 	vertical-align: top;
 }
 
-.bsc-datepicker > .picker-group .header button.minus {
+.bsc-datepicker > .picker-group .picker-header button.minus {
 	float: left;
 }
 
-.bsc-datepicker > .picker-group .header button.plus {
+.bsc-datepicker > .picker-group .picker-header button.plus {
 	float: right;
 }
 
-.bsc-datepicker > .picker-group .header h4 {
+.bsc-datepicker > .picker-group .picker-header h4 {
 	display: inline-block;
 	margin: 0;
 	padding: 5px 0 7px 0;
 }
 
-/* yearpicker */
-
-/* monthpicker */
-.bsc-datepicker > .monthpicker .monthpicker-body {
+	/* body */
+.bsc-datepicker > .picker-group .picker-body {
 	width: 238px;
 }
 
-.bsc-datepicker > .monthpicker .monthpicker-body span {
+.bsc-datepicker > .picker-group .picker-body span {
 	display: inline-block;
-	width: 55px;
 	padding: 5px 0;
 	margin: 3px 2px 0 2px;
 	float: left;
@@ -67,60 +64,38 @@
 	cursor: pointer;
 }
 
-.bsc-datepicker > .monthpicker .monthpicker-body span:hover {
+.bsc-datepicker > .picker-group .picker-selectable span:hover {
 	background: #EEE;
 }
 
-.bsc-datepicker > .monthpicker .monthpicker-body span:active {
+.bsc-datepicker > .picker-group .picker-selectable span:active {
 	background: #DDD;
 }
 
-.bsc-datepicker > .monthpicker .monthpicker-body span.active {
+.bsc-datepicker > .picker-group .picker-selectable span.active {
 	color: white;
 	background: #3276b1;
-}
-
-/* datepicker */
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-description span,
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span {
-	display: inline-block;
-	width: 30px;
-	margin: 0 2px 0 2px;
-	float: left;
-	text-align: center;
-}
-
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span {
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-radius: 3px;
-	margin-top: 4px;
-	cursor: pointer;
-}
-
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.inactive,
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.inactive:hover {
-	color: gray;
-	background: white;
 	cursor: default;
 }
 
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.active,
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span.active:hover {
-	color: white;
-	background: #3276b1;
+.bsc-datepicker > .picker-group .picker-selectable span.inactive:hover {
+	background: transparent;
+	cursor: default;
 }
 
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span:hover {
-	background: #EEE;
+/* yearpicker */
+.bsc-datepicker > .yearpicker .picker-body span {
+	width: 43px;
 }
 
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value span:active {
-	background: #DDD;
+/* monthpicker */
+.bsc-datepicker > .monthpicker .picker-body span {
+	width: 55px;
 }
 
-.bsc-datepicker > .datepicker .datepicker-body .datepicker-body-value {
-	width: 238px;
+/* datepicker */
+.bsc-datepicker > .datepicker .picker-body span {
+	width: 30px;
 }
 
 /* timepicker */
@@ -133,7 +108,7 @@
 	font-size: 40px;
 	height: 65px;
 	text-align: center;
-	padding: 10px 0;
+	padding: 0;
 	margin: 0 0 10px 0;
 }
 

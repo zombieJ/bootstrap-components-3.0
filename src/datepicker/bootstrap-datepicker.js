@@ -3,6 +3,7 @@
 				time			time picker only
 				date			date picker only
 				month			month picker only
+				year			year picker only
 	to:			element			set the value of target element
 
 	date:		Date()			to set the date time. Default is now.
@@ -17,14 +18,56 @@ $._bc.vals.datepicker.index = 1;
 
 // init function
 !function ($) {
+	// Functions
+	function toDate(str) {
+		if(str == null) {
+			return new Date();
+		}
+		var date = new Date(str.replace(/-/g,"/"));
+		if(date == null || isNaN(date)) {
+			return new Date();
+		}
+		return date;
+	}
+	function getDaysOfMonth(date) {
+		var _startDay, _days;
+		var _date = new Date(date.getTime());
+		_date.setDate(1);
+		_date.setMonth(_date.getMonth() + 1);
+		_date.setDate(0);
+		_days =  _date.getDate();
+		_date.setDate(1);
+		_startDay = _date.getDay();
+		return [_startDay, _days];
+	}
+	function fillZero(str, len) {
+		if(len == null) {
+			len = 2;
+		}
+		var ret = str + "";
+		while(ret.length < len) {
+			ret = "0" + ret;
+		}
+		return ret;
+	}
+	function toString(date) {
+		return	date.getFullYear() + "-" + fillZero(date.getMonth() + 1) + "-" + fillZero(date.getDate()) + " " +
+				fillZero(date.getHours()) + ":" + fillZero(date.getMinutes()) + ":" + fillZero(date.getSeconds())
+	}
+
+	// Datepicker Handler
 	$(document).on("click.bs.datepicker", "[data-toggle='datepicker']", function(event){
 		var my = $(this);
 		var _target = my.attr("data-to");
 		var _type = my.attr("data-type");
+			var enable_yearpicker = false;
 			var enable_monthpicker = false;
 			var enable_datepicker = false;
 			var enable_timepicker = false;
 			switch(_type) {
+			case "year":
+				enable_yearpicker = true;
+				break;
 			case "month":
 				enable_monthpicker = true;
 				break;
@@ -38,27 +81,37 @@ $._bc.vals.datepicker.index = 1;
 				enable_datepicker = true;
 				enable_timepicker = true;
 			}
+		var _date = my.attr("data-type");
+			var date = toDate(_date);
 
 		// generate datepicker component
 		var $container = $('<div class="bsc-datepicker">');
+		var $yearpicker = $('<div class="yearpicker picker-group">');
+			var $yearpicker_header = $('<div class="picker-header">');
+				var $yearpicker_header_year_minus = $('<button class="btn btn-default minus" type="button">');
+					$yearpicker_header_year_minus.html('<span class="glyphicon glyphicon-chevron-left"></span>');
+				var $yearpicker_header_title = $('<h4>&nbsp;</h4>');
+				var $yearpicker_header_year_plus = $('<button class="btn btn-default plus" type="button">');
+					$yearpicker_header_year_plus.html('<span class="glyphicon glyphicon-chevron-right"></span>');
+			var $yearpicker_body = $('<div class="picker-body picker-selectable clearfix">');
 		var $monthpicker = $('<div class="monthpicker picker-group">');
-			var $monthpicker_header = $('<div class="header">');
+			var $monthpicker_header = $('<div class="picker-header">');
 				var $monthpicker_header_year_minus = $('<button class="btn btn-default minus" type="button">');
 					$monthpicker_header_year_minus.html('<span class="glyphicon glyphicon-chevron-left"></span>');
 				var $monthpicker_header_title = $('<h4>&nbsp;</h4>');
 				var $monthpicker_header_year_plus = $('<button class="btn btn-default plus" type="button">');
 					$monthpicker_header_year_plus.html('<span class="glyphicon glyphicon-chevron-right"></span>');
-			var $monthpicker_body = $('<div class="monthpicker-body clearfix">');
+			var $monthpicker_body = $('<div class="picker-body picker-selectable clearfix">');
 		var $datepicker = $('<div class="datepicker picker-group">');
-			var $datepick_header = $('<div class="header">');
-				var $datepick_header_month_minus = $('<button class="btn btn-default minus" type="button">');
-					$datepick_header_month_minus.html('<span class="glyphicon glyphicon-step-backward"></span>');
-				var $datepick_header_title = $('<h4>&nbsp;</h4>');
-				var $datepick_header_month_plus = $('<button class="btn btn-default plus" type="button">');
-					$datepick_header_month_plus.html('<span class="glyphicon glyphicon-step-forward"></span>');
-			var $datepick_body = $('<div class="datepicker-body">');
-				var $datepick_body_description = $('<div class="datepicker-body-description clearfix">');
-				var $datepick_body_date = $('<div class="datepicker-body-value clearfix">');
+			var $datepicker_header = $('<div class="picker-header">');
+				var $datepicker_header_month_minus = $('<button class="btn btn-default minus" type="button">');
+					$datepicker_header_month_minus.html('<span class="glyphicon glyphicon-step-backward"></span>');
+				var $datepicker_header_title = $('<h4>&nbsp;</h4>');
+				var $datepicker_header_month_plus = $('<button class="btn btn-default plus" type="button">');
+					$datepicker_header_month_plus.html('<span class="glyphicon glyphicon-step-forward"></span>');
+			var $datepicker_body = $('<div class="picker-body">');
+				var $datepicker_body_description = $('<div class="datepicker-body-description clearfix">');
+				var $datepicker_body_date = $('<div class="datepicker-body-value picker-selectable clearfix">');
 		var $timepicker = $('<div class="timepicker picker-group clearfix">');
 			var $timepicker_group_hours = $('<div class="timepicker-group">');
 				var $timepicker_group_hours_input = $('<input class="form-control" type="text" />');
@@ -80,6 +133,12 @@ $._bc.vals.datepicker.index = 1;
 					$timepicker_group_seconds_plus.html('<span class="glyphicon glyphicon-plus"></span>');
 
 		$container.appendTo("body");
+		$container.append($yearpicker);
+			$yearpicker.append($yearpicker_header);
+				$yearpicker_header.append($yearpicker_header_year_minus);
+				$yearpicker_header.append($yearpicker_header_title);
+				$yearpicker_header.append($yearpicker_header_year_plus);
+			$yearpicker.append($yearpicker_body);
 		$container.append($monthpicker);
 			$monthpicker.append($monthpicker_header);
 				$monthpicker_header.append($monthpicker_header_year_minus);
@@ -92,22 +151,22 @@ $._bc.vals.datepicker.index = 1;
 					$monthpicker_body.append($element);
 				});
 		$container.append($datepicker);
-			$datepicker.append($datepick_header);
-				$datepick_header.append($datepick_header_month_minus);
-				$datepick_header.append($datepick_header_title);
-				$datepick_header.append($datepick_header_month_plus);
-			$datepicker.append($datepick_body);
-				$datepick_body.append($datepick_body_description);
+			$datepicker.append($datepicker_header);
+				$datepicker_header.append($datepicker_header_month_minus);
+				$datepicker_header.append($datepicker_header_title);
+				$datepicker_header.append($datepicker_header_month_plus);
+			$datepicker.append($datepicker_body);
+				$datepicker_body.append($datepicker_body_description);
 					$.each(['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'], function(i, _description) {
 						var $element = $('<span>');
 						$element.text(_description);
-						$datepick_body_description.append($element);
+						$datepicker_body_description.append($element);
 					});
-				$datepick_body.append($datepick_body_date);
+				$datepicker_body.append($datepicker_body_date);
 					for(var i = 0; i < 31 ; i+= 1) {
 						var $element = $('<span>');
 						$element.text(i);
-						$datepick_body_date.append($element);
+						$datepicker_body_date.append($element);
 					}
 		$container.append($timepicker);
 			$timepicker.append($timepicker_group_hours);
@@ -126,7 +185,12 @@ $._bc.vals.datepicker.index = 1;
 				$timepicker_group_seconds.append($timepicker_group_seconds_plus);
 
 		// show needed components
-		var _displayComponents = [];
+		/*var _displayComponents = [];
+		if(!enable_yearpicker) {
+			$yearpicker.hide();
+		} else {
+			_displayComponents.push($yearpicker);
+		}
 		if(!enable_monthpicker) {
 			$monthpicker.hide();
 		} else {
@@ -143,7 +207,70 @@ $._bc.vals.datepicker.index = 1;
 			_displayComponents.push($timepicker);
 		}
 		_displayComponents[0].addClass("first-group");
-		_displayComponents[_displayComponents.length - 1].addClass("last-group");
+		_displayComponents[_displayComponents.length - 1].addClass("last-group");*/
+
+		// fill date in the view
+		function draw() {
+			var _year = date.getFullYear();
+				var year_start = _year - _year % 20;
+				var year_end = year_start + 19;
+			var _month = date.getMonth();
+				var month = _month + 1;
+			var _date = date.getDate();
+				var days = getDaysOfMonth(date);
+			var _hours = date.getHours();
+			var _minutes = date.getMinutes();
+			var _seconds = date.getSeconds();
+
+			// year picker
+			$yearpicker_header_title.text(year_start + " - " + year_end);
+			$yearpicker_body.empty();
+			for(var i = year_start ; i <= year_end ; i += 1) {
+				var $element = $('<span>');
+				$element.text(i);
+				if(i == _year) {
+					$element.addClass('active');
+				}
+				$yearpicker_body.append($element);
+			}
+
+			// month picker
+			$monthpicker_header_title.text(_year);
+			$monthpicker_body.find("span").each(function(i, ele) {
+				var $element = $(ele);
+				$element.removeClass("active");
+				if(i == _month) {
+					$element.addClass("active");
+				}
+			});
+
+			// date picker
+			$datepicker_header_title.text(_year + "-" + month);
+			$datepicker_body_date.empty();
+			for(var i = 0; i < days[0] ; i+= 1) {
+				var $element = $('<span class="inactive">');
+				$datepicker_body_date.append($element);
+			}
+			for(var i = 1; i <= days[1] ; i+= 1) {
+				var $element = $('<span>');
+				$element.text(fillZero(i));
+				if(i == _month) {
+					$element.addClass('active');
+				}
+				$datepicker_body_date.append($element);
+			}
+
+			// time picker
+			$timepicker_group_hours_input.val(fillZero(_hours));
+			$timepicker_group_minutes_input.val(fillZero(_minutes));
+			$timepicker_group_seconds_input.val(fillZero(_seconds));
+		}
+		draw();
+
+		// get date by view
+		function viewToDate() {
+			
+		}
 	});
 /**	$(document).on("click.bootstrapcomponent.datepicker", "[data-toggle='datepicker']", function(event){
 		var _index = $._bc.vals.datepicker.index;
