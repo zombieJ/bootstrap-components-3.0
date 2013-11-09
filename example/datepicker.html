@@ -26,7 +26,20 @@
 			<input type="text" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"
-				data-toggle="datepicker">
+					data-toggle="datepicker"
+					data-type="all"
+				>
+					<span class="glyphicon glyphicon-calendar"></span>
+				</button>
+			</span>
+		</div>
+		<div class="input-group col-lg-3">
+			<input type="text" class="form-control">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button"
+					data-toggle="datepicker"
+					data-type="month"
+				>
 					<span class="glyphicon glyphicon-calendar"></span>
 				</button>
 			</span>
@@ -35,14 +48,32 @@
 <br/>
 <hr/>
 
-<div class="bsc-datepicker">
-	<div class="monthpicker">
-		<div class="monthpicker-header">
-			<button class="btn btn-default month-minus" type="button">
+<div class="bsc-datepicker ">
+	<div class="yearpicker picker-group">
+		<div class="header">
+			<button class="btn btn-default minus" type="button">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</button>
+			<h4>1951 - 2000</h4>
+			<button class="btn btn-default plus" type="button">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+			<div class="yearpicker-body clearfix">
+				<span>1951</span>
+				<span>1952</span>
+				<span>1953</span>
+				<span>1954</span>
+				<span>1955</span>
+			</div>
+		</div>
+	</div>
+	<div class="monthpicker picker-group">
+		<div class="header">
+			<button class="btn btn-default minus" type="button">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 			<h4>2013</h4>
-			<button class="btn btn-default month-plus" type="button">
+			<button class="btn btn-default plus" type="button">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 		</div>
@@ -62,18 +93,18 @@
 		</div>
 	</div>
 
-	<div class="datepicker">
-		<div class="datepicker-header">
-			<button class="btn btn-default date-minus" type="button">
+	<div class="datepicker picker-group">
+		<div class="header">
+			<button class="btn btn-default minus" type="button">
 				<span class="glyphicon glyphicon-step-backward"></span>
 			</button>
 			<h4>2013-11</h4>
-			<button class="btn btn-default date-plus" type="button">
+			<button class="btn btn-default plus" type="button">
 				<span class="glyphicon glyphicon-step-forward"></span>
 			</button>
 		</div>
 		<div class="datepicker-body">
-			<div class="datepicker-body-date clearfix">
+			<div class="datepicker-body-description clearfix">
 				<span>Sun</span>
 				<span>Mon</span>
 				<span>Tue</span>
@@ -105,7 +136,7 @@
 		</div>
 	</div>
 
-	<div class="timepicker clearfix">
+	<div class="timepicker picker-group clearfix">
 		<div class="timepicker-group">
 			<input class="form-control" type="text" value="03" />
 			<button type="button" class="btn btn-default time-minus">

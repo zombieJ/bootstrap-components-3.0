@@ -1,10 +1,15 @@
 /* options:
 	target:		all(default)	contains date & time picker
-				timer			time picker only
-				dater			date picker only
+				time			time picker only
+				date			date picker only
+				month			month picker only
+	to:			element			set the value of target element
 
 	date:		Date()			to set the date time. Default is now.
 */
+
+// TODO:	add default date
+//			add disabled date range
 
 // init env
 $._bc.vals.datepicker = new Object();
@@ -13,7 +18,132 @@ $._bc.vals.datepicker.index = 1;
 // init function
 !function ($) {
 	$(document).on("click.bs.datepicker", "[data-toggle='datepicker']", function(event){
-		
+		var my = $(this);
+		var _target = my.attr("data-to");
+		var _type = my.attr("data-type");
+			var enable_monthpicker = false;
+			var enable_datepicker = false;
+			var enable_timepicker = false;
+			switch(_type) {
+			case "month":
+				enable_monthpicker = true;
+				break;
+			case "date":
+				enable_datepicker = true;
+				break;
+			case "time":
+				enable_timepicker = true;
+				break;
+			default:
+				enable_datepicker = true;
+				enable_timepicker = true;
+			}
+
+		// generate datepicker component
+		var $container = $('<div class="bsc-datepicker">');
+		var $monthpicker = $('<div class="monthpicker picker-group">');
+			var $monthpicker_header = $('<div class="header">');
+				var $monthpicker_header_year_minus = $('<button class="btn btn-default minus" type="button">');
+					$monthpicker_header_year_minus.html('<span class="glyphicon glyphicon-chevron-left"></span>');
+				var $monthpicker_header_title = $('<h4>&nbsp;</h4>');
+				var $monthpicker_header_year_plus = $('<button class="btn btn-default plus" type="button">');
+					$monthpicker_header_year_plus.html('<span class="glyphicon glyphicon-chevron-right"></span>');
+			var $monthpicker_body = $('<div class="monthpicker-body clearfix">');
+		var $datepicker = $('<div class="datepicker picker-group">');
+			var $datepick_header = $('<div class="header">');
+				var $datepick_header_month_minus = $('<button class="btn btn-default minus" type="button">');
+					$datepick_header_month_minus.html('<span class="glyphicon glyphicon-step-backward"></span>');
+				var $datepick_header_title = $('<h4>&nbsp;</h4>');
+				var $datepick_header_month_plus = $('<button class="btn btn-default plus" type="button">');
+					$datepick_header_month_plus.html('<span class="glyphicon glyphicon-step-forward"></span>');
+			var $datepick_body = $('<div class="datepicker-body">');
+				var $datepick_body_description = $('<div class="datepicker-body-description clearfix">');
+				var $datepick_body_date = $('<div class="datepicker-body-value clearfix">');
+		var $timepicker = $('<div class="timepicker picker-group clearfix">');
+			var $timepicker_group_hours = $('<div class="timepicker-group">');
+				var $timepicker_group_hours_input = $('<input class="form-control" type="text" />');
+				var $timepicker_group_hours_minus = $('<button type="button" class="btn btn-default time-minus">');
+					$timepicker_group_hours_minus.html('<span class="glyphicon glyphicon-minus"></span>');
+				var $timepicker_group_hours_plus = $('<button type="button" class="btn btn-default time-plus">');
+					$timepicker_group_hours_plus.html('<span class="glyphicon glyphicon-plus"></span>');
+			var $timepicker_group_minutes = $('<div class="timepicker-group">');
+				var $timepicker_group_minutes_input = $('<input class="form-control" type="text" />');
+				var $timepicker_group_minutes_minus = $('<button type="button" class="btn btn-default time-minus">');
+					$timepicker_group_minutes_minus.html('<span class="glyphicon glyphicon-minus"></span>');
+				var $timepicker_group_minutes_plus = $('<button type="button" class="btn btn-default time-plus">');
+					$timepicker_group_minutes_plus.html('<span class="glyphicon glyphicon-plus"></span>');
+			var $timepicker_group_seconds = $('<div class="timepicker-group">');
+				var $timepicker_group_seconds_input = $('<input class="form-control" type="text" />');
+				var $timepicker_group_seconds_minus = $('<button type="button" class="btn btn-default time-minus">');
+					$timepicker_group_seconds_minus.html('<span class="glyphicon glyphicon-minus"></span>');
+				var $timepicker_group_seconds_plus = $('<button type="button" class="btn btn-default time-plus">');
+					$timepicker_group_seconds_plus.html('<span class="glyphicon glyphicon-plus"></span>');
+
+		$container.appendTo("body");
+		$container.append($monthpicker);
+			$monthpicker.append($monthpicker_header);
+				$monthpicker_header.append($monthpicker_header_year_minus);
+				$monthpicker_header.append($monthpicker_header_title);
+				$monthpicker_header.append($monthpicker_header_year_plus);
+			$monthpicker.append($monthpicker_body);
+				$.each(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'], function(i, _month) {
+					var $element = $('<span>');
+					$element.text(_month);
+					$monthpicker_body.append($element);
+				});
+		$container.append($datepicker);
+			$datepicker.append($datepick_header);
+				$datepick_header.append($datepick_header_month_minus);
+				$datepick_header.append($datepick_header_title);
+				$datepick_header.append($datepick_header_month_plus);
+			$datepicker.append($datepick_body);
+				$datepick_body.append($datepick_body_description);
+					$.each(['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'], function(i, _description) {
+						var $element = $('<span>');
+						$element.text(_description);
+						$datepick_body_description.append($element);
+					});
+				$datepick_body.append($datepick_body_date);
+					for(var i = 0; i < 31 ; i+= 1) {
+						var $element = $('<span>');
+						$element.text(i);
+						$datepick_body_date.append($element);
+					}
+		$container.append($timepicker);
+			$timepicker.append($timepicker_group_hours);
+				$timepicker_group_hours.append($timepicker_group_hours_input);
+				$timepicker_group_hours.append($timepicker_group_hours_minus);
+				$timepicker_group_hours.append($timepicker_group_hours_plus);
+			$timepicker.append('<span class="timepicker-spliter">:</span>');
+			$timepicker.append($timepicker_group_minutes);
+				$timepicker_group_minutes.append($timepicker_group_minutes_input);
+				$timepicker_group_minutes.append($timepicker_group_minutes_minus);
+				$timepicker_group_minutes.append($timepicker_group_minutes_plus);
+			$timepicker.append('<span class="timepicker-spliter">:</span>');
+			$timepicker.append($timepicker_group_seconds);
+				$timepicker_group_seconds.append($timepicker_group_seconds_input);
+				$timepicker_group_seconds.append($timepicker_group_seconds_minus);
+				$timepicker_group_seconds.append($timepicker_group_seconds_plus);
+
+		// show needed components
+		var _displayComponents = [];
+		if(!enable_monthpicker) {
+			$monthpicker.hide();
+		} else {
+			_displayComponents.push($monthpicker);
+		}
+		if(!enable_datepicker) {
+			$datepicker.hide();
+		} else {
+			_displayComponents.push($datepicker);
+		}
+		if(!enable_timepicker) {
+			$timepicker.hide();
+		} else {
+			_displayComponents.push($timepicker);
+		}
+		_displayComponents[0].addClass("first-group");
+		_displayComponents[_displayComponents.length - 1].addClass("last-group");
 	});
 /**	$(document).on("click.bootstrapcomponent.datepicker", "[data-toggle='datepicker']", function(event){
 		var _index = $._bc.vals.datepicker.index;
