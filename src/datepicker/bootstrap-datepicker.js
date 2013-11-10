@@ -245,21 +245,16 @@ $._bc.vals.datepicker.index = 1;
 
 		// month picker
 			$monthpicker_header_year_minus.click(function() {
-				var _month = dateShadow.getMonth();
-				dateShadow.setFullYear(dateShadow.getFullYear() - 1);
-				dateShadow.setMonth(_month);
+				dateShadow = plusDays(dateShadow, -1);
 				draw();
 			});
 			$monthpicker_header_year_plus.click(function() {
-				var _month = dateShadow.getMonth();
-				dateShadow.setFullYear(dateShadow.getFullYear() + 1);
-				dateShadow.setMonth(_month);
+				dateShadow = plusDays(dateShadow, 1);
 				draw();
 			});
 			$monthpicker_body.on("click", "span", function() {
 				var _month = Number($(this).attr("data-month"));
-				dateShadow.setMonth(_month);
-				dateShadow.setMonth(_month);
+				dateShadow = setDays(dateShadow, null, _month);
 				draw();
 			});
 
@@ -333,7 +328,7 @@ $._bc.vals.datepicker.index = 1;
 			for(var i = 1; i <= days[1] ; i+= 1) {
 				var $element = $('<span>');
 				$element.text(fillZero(i));
-				if(i == _month) {
+				if(i == _date) {
 					$element.addClass('active');
 				}
 				$datepicker_body_date.append($element);
