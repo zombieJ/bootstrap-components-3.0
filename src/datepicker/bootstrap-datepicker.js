@@ -228,7 +228,7 @@ $._bc.vals.datepicker.index = 1;
 				$timepicker_group_seconds.append($timepicker_group_seconds_plus);
 
 		// page change event handler
-		// year picker
+			// year picker
 			$yearpicker_header_year_minus.click(function() {
 				dateShadow = plusDays(dateShadow, -20);
 				draw();
@@ -243,7 +243,7 @@ $._bc.vals.datepicker.index = 1;
 				draw();
 			});
 
-		// month picker
+			// month picker
 			$monthpicker_header_year_minus.click(function() {
 				dateShadow = plusDays(dateShadow, -1);
 				draw();
@@ -255,6 +255,21 @@ $._bc.vals.datepicker.index = 1;
 			$monthpicker_body.on("click", "span", function() {
 				var _month = Number($(this).attr("data-month"));
 				dateShadow = setDays(dateShadow, null, _month);
+				draw();
+			});
+
+			// date picker
+			$datepicker_header_month_minus.click(function() {
+				dateShadow = plusDays(dateShadow, 0, -1);
+				draw();
+			});
+			$datepicker_header_month_plus.click(function() {
+				dateShadow = plusDays(dateShadow, 0, 1);
+				draw();
+			});
+			$datepicker_body.on("click", "span:not(.inactive)", function() {
+				var _date = Number($(this).text());
+				dateShadow = setDays(dateShadow, null, null, _date);
 				draw();
 			});
 
@@ -319,7 +334,7 @@ $._bc.vals.datepicker.index = 1;
 			});
 
 			// date picker
-			$datepicker_header_title.text(_year + "-" + month);
+			$datepicker_header_title.text(_year + "-" + fillZero(month));
 			$datepicker_body_date.empty();
 			for(var i = 0; i < days[0] ; i+= 1) {
 				var $element = $('<span class="inactive">');
