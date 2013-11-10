@@ -32,9 +32,7 @@ $._bc.vals.datepicker.index = 1;
 	function getDaysOfMonth(date) {
 		var _startDay, _days;
 		var _date = new Date(date.getTime());
-		_date.setDate(1);
-		_date.setMonth(_date.getMonth() + 1);
-		_date.setDate(0);
+		_date.setMonth(_date.getMonth() + 1, 0);
 		_days =  _date.getDate();
 		_date.setDate(1);
 		_startDay = _date.getDay();
@@ -53,6 +51,49 @@ $._bc.vals.datepicker.index = 1;
 	function toString(date) {
 		return	date.getFullYear() + "-" + fillZero(date.getMonth() + 1) + "-" + fillZero(date.getDate()) + " " +
 				fillZero(date.getHours()) + ":" + fillZero(date.getMinutes()) + ":" + fillZero(date.getSeconds())
+	}
+	function plusDays(date, year, month, day) {
+		if(month == null) {
+			month = 0;
+		}
+		if(day == null) {
+			day = 0;
+		}
+		var _ret = new Date(date.getTime());
+		var _year = _ret.getFullYear();
+		var _month = _ret.getMonth() + month + year * 12;
+		var _date = _ret.getDate();
+
+		_ret.setMonth(_month, 1);
+		var _days = getDaysOfMonth(_ret)[1];
+		if(_date <= _days) {
+			_ret.setDate(_date);
+		} else {
+			_ret.setDate(_days);
+		}
+
+		_date = _ret.getDate() + day;
+		_ret.setDate(_date);
+		return _ret;
+	}
+	function setDays(date, year, month, day) {
+		if(year == null) {
+			year = date.getFullYear();
+		}
+		if(month == null) {
+			month = date.getMonth();
+		}
+		if(day == null) {
+			day = date.getDate();
+		}
+		var _ret = new Date(date.getTime());
+		_ret.setFullYear(year, month, 1);
+		var _days = getDaysOfMonth(_ret);
+		if(day > _days) {
+			day = _days;
+		}
+		_ret.setFullYear(year, month, day);
+		return _ret;
 	}
 
 	// Datepicker Handler
@@ -189,22 +230,16 @@ $._bc.vals.datepicker.index = 1;
 		// page change event handler
 		// year picker
 			$yearpicker_header_year_minus.click(function() {
-				var _month = dateShadow.getMonth();
-				dateShadow.setFullYear(dateShadow.getFullYear() - 20);
-				dateShadow.setMonth(_month);
+				dateShadow = plusDays(dateShadow, -20);
 				draw();
 			});
 			$yearpicker_header_year_plus.click(function() {
-				var _month = dateShadow.getMonth();
-				dateShadow.setFullYear(dateShadow.getFullYear() + 20);
-				dateShadow.setMonth(_month);
+				dateShadow = plusDays(dateShadow, 20);
 				draw();
 			});
 			$yearpicker_body.on("click", "span", function() {
-				var _month = dateShadow.getMonth();
 				var year = Number($(this).text());
-				dateShadow.setFullYear(year);
-				dateShadow.setMonth(_month);
+				dateShadow = setDays(dateShadow, year);
 				draw();
 			});
 
