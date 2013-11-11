@@ -2,15 +2,18 @@
 	background: white;
 	display: inline-block;
 	border: 1px solid #CCC;
-	padding: 10px;
+	padding: 0 10px;
 	border-radius: 5px;
 	box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+	overflow-y: hidden;
+	position: absolute;
 }
 
 /* picker-group */
 .bsc-datepicker .picker-group {
 	border-top: 1px solid gray;
-	padding: 15px 0 15px 0;
+	padding: 15px 0 13px 0;
+	margin-top: -2px;
 }
 
 .bsc-datepicker .picker-group.first-group {
@@ -47,6 +50,7 @@
 	display: inline-block;
 	margin: 0;
 	padding: 5px 0 7px 0;
+	cursor: pointer;
 }
 
 	/* body */
@@ -75,7 +79,6 @@
 .bsc-datepicker > .picker-group .picker-selectable span.active {
 	color: white;
 	background: #3276b1;
-	cursor: default;
 }
 
 .bsc-datepicker > .picker-group .picker-selectable span.inactive:hover {
@@ -86,6 +89,10 @@
 /* yearpicker */
 .bsc-datepicker > .yearpicker .picker-body span {
 	width: 43px;
+}
+
+.bsc-datepicker > .yearpicker .picker-header h4 {
+	cursor: default;
 }
 
 /* monthpicker */

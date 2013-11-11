@@ -23,11 +23,12 @@
 	</head>
 	<body>
 		<div class="input-group col-lg-3">
-			<input type="text" class="form-control">
+			<input type="text" id="input_all" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"
 					data-toggle="datepicker"
 					data-type="all"
+					data-to="#input_all"
 				>
 					<span class="glyphicon glyphicon-calendar"></span>
 				</button>
@@ -67,7 +68,7 @@
 			</span>
 		</div>
 		<div class="input-group col-lg-3">
-			<input type="text" class="form-control">
+			<input type="text" id="input_time" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"
 					data-toggle="datepicker"
@@ -77,149 +78,6 @@
 				</button>
 			</span>
 		</div>
-
-<br/><br/>
-<hr/>
-
-
-<div class="bsc-datepicker hidden">
-	<div class="yearpicker picker-group">
-		<div class="picker-header">
-			<button class="btn btn-default minus" type="button">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</button>
-			<h4>1951 - 2000</h4>
-			<button class="btn btn-default plus" type="button">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-		</div>
-		<div class="picker-body picker-selectable clearfix">
-			<span>1951</span>
-			<span>1952</span>
-			<span>1953</span>
-			<span>1954</span>
-			<span>1955</span>
-			<span>1951</span>
-			<span>1952</span>
-			<span>1953</span>
-			<span>1954</span>
-			<span>1955</span>
-			<span>1951</span>
-			<span>1952</span>
-			<span>1953</span>
-			<span>1954</span>
-			<span>1955</span>
-			<span>1951</span>
-			<span>1952</span>
-			<span>1953</span>
-			<span>1954</span>
-			<span>1955</span>
-		</div>
-	</div>
-	<div class="monthpicker picker-group">
-		<div class="picker-header">
-			<button class="btn btn-default minus" type="button">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</button>
-			<h4>2013</h4>
-			<button class="btn btn-default plus" type="button">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-		</div>
-		<div class="picker-body picker-selectable clearfix">
-			<span>Jan</span>
-			<span>Feb</span>
-			<span>Mar</span>
-			<span>Apr</span>
-			<span>May</span>
-			<span>June</span>
-			<span>July</span>
-			<span>Aug</span>
-			<span>Sept</span>
-			<span class="active">Oct</span>
-			<span>Nov</span>
-			<span>Dec</span>
-		</div>
-	</div>
-
-	<div class="datepicker picker-group">
-		<div class="picker-header">
-			<button class="btn btn-default minus" type="button">
-				<span class="glyphicon glyphicon-step-backward"></span>
-			</button>
-			<h4>2013-11</h4>
-			<button class="btn btn-default plus" type="button">
-				<span class="glyphicon glyphicon-step-forward"></span>
-			</button>
-		</div>
-		<div class="picker-body">
-			<div class="datepicker-body-description clearfix">
-				<span>Sun</span>
-				<span>Mon</span>
-				<span>Tue</span>
-				<span>Wed</span>
-				<span>Thur</span>
-				<span>Fri</span>
-				<span>Sat</span>
-			</div>
-			<div class="datepicker-body-value picker-selectable clearfix">
-				<span class="inactive">&nbsp;</span>
-				<span class="inactive">&nbsp;</span>
-				<span>01</span>
-				<span>02</span>
-				<span>03</span>
-				<span>04</span>
-				<span>05</span>
-				<span>06</span>
-				<span>07</span>
-				<span>08</span>
-				<span>09</span>
-				<span>10</span>
-				<span class="active">11</span>
-				<span>12</span>
-				<span>13</span>
-				<span>14</span>
-				<span>15</span>
-				<span>16</span>
-			</div>
-		</div>
-	</div>
-
-	<div class="timepicker picker-group clearfix">
-		<div class="timepicker-group">
-			<input class="form-control" type="text" value="03" />
-			<button type="button" class="btn btn-default time-minus">
-				<span class="glyphicon glyphicon-minus"></span>
-			</button>
-			<button type="button" class="btn btn-default time-plus">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</div>
-		<span class="timepicker-spliter">:</span>
-		<div class="timepicker-group">
-			<input class="form-control" type="text" value="33" />
-			<button type="button" class="btn btn-default time-minus">
-				<span class="glyphicon glyphicon-minus"></span>
-			</button>
-			<button type="button" class="btn btn-default time-plus">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</div>
-		<span class="timepicker-spliter">:</span>
-		<div class="timepicker-group">
-			<input class="form-control" type="text" value="59" />
-			<button type="button" class="btn btn-default time-minus">
-				<span class="glyphicon glyphicon-minus"></span>
-			</button>
-			<button type="button" class="btn btn-default time-plus">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</div>
-	</div>
-</div>
-
-<hr/>
-
 		<div class="input-append">
 			<input id="datepicker" type="text" style="width: 140px;">
 			<button class="btn" data-toggle="datepicker" data-to="#datepicker"><i class="icon-calendar"></i></button>
@@ -237,4 +95,6 @@
 			<span id="lb_tips"></span>
 		</div>
 	</body>
+
+	<div style="height: 2000px;"></div>
 </html>
