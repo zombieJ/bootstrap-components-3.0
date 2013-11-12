@@ -4,7 +4,8 @@
 				date			date picker only
 				month			month picker only
 				year			year picker only
-	to:			element			set the value of target element
+	to:			string			set the value of target element
+	container:	string			set datepicker component container
 
 	date:		Date()			to set the date time. Default is now.
 */
@@ -18,7 +19,17 @@ $._bc.vals.datepicker.index = 1;
 
 // init function
 !function ($) {
+	// var
+	var _instance = null;
+	var _preventEvent = false;
+
 	// Functions
+	function refreshInstance(instance) {
+		if(_instance != null) {
+			_instance.remove();
+		}
+		_instance = instance;
+	}
 	function toDate(str) {
 		if(str == null) {
 			return new Date();
@@ -112,9 +123,19 @@ $._bc.vals.datepicker.index = 1;
 
 	// Datepicker Handler
 	$(document).on("click.bs.datepicker", "[data-toggle='datepicker']", function(event){
+		_preventEvent = true;
 		var my = $(this);
 		var _target = $(my.attr("data-to"));
 			var target = _target.length != 0 ? _target : my;
+		var _container = $(my.attr("data-container"));
+			var container = target.parent();
+			if(container.hasClass("input-group-btn")) {
+				container = container.parent();
+			}
+			if(container.hasClass("input-group")) {
+				container = container.parent();
+			}
+			container = _container.length != 0 ? _container : container;
 		var _type = my.attr("data-type");
 			var enable_yearpicker = false;
 			var enable_monthpicker = false;
@@ -189,7 +210,7 @@ $._bc.vals.datepicker.index = 1;
 				var $timepicker_group_seconds_plus = $('<button type="button" class="btn btn-default time-plus">');
 					$timepicker_group_seconds_plus.html('<span class="glyphicon glyphicon-plus"></span>');
 
-		$container.appendTo("body");
+		$container.appendTo(container);
 		$container.append($yearpicker);
 			$yearpicker.append($yearpicker_header);
 				$yearpicker_header.append($yearpicker_header_year_minus);
@@ -237,9 +258,14 @@ $._bc.vals.datepicker.index = 1;
 				$timepicker_group_seconds.append($timepicker_group_seconds_minus);
 				$timepicker_group_seconds.append($timepicker_group_seconds_plus);
 
+		refreshInstance($container);
 		var pos = target.offset();
-		$container.css("left", pos.left + "px");
-		$container.css("top", (pos.top + target.outerHeight()) + "px");
+		$container.offset({
+			left: pos.left,
+			top: pos.top + target.outerHeight(),
+		}).click(function() {
+			_preventEvent = true;
+		});
 
 		// page change event handler
 			// switch picker view
@@ -426,6 +452,15 @@ $._bc.vals.datepicker.index = 1;
 		// get date by view
 		function viewToDate() {
 			var _year = $yearpicker_body.find("span.active");
+		}
+	});
+
+	// hide datapicker if exist
+	$(document).on("click.bs.datepicker", function(event){
+		if(_preventEvent == true) {
+			_preventEvent = false;
+		} else {
+			refreshInstance(null);
 		}
 	});
 /**	$(document).on("click.bootstrapcomponent.datepicker", "[data-toggle='datepicker']", function(event){

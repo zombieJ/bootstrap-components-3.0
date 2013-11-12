@@ -7,6 +7,7 @@
 	box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 	overflow-y: hidden;
 	position: absolute;
+	z-index: 10;
 }
 
 /* picker-group */
@@ -106,6 +107,10 @@
 }
 
 /* timepicker */
+.bsc-datepicker > .timepicker {
+	width: 238px;
+}
+
 .bsc-datepicker > .timepicker .timepicker-group {
 	width: 60px;
 	float: left;
@@ -117,6 +122,8 @@
 	text-align: center;
 	padding: 0;
 	margin: 0 0 10px 0;
+	border-radius: 5px;
+	display: block;
 }
 
 .bsc-datepicker > .timepicker .timepicker-group button {
