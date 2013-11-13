@@ -36,33 +36,36 @@
 			</span>
 		</div>
 		<div class="input-group col-lg-3">
-			<input type="text" class="form-control">
+			<input type="text" id="input_year" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"
 					data-toggle="datepicker"
 					data-type="year"
+					data-to="#input_year"
 				>
 					<span class="glyphicon glyphicon-calendar"></span>
 				</button>
 			</span>
 		</div>
 		<div class="input-group col-lg-3">
-			<input type="text" class="form-control">
+			<input type="text" id="input_month" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"
 					data-toggle="datepicker"
 					data-type="month"
+					data-to="#input_month"
 				>
 					<span class="glyphicon glyphicon-calendar"></span>
 				</button>
 			</span>
 		</div>
 		<div class="input-group col-lg-3">
-			<input type="text" class="form-control">
+			<input type="text" id="input_date" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button"
 					data-toggle="datepicker"
 					data-type="date"
+					data-to="#input_date"
 				>
 					<span class="glyphicon glyphicon-calendar"></span>
 				</button>
@@ -74,26 +77,11 @@
 				<button class="btn btn-default" type="button"
 					data-toggle="datepicker"
 					data-type="time"
+					data-to="#input_time"
 				>
 					<span class="glyphicon glyphicon-calendar"></span>
 				</button>
 			</span>
-		</div>
-		<div class="input-append">
-			<input id="datepicker" type="text" style="width: 140px;">
-			<button class="btn" data-toggle="datepicker" data-to="#datepicker"><i class="icon-calendar"></i></button>
-		</div>
-		<div class="input-append">
-			<input id="datepicker_date" type="text" style="width: 140px;">
-			<button class="btn" data-toggle="datepicker" data-to="#datepicker_date" data-type="dater"><i class="icon-calendar"></i></button>
-		</div>
-		<div class="input-append">
-			<input id="datepicker_time" type="text" style="width: 140px;">
-			<button class="btn" data-toggle="datepicker" data-to="#datepicker_time" data-type="timer"><i class="icon-time"></i></button>
-		</div>
-		<div>
-			<input id="appended_change" type="text" style="width: 140px;" data-toggle="datepicker">
-			<span id="lb_tips"></span>
 		</div>
 	</body>
 

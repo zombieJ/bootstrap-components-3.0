@@ -26,7 +26,37 @@ $._bc.vals.datepicker.index = 1;
 	// Functions
 	function refreshInstance(instance) {
 		if(_instance != null) {
+			var _type = _instance.getType();
+			var _date = _instance.getDate();
+			var _target = _instance.getTarget();
+			var _preVal = _target.val();
+			var _val = null;
+			switch(_type) {
+			case "year":
+				_val = _date.getFullYear();
+				break;
+			case "month":
+				_val = _date.getFullYear() + "-" + fillZero(_date.getMonth() + 1);
+				break;
+			case "date":
+				_val = _date.getFullYear() + "-" + fillZero(_date.getMonth() + 1) + "-" + fillZero(_date.getDate());
+				break;
+			case "time":
+				_val = fillZero(_date.getHours()) + ":" + fillZero(_date.getMinutes()) + ":" + fillZero(_date.getSeconds());
+				break;
+			default:
+				_val = _date.getFullYear() + "-" + fillZero(_date.getMonth() + 1) + "-" + fillZero(_date.getDate()) + " ";
+				_val += fillZero(_date.getHours()) + ":" + fillZero(_date.getMinutes()) + ":" + fillZero(_date.getSeconds());
+				break;
+			}
+			_target.val(_val);
 			_instance.remove();
+			_instance = null;
+
+			// trigger event
+			if(_val != _preVal) {
+				_target.change();
+			}
 		}
 		_instance = instance;
 	}
@@ -155,6 +185,7 @@ $._bc.vals.datepicker.index = 1;
 				enable_timepicker = true;
 				break;
 			default:
+				_type = "all";
 				enable_datepicker = true;
 				enable_timepicker = true;
 			}
@@ -266,6 +297,17 @@ $._bc.vals.datepicker.index = 1;
 		}).click(function() {
 			_preventEvent = true;
 		});
+
+		// bind data
+		$container.getTarget = function() {
+			return target;
+		}
+		$container.getType = function() {
+			return _type;
+		}
+		$container.getDate = function() {
+			return dateShadow;
+		}
 
 		// page change event handler
 			// switch picker view
