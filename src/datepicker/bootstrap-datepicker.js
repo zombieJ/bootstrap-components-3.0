@@ -6,8 +6,6 @@
 				year			year picker only
 	to:			string			set the value of target element
 	container:	string			set datepicker component container
-
-	date:		Date()			to set the date time. Default is now.
 */
 
 // TODO:	add default date
@@ -64,7 +62,15 @@ $._bc.vals.datepicker.index = 1;
 		if(str == null) {
 			return new Date();
 		}
-		var date = new Date(str.replace(/-/g,"/"));
+		var _str = str.trim().replace(/-/g,"/");
+		if(_str.match(/^\d{4}$/)) {
+			_str = _str + "/01/01";
+		} else if(_str.match(/^\d{4}\/\d{1,2}$/)) {
+			_str = _str + "/01";
+		} else if(_str.match(/^\d{1,2}:\d{1,2}:\d{1,2}$/)) {
+			_str = "2013/11/14 " + _str;
+		}
+		var date = new Date(_str);
 		if(date == null || isNaN(date)) {
 			return new Date();
 		}
@@ -189,7 +195,7 @@ $._bc.vals.datepicker.index = 1;
 				enable_datepicker = true;
 				enable_timepicker = true;
 			}
-		var _date = my.attr("data-type");
+		var _date = target.val();
 			var date = toDate(_date);
 			var dateShadow = new Date(date.getTime());		// an date which is display the current view
 
