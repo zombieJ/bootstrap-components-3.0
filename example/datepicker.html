@@ -18,6 +18,11 @@
 				$("#appended_change").change(function(){
 					$("#lb_tips").html($(this).val());
 				});
+				
+				$("input").change(function() {
+					var my = $(this);
+					$("#tips").text(my.attr("id") + " changed, value : " + my.val());
+				});
 			});
 		</script>
 	</head>
@@ -83,6 +88,8 @@
 				</button>
 			</span>
 		</div>
+
+		<span id="tips"></span>
 	</body>
 
 	<div style="height: 2000px;"></div>
