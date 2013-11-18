@@ -87,6 +87,10 @@
 	cursor: default;
 }
 
+.bsc-datepicker > .picker-group .picker-selectable span.disabled {
+	color: #DDD;
+}
+
 /* yearpicker */
 .bsc-datepicker > .yearpicker .picker-body span {
 	width: 43px;
