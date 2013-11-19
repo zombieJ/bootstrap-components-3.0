@@ -202,6 +202,8 @@ $._bc.vals.datepicker.index = 1;
 			var dateCurrent = new Date(date.getTime());		// an date which is mark as current date
 		var _before = my.attr("data-before");
 			var before = _before == null ? null : toDate(_before);
+		var _after = my.attr("data-after");
+			var after = _after == null ? null : toDate(_after);
 
 		// generate datepicker component
 		var $container = $('<div class="bsc-datepicker">');
@@ -504,8 +506,8 @@ $._bc.vals.datepicker.index = 1;
 				if(i == _date) {
 					$element.addClass('active');
 				}
-				if(before.getFullYear() * 10000 + before.getMonth() * 100 + before.getDate() < 
-				_year * 10000 + _month * 100 + i) {
+				if(		before.getFullYear() * 10000 + before.getMonth() * 100 + before.getDate() < _year * 10000 + _month * 100 + i || 
+						after.getFullYear() * 10000 + after.getMonth() * 100 + after.getDate() > _year * 10000 + _month * 100 + i) {
 					$element.addClass('disabled');
 				}
 				$datepicker_body_date.append($element);
