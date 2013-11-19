@@ -379,7 +379,7 @@ $._bc.vals.datepicker.index = 1;
 				dateShadow = plusDays(dateShadow, 0, 1);
 				draw();
 			});
-			$datepicker_body.on("click", "span:not(.inactive)", function() {
+			$datepicker_body.on("click", "span:not(.inactive):not(.disabled)", function() {
 				var _date = Number($(this).text());
 				dateShadow = setDays(dateShadow, null, null, _date);
 				draw();
@@ -443,6 +443,17 @@ $._bc.vals.datepicker.index = 1;
 			$timepicker.hide();
 		}
 
+		// set the current date
+		function getCurrent(current, target, before, after) {
+			if(before != null && target > before) {
+				return new Date(before.getTime());
+			}
+			if(after != null && target < after) {
+				return new Date(after.getTime());
+			}
+			return target;
+		}
+
 		// fill date in the view
 		function draw() {
 			var _year = dateShadow.getFullYear();
@@ -485,17 +496,16 @@ $._bc.vals.datepicker.index = 1;
 				var $element = $('<span class="inactive">');
 				$datepicker_body_date.append($element);
 			}
-			var _disable = false;
-			if(before != null && before < dateShadow) {
-				_disable = true;
-			}
+
+			var _cmp_date = _year * 10000 + _month * 100 + _date;
 			for(var i = 1; i <= days[1] ; i+= 1) {
 				var $element = $('<span>');
 				$element.text(fillZero(i));
 				if(i == _date) {
 					$element.addClass('active');
 				}
-				if(_disable) {
+				if(before.getFullYear() * 10000 + before.getMonth() * 100 + before.getDate() < 
+				_year * 10000 + _month * 100 + i) {
 					$element.addClass('disabled');
 				}
 				$datepicker_body_date.append($element);

@@ -89,6 +89,17 @@
 
 .bsc-datepicker > .picker-group .picker-selectable span.disabled {
 	color: #DDD;
+	cursor: default;
+}
+
+.bsc-datepicker > .picker-group .picker-selectable span.disabled:hover {
+	color: #DDD;
+	background: #FFF;
+}
+
+.bsc-datepicker > .picker-group .picker-selectable span.disabled.active {
+	color: #FFF;
+	background: #DDD;
 }
 
 /* yearpicker */
