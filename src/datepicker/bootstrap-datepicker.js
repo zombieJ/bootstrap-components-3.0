@@ -157,6 +157,16 @@ $._bc.vals.datepicker.index = 1;
 		}
 		return _val;
 	}
+	// set the current date
+	function getDateInRange(current, target, before, after) {
+		if(before != null && target > before) {
+			return new Date(before.getTime());
+		}
+		if(after != null && target < after) {
+			return new Date(after.getTime());
+		}
+		return target;
+	}
 
 	// Datepicker Handler
 	$(document).on("click.bs.datepicker", "[data-toggle='datepicker']", function(event){
@@ -318,10 +328,14 @@ $._bc.vals.datepicker.index = 1;
 			return _type;
 		}
 		$container.getDate = function() {
-			return dateShadow;
+			//return dateShadow;
+			return dateCurrent;
 		}
 
 		// page change event handler
+			function refreshCurrentDate() {
+				dateCurrent = getDateInRange(dateCurrent, dateShadow, before, after);
+			}
 			// switch picker view
 			$datepicker_header_title.click(function() {
 				$datepicker.slideUp();
@@ -335,15 +349,18 @@ $._bc.vals.datepicker.index = 1;
 			// year picker
 			$yearpicker_header_year_minus.click(function() {
 				dateShadow = plusDays(dateShadow, -20);
+				refreshCurrentDate();
 				draw();
 			});
 			$yearpicker_header_year_plus.click(function() {
 				dateShadow = plusDays(dateShadow, 20);
+				refreshCurrentDate();
 				draw();
 			});
-			$yearpicker_body.on("click", "span", function() {
+			$yearpicker_body.on("click", "span:not(.disabled)", function() {
 				var year = Number($(this).text());
 				dateShadow = setDays(dateShadow, year);
+				refreshCurrentDate();
 				draw();
 
 				if(!enable_yearpicker) {
@@ -355,15 +372,18 @@ $._bc.vals.datepicker.index = 1;
 			// month picker
 			$monthpicker_header_year_minus.click(function() {
 				dateShadow = plusDays(dateShadow, -1);
+				refreshCurrentDate();
 				draw();
 			});
 			$monthpicker_header_year_plus.click(function() {
 				dateShadow = plusDays(dateShadow, 1);
+				refreshCurrentDate();
 				draw();
 			});
-			$monthpicker_body.on("click", "span", function() {
+			$monthpicker_body.on("click", "span:not(.disabled)", function() {
 				var _month = Number($(this).attr("data-month"));
 				dateShadow = setDays(dateShadow, null, _month);
+				refreshCurrentDate();
 				draw();
 
 				if(!enable_monthpicker) {
@@ -375,15 +395,18 @@ $._bc.vals.datepicker.index = 1;
 			// date picker
 			$datepicker_header_month_minus.click(function() {
 				dateShadow = plusDays(dateShadow, 0, -1);
+				refreshCurrentDate();
 				draw();
 			});
 			$datepicker_header_month_plus.click(function() {
 				dateShadow = plusDays(dateShadow, 0, 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$datepicker_body.on("click", "span:not(.inactive):not(.disabled)", function() {
 				var _date = Number($(this).text());
 				dateShadow = setDays(dateShadow, null, null, _date);
+				refreshCurrentDate();
 				draw();
 			});
 
@@ -391,43 +414,52 @@ $._bc.vals.datepicker.index = 1;
 			// hours
 			$timepicker_group_hours_minus.click(function() {
 				dateShadow.setHours(dateShadow.getHours() - 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$timepicker_group_hours_plus.click(function() {
 				dateShadow.setHours(dateShadow.getHours() + 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$timepicker_group_hours_input.change(function() {
 				var _val = digitization($(this).val(), 0, 23);
 				dateShadow.setHours(_val);
+				refreshCurrentDate();
 				draw();
 			});
 			// minutes
 			$timepicker_group_minutes_minus.click(function() {
 				dateShadow.setMinutes(dateShadow.getMinutes() - 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$timepicker_group_minutes_plus.click(function() {
 				dateShadow.setMinutes(dateShadow.getMinutes() + 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$timepicker_group_minutes_input.change(function() {
 				var _val = digitization($(this).val(), 0, 59);
 				dateShadow.setMinutes(_val);
+				refreshCurrentDate();
 				draw();
 			});
 			// seconds
 			$timepicker_group_seconds_minus.click(function() {
 				dateShadow.setSeconds(dateShadow.getSeconds() - 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$timepicker_group_seconds_plus.click(function() {
 				dateShadow.setSeconds(dateShadow.getSeconds() + 1);
+				refreshCurrentDate();
 				draw();
 			});
 			$timepicker_group_seconds_input.change(function() {
 				var _val = digitization($(this).val(), 0, 59);
 				dateShadow.setSeconds(_val);
+				refreshCurrentDate();
 				draw();
 			});
 
@@ -443,17 +475,6 @@ $._bc.vals.datepicker.index = 1;
 		}
 		if(!enable_timepicker) {
 			$timepicker.hide();
-		}
-
-		// set the current date
-		function getCurrent(current, target, before, after) {
-			if(before != null && target > before) {
-				return new Date(before.getTime());
-			}
-			if(after != null && target < after) {
-				return new Date(after.getTime());
-			}
-			return target;
 		}
 
 		// fill date in the view
@@ -478,6 +499,10 @@ $._bc.vals.datepicker.index = 1;
 				if(i == _year) {
 					$element.addClass('active');
 				}
+				if(		before.getFullYear() < i || 
+						after.getFullYear() > i) {
+					$element.addClass('disabled');
+				}
 				$yearpicker_body.append($element);
 			}
 
@@ -486,8 +511,13 @@ $._bc.vals.datepicker.index = 1;
 			$monthpicker_body.find("span").each(function(i, ele) {
 				var $element = $(ele);
 				$element.removeClass("active");
+				$element.removeClass("disabled");
 				if(i == _month) {
 					$element.addClass("active");
+				}
+				if(		before.getFullYear() * 100 + before.getMonth() < _year * 100 + i || 
+						after.getFullYear() * 100 + after.getMonth() > _year * 100 + i) {
+					$element.addClass('disabled');
 				}
 			});
 
@@ -499,7 +529,6 @@ $._bc.vals.datepicker.index = 1;
 				$datepicker_body_date.append($element);
 			}
 
-			var _cmp_date = _year * 10000 + _month * 100 + _date;
 			for(var i = 1; i <= days[1] ; i+= 1) {
 				var $element = $('<span>');
 				$element.text(fillZero(i));
