@@ -7,6 +7,7 @@
 	to:			string			set the value of target element
 	container:	string			set datepicker component container
 	before:		string			set the date/time picker can't pass
+	goon:		boolean			default false. True will change value immediately when click.
 */
 
 // TODO:	add default date
