@@ -22,6 +22,11 @@
 	<body>
 		<script>
 			$(document).ready(function(){
+				var num = 0;
+				$("#i_select").change(function() {
+					num += 1;
+					$("#tips").text("select changed: " + num + " times");
+				});
 			});
 		</script>
 		<div class="btn-group">
@@ -37,6 +42,6 @@
 			</ul>
 		</div>
 
-		<input type="input" id="i_select" />
+		<input type="input" id="i_select" /><span id="tips"></span>
 	</body>
 </html>
