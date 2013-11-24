@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/slider/bootstrap-slider.js"></script>
+		<link href="../src/slider/bootstrap-slider.css" rel="stylesheet" media="screen">
+
+		<script>
+			$(document).ready(function(){
+				var num = 0;
+				$("#slider1").change(function() {
+					num += 1;
+					$("#tips1").text("value changed " + num + " times.");
+				});
+			});
+		</script>
+		<style>
+			.progress {
+				width: 80%;
+				margin: auto;
+			}
+			
+			input {
+				margin-left: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<br />
+		<div class="progress">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider1"></button>
+		</div>
+		<input type="text" id="slider1" /><span id="tips1"></span>
+
+		<div class="progress">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider2" data-min="100" data-max="200"></button>
+		</div>
+		<input type="text" id="slider2" />
+
+		<div class="progress">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
+			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
+		</div>
+	</body>
+</html>
