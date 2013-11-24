@@ -1,0 +1,12 @@
+.dropdown-toggle[data-toggle="dropdown"][data-type="selector"] {
+	text-align: left;
+}
+
+.dropdown-toggle[data-toggle="dropdown"][data-type="selector"] .caret {
+	float: right;
+	margin-top: 9px;
+}
+
+ul.dropdown-menu[role="menu"][data-type="selector"] li a {
+	cursor: default;
+}

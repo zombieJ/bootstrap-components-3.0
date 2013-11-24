@@ -4,14 +4,11 @@
 				date			date picker only
 				month			month picker only
 				year			year picker only
-	to:			string			set the value of target element
+	to:			element			set the value of target element
 	container:	string			set datepicker component container
 	before:		string			set the date/time picker can't pass
 	goon:		boolean			default false. True will change value immediately when click.
 */
-
-// TODO:	add default date
-//			add disabled date range
 
 // init env
 $._bc.vals.datepicker = new Object();

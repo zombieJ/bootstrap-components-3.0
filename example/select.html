@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/select/bootstrap-select.js"></script>
+		<link href="../src/select/bootstrap-select.css" rel="stylesheet" media="screen">
+
+		<style>
+			button[data-toggle="dropdown"] {
+				width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			$(document).ready(function(){
+			});
+		</script>
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+			data-type="selector" data-to="#i_select">
+				<span data-value>Select ...</span> <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu" data-type="selector">
+				<li><a>Option 1</a></li>
+				<li><a>Option 2</a></li>
+				<li class="divider"></li>
+				<li><a value="Specific Value">Option with value</a></li>
+			</ul>
+		</div>
+
+		<input type="input" id="i_select" />
+	</body>
+</html>
