@@ -1,4 +1,5 @@
 .progress .slider {
 	height: 100%;
 	vertical-align: top;
+	float: left;
 }

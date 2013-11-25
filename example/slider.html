@@ -29,7 +29,7 @@
 			}
 			
 			input {
-				margin-left: 200px;
+				margin-left: 100px;
 			}
 		</style>
 	</head>
@@ -40,14 +40,18 @@
 		</div>
 		<input type="text" id="slider1" /><span id="tips1"></span>
 
-		<div class="progress">
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider2" data-min="100" data-max="200"></button>
+		<div class="progress" data-min="100" data-max="200">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider2"></button>
 		</div>
 		<input type="text" id="slider2" />
 
 		<div class="progress">
-			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
-			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_1"></button>
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_2"></button>
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_3"></button>
 		</div>
+		<input type="text" id="slider3_1" />
+		<input type="text" id="slider3_2" />
+		<input type="text" id="slider3_3" />
 	</body>
 </html>
