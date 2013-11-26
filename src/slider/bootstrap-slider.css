@@ -3,3 +3,8 @@
 	vertical-align: top;
 	float: left;
 }
+
+.progress[data-slider-container] .slider {
+	position: absolute;
+	height: 20px;
+}

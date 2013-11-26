@@ -1,10 +1,41 @@
 /* options:
 	to:			element			set the value of target element
+
 	min:		number			set min value
 	max:		number			set max value
+
+	number		number			set the number of the slider blocks
 */
 
 !function ($) {
+	$.fn.extend({
+		slider:function(options){
+			// get options
+			var _my = $(this);
+			var vars = $._bc.vars(options);
+			var _options = vars.options;
+
+			// set min / max value
+			var _min = $._bc.get(_options, "min", 0);
+			var _max = $._bc.get(_options, "max", 100);
+			_my.attr("data-min", _min);
+			_my.attr("data-max", _max);
+
+			// set number
+			var _number = _options.number;
+			if(_number != null) {
+				_my.empty();
+				for(var i = 0 ; i < _number ; i += 1) {
+					var $slider = $("<button type='button' class='btn btn-primary slider' data-toggle='slider'>");
+					_my.append($slider);
+				}
+			}
+
+			_my.attr("data-slider-container", "");
+		}
+	});
+
+	// dynamic controller without handler
 	function index(element) {
 		return element.parent().find("button[data-toggle='slider']").index(element);
 	}

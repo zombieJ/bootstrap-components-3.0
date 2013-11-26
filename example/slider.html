@@ -20,6 +20,15 @@
 					num += 1;
 					$("#tips1").text("value changed " + num + " times.");
 				});
+
+				$("#sldctnr_1").slider({
+					min: 150,
+					max: 200,
+				});
+
+				$("#sldctnr_2").slider({
+					number: 3,
+				});
 			});
 		</script>
 		<style>
@@ -53,5 +62,15 @@
 		<input type="text" id="slider3_1" />
 		<input type="text" id="slider3_2" />
 		<input type="text" id="slider3_3" />
+
+		<div id="sldctnr_1" class="progress">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider4_1"></button>
+			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider4_2"></button>
+		</div>
+		<input type="text" id="slider4_1" />
+		<input type="text" id="slider4_2" />
+
+		<div id="sldctnr_2" class="progress">
+		</div>
 	</body>
 </html>
