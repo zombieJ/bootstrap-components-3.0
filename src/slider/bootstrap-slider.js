@@ -43,7 +43,6 @@
 
 		// generate value
 		var _ptg = _value / _total_width;
-		console.log(_total_width);
 		var _val = _min + (_max - _min) * _ptg;
 		return _val;
 	}
@@ -82,8 +81,8 @@
 		if(_instance_left < 0) _instance_left = 0;
 		if(_instance_left > _value_range) _instance_left = _value_range;
 		_instance.css("margin-left", _instance_left);
-
-		// generate value
+	}
+	function doChange(_instance) {
 		var _target = $(_instance.attr("data-to"));
 		var _pre_val = Number(_target.val());
 		var _val = getValue(_instance);
@@ -93,16 +92,25 @@
 			_target.change();
 		}
 	}
-	function doChange() {
-		
-	}
 	$(document).on("mousedown.bs.slider", "button[data-toggle='slider']", function(event){
 		_instance = $(this);
 		doStart(_instance, event);
 	});
 	$(document).on("mousemove.bs.slider", function(event){
 		if(_instance != null) {
-		doMove(_instance, event);
+			doMove(_instance, event);
+			doChange(_instance);
+
+			// loop trigger change event
+			var _process = _instance.parent();
+			var _sliders = _process.find("button[data-toggle='slider']");
+			var _len = _sliders.length;
+			var _index = index(_instance);
+			$.each(_sliders, function(i, element) {
+				if(i != _index) {
+					doChange($(element));
+				}
+			});
 		}
 	});
 	$(document).on("mouseup.bs.slider", function(event){
