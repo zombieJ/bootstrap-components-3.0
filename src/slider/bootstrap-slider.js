@@ -40,7 +40,7 @@
 			var _sliders = _my.find("button[data-toggle='slider']");
 			{
 				var _len = _values.length;
-				var _default = _len == 0 ? 0 : _values[_len - 1];
+				var _default = _len == 0 ? _min : _values[_len - 1];
 				$.each(_sliders, function(i, ele) {
 					var _element = $(ele);
 					var _val = i < _len ? _values[i] : _default;
@@ -134,24 +134,29 @@
 		var _sliders = _process.find("button[data-toggle='slider']");
 		var _len = _sliders.length;
 		var _index = index(_instance);
-		var _value_range =_process.outerWidth();
-		for(var i = 0 ; i < _index ; i += 1) {
-			var _element = $(_sliders[i]);
-			var _left = getLeft(_element);
-			var _width = _element.outerWidth();
-			_value_range -= _left + _width;
-		}
-		_value_range -= _instance.outerWidth();
-		for(var i = _index + 1 ; i < _len ; i += 1) {
-			var _element = $(_sliders[i]);
-			var _width = _element.outerWidth();
-			_value_range -= getLeft(_element) + _width;
-		}
+		var _total_width = _process.outerWidth();
+		$.each(_sliders, function(i, ele) {
+			var _element = $(ele);
+			_total_width -= _element.outerWidth();
+		});
+		if(_process.attr("data-slider-container") == null) {
+			var _value_range =_total_width;
+			for(var i = 0 ; i < _index ; i += 1) {
+				var _element = $(_sliders[i]);
+				_value_range -= getLeft(_element);
+			}
+			for(var i = _index + 1 ; i < _len ; i += 1) {
+				var _element = $(_sliders[i]);
+				_value_range -= getLeft(_element);
+			}
 
-		var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
-		if(_instance_left < 0) _instance_left = 0;
-		if(_instance_left > _value_range) _instance_left = _value_range;
-		_instance.css("margin-left", _instance_left);
+			var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
+			if(_instance_left < 0) _instance_left = 0;
+			if(_instance_left > _value_range) _instance_left = _value_range;
+			_instance.css("margin-left", _instance_left);
+		} else {
+			// TODO: set position of slider!
+		}
 	}
 	function doChange(_instance) {
 		var _target = $(_instance.attr("data-to"));
