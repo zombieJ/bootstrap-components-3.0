@@ -4,7 +4,8 @@
 	min:		number			set min value
 	max:		number			set max value
 
-	number		number			set the number of the slider blocks
+	number:		number			set the number of the slider blocks
+	value:		array			set initial value of sliders
 */
 
 !function ($) {
@@ -31,7 +32,21 @@
 				}
 			}
 
+			// mark as enhanced slider
 			_my.attr("data-slider-container", "");
+
+			// set default value
+			var _values = $._bc.get(_options, "value", []);
+			var _sliders = _my.find("button[data-toggle='slider']");
+			{
+				var _len = _values.length;
+				var _default = _len == 0 ? 0 : _values[_len - 1];
+				$.each(_sliders, function(i, ele) {
+					var _element = $(ele);
+					var _val = i < _len ? _values[i] : _default;
+					setValue(_element, _val);
+				});
+			}
 		}
 	});
 
@@ -76,6 +91,31 @@
 		var _ptg = _value / _total_width;
 		var _val = _min + (_max - _min) * _ptg;
 		return _val;
+	}
+	function setValue(_instance, value) {
+		var _process = _instance.parent();
+
+		// limit the range of min & max value
+		var _min = Number(_process.attr("data-min"));
+		var _max = Number(_process.attr("data-max"));
+		if(_min == null || isNaN(_min)) _min = 0;
+		if(_max == null || isNaN(_max)) _max = 100;
+
+		// prepare value condition
+		var _sliders = _process.find("button[data-toggle='slider']");
+		var _index = index(_instance);
+		var _total_width = _process.outerWidth();
+		$.each(_sliders, function(i, ele) {
+			var _element = $(ele);
+			_total_width -= _element.outerWidth();
+		});
+		var _my_left = _total_width * (value - _min) / (_max - _min);
+		for(var i = 0 ; i < _index ; i += 1) {
+			var _element = $(_sliders[i]);
+			_my_left += _element.outerWidth();
+		}
+		_instance.css("margin-left", _my_left + "px");
+		_instance.val(value).attr("data-value", value);
 	}
 	function doStart(_instance, event) {
 		_mouseLeft = event.pageX - _instance.offset().left;
@@ -124,8 +164,10 @@
 		}
 	}
 	$(document).on("mousedown.bs.slider", "button[data-toggle='slider']", function(event){
-		_instance = $(this);
-		doStart(_instance, event);
+		if(event.button == 0) {
+			_instance = $(this);
+			doStart(_instance, event);
+		}
 	});
 	$(document).on("mousemove.bs.slider", function(event){
 		if(_instance != null) {
@@ -145,6 +187,8 @@
 		}
 	});
 	$(document).on("mouseup.bs.slider", function(event){
-		_instance = null;
+		if(event.button == 0) {
+			_instance = null;
+		}
 	});
 }(window.jQuery);
