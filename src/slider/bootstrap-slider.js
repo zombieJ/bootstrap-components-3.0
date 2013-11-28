@@ -121,11 +121,13 @@
 		_mouseLeft = event.pageX - _instance.offset().left;
 
 		var _process = _instance.parent();
-		var _sliders = _process.find("button[data-toggle='slider']");
-		var _index = index(_instance);
-		for(var i = 0 ; i < _index ; i += 1) {
-			var _element = $(_sliders[i]);
-			_mouseLeft += _element.outerWidth() + getLeft(_element);
+		if(_process.attr("data-slider-container") == null) {
+			var _sliders = _process.find("button[data-toggle='slider']");
+			var _index = index(_instance);
+			for(var i = 0 ; i < _index ; i += 1) {
+				var _element = $(_sliders[i]);
+				_mouseLeft += _element.outerWidth() + getLeft(_element);
+			}
 		}
 	}
 	function doMove(_instance, event, recv) {
@@ -135,11 +137,11 @@
 		var _len = _sliders.length;
 		var _index = index(_instance);
 		var _total_width = _process.outerWidth();
-		$.each(_sliders, function(i, ele) {
-			var _element = $(ele);
-			_total_width -= _element.outerWidth();
-		});
 		if(_process.attr("data-slider-container") == null) {
+			$.each(_sliders, function(i, ele) {
+				var _element = $(ele);
+				_total_width -= _element.outerWidth();
+			});
 			var _value_range =_total_width;
 			for(var i = 0 ; i < _index ; i += 1) {
 				var _element = $(_sliders[i]);
@@ -155,7 +157,20 @@
 			if(_instance_left > _value_range) _instance_left = _value_range;
 			_instance.css("margin-left", _instance_left);
 		} else {
-			// TODO: set position of slider!
+			var _value_start = 0;
+			if(_index > 0) {
+				var _prev = $(_sliders[_index - 1]);
+				_value_start = getLeft(_prev) + _prev.outerWidth();
+			}
+			var _value_range =_total_width - _instance.outerWidth();
+			if(_len != 0 && _index != _len - 1) {
+				var _last = $(_sliders[_len - 1]);
+				_value_range = _total_width - getLeft(_last) - _last.outerWidth();
+			}
+			var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
+			if(_instance_left < _value_start) _instance_left = _value_start;
+			if(_instance_left > _value_range) _instance_left = _value_range;
+			_instance.css("margin-left", _instance_left);
 		}
 	}
 	function doChange(_instance) {
