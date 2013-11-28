@@ -27,7 +27,7 @@
 
 			// set number
 			var _number = _options.number;
-			if(_number == null && _values != null) {
+			if(_number == null && _values.length != 0) {
 				_number = _values.length;
 			}
 			if(_number != null) {
@@ -79,17 +79,23 @@
 		var _index = index(_instance);
 		var _value = 0;
 		var _total_width = _process.outerWidth();
-		for(var i = 0 ; i <= _index ; i += 1) {
-			var _element = $(_sliders[i]);
-			var _left = getLeft(_element);
-			var _width = _element.outerWidth();
-			_total_width -= _width;
-			_value += _left;
-		}
-		for(var i = _index + 1 ; i < _len ; i += 1) {
-			var _element = $(_sliders[i]);
-			var _width = _element.outerWidth();
-			_total_width -= _width;
+		$.each(_sliders, function(i, ele) {
+			var _element = $(ele);
+			_total_width -= _element.outerWidth();
+		});
+
+		if(_process.attr("data-slider-container") == null) {
+			for(var i = 0 ; i <= _index ; i += 1) {
+				var _element = $(_sliders[i]);
+				var _left = getLeft(_element);
+				_value += _left;
+			}
+		} else {
+			_value = getLeft(_instance);
+			for(var i = 0 ; i < _index ; i += 1) {
+				var _element = $(_sliders[i]);
+				_value -= _element.outerWidth();
+			}
 		}
 
 		// generate value
