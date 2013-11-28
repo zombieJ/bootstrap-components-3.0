@@ -27,6 +27,10 @@
 				});
 
 				$("#sldctnr_2").slider({
+					value: [5, 9, 11, 25, 38],
+				});
+
+				$("#sldctnr_3").slider({
 					number: 4,
 					value: [0, 1, 5],
 				});
@@ -40,6 +44,13 @@
 			
 			input {
 				margin-left: 100px;
+			}
+
+			#sldctnr_3 button:nth-child(2) {
+				width: 40px;
+			}
+			#sldctnr_3 button:last-child {
+				width: 50px;
 			}
 		</style>
 	</head>
@@ -71,7 +82,8 @@
 		<input type="text" id="slider4_1" />
 		<input type="text" id="slider4_2" />
 
-		<div id="sldctnr_2" class="progress">
-		</div>
+		<div id="sldctnr_2" class="progress"></div>
+
+		<div id="sldctnr_3" class="progress"></div>
 	</body>
 </html>
