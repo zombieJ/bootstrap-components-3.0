@@ -37,9 +37,15 @@
 			});
 		</script>
 		<style>
+			.reg {
+				margin: 20px 0 0 0;
+				text-align: center;
+			}
+
 			.progress {
 				width: 80%;
 				margin: auto;
+				text-align: left;
 			}
 			
 			input {
@@ -60,43 +66,53 @@
 			}
 
 			#sldctnr_3 button:nth-child(2) {
-				width: 40px;
+				width: 50px;
 			}
 			#sldctnr_3 button:last-child {
-				width: 50px;
+				width: 70px;
 			}
 		</style>
 	</head>
 	<body>
-		<br />
-		<div class="progress">
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider1"></button>
+		<div class="reg">
+			<div class="progress">
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider1"></button>
+			</div>
+			<div class="progress">
+				<button type="button" disabled="disabled" class="btn btn-primary slider" data-toggle="slider" data-to="#slider1"></button>
+			</div>
 		</div>
-		<input type="text" id="slider1" /><span id="tips1"></span>
 
-		<div class="progress" data-min="100" data-max="200">
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider2"></button>
+		<div class="reg">
+			<div class="progress" data-min="100" data-max="200">
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider2"></button>
+			</div>
+			<input type="text" id="slider2" />
 		</div>
-		<input type="text" id="slider2" />
 
-		<div class="progress">
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_1"></button>
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_2"></button>
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_3"></button>
+		<div class="reg">
+			<div class="progress">
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_1"></button>
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_2"></button>
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider3_3"></button>
+			</div>
+			<input type="text" id="slider3_1" />
+			<input type="text" id="slider3_2" />
+			<input type="text" id="slider3_3" />
 		</div>
-		<input type="text" id="slider3_1" />
-		<input type="text" id="slider3_2" />
-		<input type="text" id="slider3_3" />
 
-		<div id="sldctnr_1" class="progress">
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider4_1"></button>
-			<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider4_2"></button>
+		<div class="reg">
+			<div id="sldctnr_1" class="progress">
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider4_1"></button>
+				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider4_2"></button>
+			</div>
+			<input type="text" id="slider4_1" />
+			<input type="text" id="slider4_2" />
 		</div>
-		<input type="text" id="slider4_1" />
-		<input type="text" id="slider4_2" />
 
-		<div id="sldctnr_2" class="progress"></div>
-
-		<div id="sldctnr_3" class="progress"></div>
+		<div class="reg">
+			<div id="sldctnr_2" class="progress"></div>
+			<div id="sldctnr_3" class="progress"></div>
+		</div>
 	</body>
 </html>
