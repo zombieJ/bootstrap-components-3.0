@@ -30,6 +30,7 @@
 			if(_number == null && _values.length != 0) {
 				_number = _values.length;
 			}
+			// create sliders with given number
 			if(_number != null) {
 				_my.empty();
 				for(var i = 0 ; i < _number ; i += 1) {
@@ -41,8 +42,19 @@
 			// mark as enhanced slider
 			_my.attr("data-slider-container", "");
 
-			// set default value
+			// create the background between sliders
 			var _sliders = _my.find("button[data-toggle='slider']");
+			{
+				var _len = _sliders.length;
+				for(var i = _len - 1 ; i > 0  ; i -= 1) {
+					var $bac = $("<div data-toggle='slider-background'>");
+					$bac.attr("data-from", i - 1);
+					$bac.attr("data-to", i);
+					_my.prepend($bac);
+				}
+			}
+
+			// set default value
 			{
 				var _len = _values.length;
 				var _default = _len == 0 ? _min : _values[_len - 1];
@@ -52,6 +64,9 @@
 					setValue(_element, _val);
 				});
 			}
+
+			// refresh background for user draw color
+			refreshBackfround(_my);
 		}
 	});
 
@@ -205,6 +220,27 @@
 			_target.change();
 		}
 	}
+	function refreshBackfround(_instance) {
+		var _process = $(_instance);
+		if(_process.attr("data-slider-container") == null) {
+			_process = _process.parent();
+		}
+		var _sliders = _process.find("button[data-toggle='slider']");
+		var _lenSliders = _sliders.length;
+		var _backgrounds = _process.find("div[data-toggle='slider-background']");
+		var _lenBackgrounds = _backgrounds.length;
+		for(var i = 0 ; i < _lenBackgrounds ; i += 1) {
+			var _bac = $(_backgrounds[i]);
+			var _prev = $(_sliders[i]);
+			var _next = $(_sliders[i + 1]);
+			var _left = getLeft(_prev) + _prev.outerWidth() * 0.5;
+			var _right = getLeft(_next) + _next.outerWidth() * 0.5;
+			var _width = _right - _left;
+
+			_bac.css("margin-left", _left);
+			_bac.outerWidth(_width);
+		}
+	}
 	$(document).on("mousedown.bs.slider", "button[data-toggle='slider']", function(event){
 		if(event.button == 0) {
 			_instance = $(this);
@@ -226,6 +262,9 @@
 					doChange($(element));
 				}
 			});
+
+			// refresh background for user draw color
+			refreshBackfround(_instance);
 		}
 	});
 	$(document).on("mouseup.bs.slider", function(event){
