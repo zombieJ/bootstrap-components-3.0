@@ -117,12 +117,17 @@
 		var _sliders = _process.find("button[data-toggle='slider']");
 		var _len = _sliders.length;
 		var _index = index(_instance);
+		var _mixed = _process.attr("data-slider-mixed") != null;
 		var _value = 0;
 		var _total_width = _process.outerWidth();
-		$.each(_sliders, function(i, ele) {
-			var _element = $(ele);
-			_total_width -= getWidth(_element);
-		});
+		if(_mixed) {
+			_total_width -= getWidth(_instance);
+		} else {
+			$.each(_sliders, function(i, ele) {
+				var _element = $(ele);
+				_total_width -= getWidth(_element);
+			});
+		}
 
 		if(_process.attr("data-slider-container") == null) {
 			for(var i = 0 ; i <= _index ; i += 1) {
@@ -132,9 +137,11 @@
 			}
 		} else {
 			_value = getLeft(_instance);
-			for(var i = 0 ; i < _index ; i += 1) {
-				var _element = $(_sliders[i]);
-				_value -= getWidth(_element);
+			if(!_mixed) {
+				for(var i = 0 ; i < _index ; i += 1) {
+					var _element = $(_sliders[i]);
+					_value -= getWidth(_element);
+				}
 			}
 		}
 
