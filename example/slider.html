@@ -32,12 +32,16 @@
 
 				$("#sldctnr_3").slider({
 					number: 4,
-					value: [0, 1, 5],
+					value: [0, 50, 75],
 					single: true,
 				});
 			});
 		</script>
 		<style>
+			body {
+				height: 1000px;
+			}
+
 			.reg {
 				margin: 20px 0 0 0;
 				text-align: center;
@@ -51,6 +55,19 @@
 			
 			input {
 				margin-left: 100px;
+			}
+
+			#sldctnr_0_3 {
+				border-radius: 20px;
+				height: 8px;
+				overflow: visible;
+			}
+			#sldctnr_0_3 button {
+				margin-top: -6px;
+				border-radius: 20px;
+				padding: 0;
+				width: 20px;
+				height: 20px;
 			}
 
 			#sldctnr_2 [data-toggle="slider-background"]:nth-child(1) {
@@ -78,9 +95,10 @@
 		</div>
 
 		<div class="reg">
-			<div class="progress" data-min="100" data-max="200">
-				<button type="button" class="btn btn-primary slider" data-toggle="slider" data-to="#slider2"></button>
+			<div id="sldctnr_0_3" class="progress" data-min="100" data-max="200">
+				<button type="button" class="btn btn-primary slider" data-slider-width="8" data-toggle="slider" data-to="#slider2"></button>
 			</div>
+			<br/>
 			<input type="text" id="slider2" />
 		</div>
 

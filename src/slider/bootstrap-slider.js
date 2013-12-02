@@ -80,7 +80,17 @@
 		return element.parent().find("button[data-toggle='slider']").index(element);
 	}
 	function getLeft(element) {
-		return Number(element.css("margin-left").replace("px", ""));
+		var _left = Number(element.css("margin-left").replace("px", ""));
+		return _left;
+	}
+	function getWidth(element) {
+		var _width = Number(element.attr("data-slider-width"));
+		if(_width == null || isNaN(_width)) {
+			return element.outerWidth();
+		} else {
+			console.log(_width);
+			return _width;
+		}
 	}
 
 	var _instance = null;
@@ -101,7 +111,7 @@
 		var _total_width = _process.outerWidth();
 		$.each(_sliders, function(i, ele) {
 			var _element = $(ele);
-			_total_width -= _element.outerWidth();
+			_total_width -= getWidth(_element);
 		});
 
 		if(_process.attr("data-slider-container") == null) {
@@ -114,7 +124,7 @@
 			_value = getLeft(_instance);
 			for(var i = 0 ; i < _index ; i += 1) {
 				var _element = $(_sliders[i]);
-				_value -= _element.outerWidth();
+				_value -= getWidth(_element);
 			}
 		}
 
@@ -138,12 +148,12 @@
 		var _total_width = _process.outerWidth();
 		$.each(_sliders, function(i, ele) {
 			var _element = $(ele);
-			_total_width -= _element.outerWidth();
+			_total_width -= getWidth(_element);
 		});
 		var _my_left = _total_width * (value - _min) / (_max - _min);
 		for(var i = 0 ; i < _index ; i += 1) {
 			var _element = $(_sliders[i]);
-			_my_left += _element.outerWidth();
+			_my_left += getWidth(_element);
 		}
 		_instance.css("margin-left", _my_left + "px");
 		_instance.val(value).attr("data-value", value);
@@ -157,7 +167,7 @@
 			var _index = index(_instance);
 			for(var i = 0 ; i < _index ; i += 1) {
 				var _element = $(_sliders[i]);
-				_mouseLeft += _element.outerWidth() + getLeft(_element);
+				_mouseLeft += getWidth(_element) + getLeft(_element);
 			}
 		}
 	}
@@ -171,7 +181,7 @@
 		if(_process.attr("data-slider-container") == null) {	// run as simple mode
 			$.each(_sliders, function(i, ele) {
 				var _element = $(ele);
-				_total_width -= _element.outerWidth();
+				_total_width -= getWidth(_element);
 			});
 			var _value_range =_total_width;
 			for(var i = 0 ; i < _index ; i += 1) {
@@ -195,19 +205,19 @@
 			var _value_start = 0;
 			if(_index > 0) {// start
 				var _prev = $(_sliders[_index - 1]);
-				_value_start = getLeft(_prev) + _prev.outerWidth();
+				_value_start = getLeft(_prev) + getWidth(_prev);
 			}
-			var _value_end =_total_width - _instance.outerWidth();
+			var _value_end =_total_width - getWidth(_instance);
 			if(_single) {
 				if(_index < _len - 1) {
 					var _next = $(_sliders[_index + 1]);
-					_value_end = getLeft(_next) - _instance.outerWidth();
+					_value_end = getLeft(_next) - getWidth(_instance);
 				}
 			} else {
 				if(_index < _len - 1) {// end
 					var _next = $(_sliders[_index + 1]);
 					var _last = $(_sliders[_len - 1]);
-					_value_end = _total_width - (getLeft(_last) - getLeft(_instance)) - _last.outerWidth();
+					_value_end = _total_width - (getLeft(_last) - getLeft(_instance)) - getWidth(_last);
 				}
 			}
 			var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
@@ -248,8 +258,8 @@
 			var _bac = $(_backgrounds[i]);
 			var _prev = $(_sliders[i]);
 			var _next = $(_sliders[i + 1]);
-			var _left = getLeft(_prev) + _prev.outerWidth() * 0.5;
-			var _right = getLeft(_next) + _next.outerWidth() * 0.5;
+			var _left = getLeft(_prev) + getWidth(_prev) * 0.5;
+			var _right = getLeft(_next) + getWidth(_next) * 0.5;
 			var _width = _right - _left;
 
 			_bac.css("margin-left", _left);
