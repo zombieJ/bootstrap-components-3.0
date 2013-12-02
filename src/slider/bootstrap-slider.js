@@ -6,6 +6,7 @@
 
 	number:		number			set the number of the slider blocks
 	value:		array			set initial value of sliders. If set value without number, it will trade length of them as the number.
+	single:		boolean 		default false. Move slider will not influence other sliders if true.
 */
 
 !function ($) {
@@ -24,6 +25,7 @@
 
 			// get values
 			var _values = $._bc.get(_options, "value", []);
+			var _single = $._bc.get(_options, "single", false);
 
 			// set number
 			var _number = _options.number;
@@ -41,6 +43,9 @@
 
 			// mark as enhanced slider
 			_my.attr("data-slider-container", "");
+			if(_single) {
+				_my.attr("data-slider-single", "");
+			}
 
 			// create the background between sliders
 			var _sliders = _my.find("button[data-toggle='slider']");
@@ -163,7 +168,7 @@
 		var _len = _sliders.length;
 		var _index = index(_instance);
 		var _total_width = _process.outerWidth();
-		if(_process.attr("data-slider-container") == null) {
+		if(_process.attr("data-slider-container") == null) {	// run as simple mode
 			$.each(_sliders, function(i, ele) {
 				var _element = $(ele);
 				_total_width -= _element.outerWidth();
@@ -182,7 +187,8 @@
 			if(_instance_left < 0) _instance_left = 0;
 			if(_instance_left > _value_range) _instance_left = _value_range;
 			_instance.css("margin-left", _instance_left);
-		} else {
+		} else {												// run as enhance mode
+			var _single = _process.attr("data-slider-single") != null;
 			var _pre_left = getLeft(_instance);
 
 			// move slider
@@ -192,10 +198,17 @@
 				_value_start = getLeft(_prev) + _prev.outerWidth();
 			}
 			var _value_end =_total_width - _instance.outerWidth();
-			if(_index < _len - 1) {// end
-				var _next = $(_sliders[_index + 1]);
-				var _last = $(_sliders[_len - 1]);
-				_value_end = _total_width - (getLeft(_last) - getLeft(_instance)) - _last.outerWidth();
+			if(_single) {
+				if(_index < _len - 1) {
+					var _next = $(_sliders[_index + 1]);
+					_value_end = getLeft(_next) - _instance.outerWidth();
+				}
+			} else {
+				if(_index < _len - 1) {// end
+					var _next = $(_sliders[_index + 1]);
+					var _last = $(_sliders[_len - 1]);
+					_value_end = _total_width - (getLeft(_last) - getLeft(_instance)) - _last.outerWidth();
+				}
 			}
 			var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
 			if(_instance_left < _value_start) _instance_left = _value_start;
@@ -203,10 +216,12 @@
 			_instance.css("margin-left", _instance_left);
 
 			// move other after sliders
-			var _dis = _instance_left - _pre_left;
-			for(var i = _index + 1 ; i < _len ; i += 1) {
-				var _element = $(_sliders[i]);
-				_element.css("margin-left", (getLeft(_element) + _dis) + "px");
+			if(!_single) {
+				var _dis = _instance_left - _pre_left;
+				for(var i = _index + 1 ; i < _len ; i += 1) {
+					var _element = $(_sliders[i]);
+					_element.css("margin-left", (getLeft(_element) + _dis) + "px");
+				}
 			}
 		}
 	}
