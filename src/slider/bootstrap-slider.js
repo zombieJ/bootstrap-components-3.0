@@ -7,7 +7,7 @@
 	number:		number			set the number of the slider blocks
 	value:		array			set initial value of sliders. If set value without number, it will trade length of them as the number.
 	single:		boolean			default false. Move slider will not influence other sliders if true.
-	mix:		boolean			default false. Slider can move every where with out order if true.
+	mixed:		boolean			default false. Slider can move every where with out order if true.
 */
 
 !function ($) {
@@ -27,6 +27,7 @@
 			// get values
 			var _values = $._bc.get(_options, "value", []);
 			var _single = $._bc.get(_options, "single", false);
+			var _mixed = $._bc.get(_options, "mixed", false);
 
 			// set number
 			var _number = _options.number;
@@ -44,9 +45,8 @@
 
 			// mark as enhanced slider
 			_my.attr("data-slider-container", "");
-			if(_single) {
-				_my.attr("data-slider-single", "");
-			}
+			if(_single) _my.attr("data-slider-single", "");
+			if(_mixed) _my.attr("data-slider-mixed", "");
 
 			// create the background between sliders
 			var _sliders = _my.find("button[data-toggle='slider']");
@@ -212,28 +212,31 @@
 			if(_instance_left > _value_range) _instance_left = _value_range;
 			_instance.css("margin-left", _instance_left);
 		} else {												// run as enhance mode
-			var _single = _process.attr("data-slider-single") != null;
+			var _mixed = _process.attr("data-slider-mixed") != null;
+			var _single = _mixed || _process.attr("data-slider-single") != null;
 			var _pre_left = getLeft(_instance);
 
 			// move slider
 			var _value_start = 0;
-			if(_index > 0) {// start
-				var _prev = $(_sliders[_index - 1]);
-				_value_start = getLeft(_prev) + getWidth(_prev);
-			}
 			var _value_end =_total_width - getWidth(_instance);
-			if(_single) {
-				if(_index < _len - 1) {
-					var _next = $(_sliders[_index + 1]);
-					_value_end = getLeft(_next) - getWidth(_instance);
+
+			if(!_mixed) {
+				if(_index > 0) {// start
+					var _prev = $(_sliders[_index - 1]);
+					_value_start = getLeft(_prev) + getWidth(_prev);
 				}
-			} else {
-				if(_index < _len - 1) {// end
-					var _next = $(_sliders[_index + 1]);
-					var _last = $(_sliders[_len - 1]);
-					_value_end = _total_width - (getLeft(_last) - getLeft(_instance)) - getWidth(_last);
+				if(_index < _len - 1) {
+					if(_single) {
+						var _next = $(_sliders[_index + 1]);
+						_value_end = getLeft(_next) - getWidth(_instance);
+					} else {
+						var _next = $(_sliders[_index + 1]);
+						var _last = $(_sliders[_len - 1]);
+						_value_end = _total_width - (getLeft(_last) - getLeft(_instance)) - getWidth(_last);
+					}
 				}
 			}
+
 			var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
 			if(_instance_left < _value_start) _instance_left = _value_start;
 			if(_instance_left > _value_end) _instance_left = _value_end;
