@@ -4,6 +4,10 @@
 	float: left;
 }
 
+.progress[data-slider-container] {
+	position: relative;
+}
+
 .progress[data-slider-container] [data-toggle="slider"] {
 	position: absolute;
 	height: 20px;

@@ -59,7 +59,7 @@
 				}
 			}
 
-			// set default value
+			// set default value & set margin-left as left
 			{
 				var _len = _values.length;
 				var _default = _len == 0 ? _min : _values[_len - 1];
@@ -67,6 +67,11 @@
 					var _element = $(ele);
 					var _val = i < _len ? _values[i] : _default;
 					setValue(_element, _val);
+
+					var _style = _element.attr("style");
+					if(_style != null) {
+						_element.attr("style", _style.replace(/margin-left/g, "left"));
+					}
 				});
 			}
 
@@ -80,17 +85,21 @@
 		return element.parent().find("button[data-toggle='slider']").index(element);
 	}
 	function getLeft(element) {
-		var _left = Number(element.css("margin-left").replace("px", ""));
-		return _left;
+		var _process = element.parent();
+		if(_process.attr("data-slider-container") == null) {
+			return Number(element.css("margin-left").replace("px", ""));
+		} else {
+			return Number(element.css("left").replace("px", ""));
+		}
 	}
 	function getWidth(element) {
-		var _width = Number(element.attr("data-slider-width"));
-		if(_width == null || isNaN(_width)) {
-			return element.outerWidth();
-		} else {
-			console.log(_width);
-			return _width;
+		var _width = element.outerWidth();
+		if(element.parent().attr("data-slider-container") != null) {
+			var _mgnLeft = Number(element.css("margin-left").replace("px", ""));
+			_width += _mgnLeft * 2;
 		}
+		return _width;
+		
 	}
 
 	var _instance = null;
@@ -155,7 +164,11 @@
 			var _element = $(_sliders[i]);
 			_my_left += getWidth(_element);
 		}
-		_instance.css("margin-left", _my_left + "px");
+		if(_process.attr("data-slider-container") == null) {
+			_instance.css("margin-left", _my_left);
+		} else {
+			_instance.css("left", _my_left);
+		}
 		_instance.val(value).attr("data-value", value);
 	}
 	function doStart(_instance, event) {
@@ -223,14 +236,14 @@
 			var _instance_left = event.pageX - _process.offset().left - _mouseLeft;
 			if(_instance_left < _value_start) _instance_left = _value_start;
 			if(_instance_left > _value_end) _instance_left = _value_end;
-			_instance.css("margin-left", _instance_left);
+			_instance.css("left", _instance_left);
 
 			// move other after sliders
 			if(!_single) {
 				var _dis = _instance_left - _pre_left;
 				for(var i = _index + 1 ; i < _len ; i += 1) {
 					var _element = $(_sliders[i]);
-					_element.css("margin-left", (getLeft(_element) + _dis) + "px");
+					_element.css("left", (getLeft(_element) + _dis));
 				}
 			}
 		}
@@ -262,7 +275,7 @@
 			var _right = getLeft(_next) + getWidth(_next) * 0.5;
 			var _width = _right - _left;
 
-			_bac.css("margin-left", _left);
+			_bac.css("left", _left);
 			_bac.outerWidth(_width);
 		}
 	}

@@ -35,6 +35,10 @@
 					value: [0, 50, 75],
 					single: true,
 				});
+
+				$("#sldctnr_4").slider({
+					number: 1,
+				});
 			});
 		</script>
 		<style>
@@ -57,19 +61,6 @@
 				margin-left: 100px;
 			}
 
-			#sldctnr_0_3 {
-				border-radius: 20px;
-				height: 8px;
-				overflow: visible;
-			}
-			#sldctnr_0_3 button {
-				margin-top: -6px;
-				border-radius: 20px;
-				padding: 0;
-				width: 20px;
-				height: 20px;
-			}
-
 			#sldctnr_2 [data-toggle="slider-background"]:nth-child(1) {
 				background: #FCC;
 			}
@@ -81,6 +72,20 @@
 			}
 			#sldctnr_2 [data-toggle="slider-background"]:nth-child(4) {
 				background: #FFC;
+			}
+
+			#sldctnr_4 {
+				border-radius: 20px;
+				height: 8px;
+				overflow: visible;
+			}
+			#sldctnr_4 button {
+				margin-top: -6px;
+				margin-left: -6px;
+				border-radius: 20px;
+				padding: 0;
+				width: 20px;
+				height: 20px;
 			}
 		</style>
 	</head>
@@ -125,6 +130,9 @@
 		<div class="reg">
 			<div id="sldctnr_2" class="progress"></div>
 			<div id="sldctnr_3" class="progress"></div>
+
+			<br/>
+			<div id="sldctnr_4" class="progress"></div>
 		</div>
 	</body>
 </html>
