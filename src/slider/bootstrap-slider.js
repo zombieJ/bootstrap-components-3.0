@@ -7,7 +7,7 @@
 	number:		number			set the number of the slider blocks
 	value:		array			set initial value of sliders. If set value without number, it will trade length of them as the number.
 	single:		boolean			default false. Move slider will not influence other sliders if true.
-	mixed:		boolean			default false. Slider can move every where with out order if true.
+	mixed:		boolean			default false. Slider can move every where with out order if true and single will always be true in this mode.
 */
 
 !function ($) {
