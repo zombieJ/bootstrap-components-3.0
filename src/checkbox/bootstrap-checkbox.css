@@ -8,4 +8,13 @@
 
 	position: relative;
 	top: 0;
+
+	font-family: 'Glyphicons Halflings';
+	-webkit-font-smoothing: antialiased;
+}
+
+.checkbox[data-toggle="checkbox"][checked]:before {
+	content: "\e013";
+	position: relative;
+	top: -3px;
 }

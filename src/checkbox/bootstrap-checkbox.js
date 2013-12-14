@@ -32,10 +32,8 @@
 	function updateStatus(_instance, _checked) {
 		if(_checked) {
 			_instance.attr("checked", "checked");
-			_instance.addClass("glyphicon").addClass("glyphicon-ok");
 		} else {
 			_instance.removeAttr("checked", "checked");
-			_instance.removeClass("glyphicon").removeClass("glyphicon-ok");
 		}
 	}
 
