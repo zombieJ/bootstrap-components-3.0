@@ -1,0 +1,11 @@
+.checkbox[data-toggle="checkbox"] {
+	margin: 0 0 1px 0;
+	padding: 0 0 0 0;
+	min-height: inherit;
+	display: inline-block;
+	width: 16px;
+	height: 17px;
+
+	position: relative;
+	top: 0;
+}

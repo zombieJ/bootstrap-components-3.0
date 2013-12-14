@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/checkbox/bootstrap-checkbox.js"></script>
+		<link href="../src/checkbox/bootstrap-checkbox.css" rel="stylesheet" media="screen">
+
+		<script>
+			$(document).ready(function(){
+				
+			});
+		</script>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<h3>Checkbox in label</h3>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox">
+				<span data-toggle="checkbox" class="checkbox btn btn-default"></span>
+				Check me out
+			</label>
+		</div>
+
+		<h3>Checkbox in label and target checkbox out of label</h3>
+		<div class="checkbox">
+			<input type="checkbox" id="chk_otlb">
+			<label>
+				<span data-toggle="checkbox" data-to="#chk_otlb" class="checkbox btn btn-default"></span>
+				Check me out
+			</label>
+		</div>
+
+		<h3>Checkbox out of label</h3>
+		<input type="checkbox" id="chk_outer">
+		<span data-toggle="checkbox" data-to="#chk_outer" class="checkbox btn btn-default"></span>
+	</body>
+</html>
