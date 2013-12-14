@@ -15,7 +15,18 @@
 
 		<script>
 			$(document).ready(function(){
-				
+				var num = 0;
+				$("#chk_outer").change(function() {
+					num += 1;
+					$("#tips").text("Changed: " + $(this).prop("checked") + " [" + num + " times]");
+				});
+
+				$("#btn_check").click(function() {
+					$("#tgr_chk").checkbox({checked: true});
+				});
+				$("#btn_uncheck").click(function() {
+					$("#tgr_chk").checkbox({checked: false});
+				});
 			});
 		</script>
 		<style>
@@ -41,8 +52,21 @@
 			</label>
 		</div>
 
-		<h3>Checkbox out of label</h3>
-		<input type="checkbox" id="chk_outer">
-		<span data-toggle="checkbox" data-to="#chk_outer" class="checkbox btn btn-default"></span>
+		<h3>Checkbox out of label and trigger event</h3>
+		<div>
+			<input type="checkbox" id="chk_outer">
+			<span id="chk_chg" data-toggle="checkbox" data-to="#chk_outer" class="checkbox btn btn-default"></span>
+			<span id="tips"></span>
+		</div>
+
+		<h3>Set checkbox status</h3>
+		<div>
+			<button id="btn_check" class="btn btn-default">check it</button>
+			<button id="btn_uncheck" class="btn btn-default">uncheck it</button>
+		</div>
+		<label>
+			<input type="checkbox" id="chk_tgr">
+			<span id="tgr_chk" data-toggle="checkbox" data-to="#chk_tgr" class="checkbox btn btn-default"></span>
+		</label>
 	</body>
 </html>
