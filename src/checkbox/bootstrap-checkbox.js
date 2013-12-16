@@ -1,5 +1,5 @@
 /* options:
-	to:			element			set the value of target element
+	to:			element			set the value of target element(only for checkbox)
 
 	checked:	boolean			set checkbox checked or not
 */

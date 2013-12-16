@@ -13,8 +13,21 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-.checkbox[data-toggle="checkbox"][checked]:before {
+.checkbox[data-toggle="checkbox"]:before {
 	content: "\e013";
 	position: relative;
 	top: -3px;
+
+	font-size: 10px;
+	opacity: 0;
+
+	transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+}
+
+.checkbox[data-toggle="checkbox"][checked]:before {
+	font-size: 15px;
+	opacity: 1;
 }
