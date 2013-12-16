@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/radio/bootstrap-radio.js"></script>
+		<link href="../src/radio/bootstrap-radio.css" rel="stylesheet" media="screen">
+
+		<script>
+			$(document).ready(function(){
+				
+			});
+		</script>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<h3>Radio in label</h3>
+		<div class="radio">
+			<label>
+				<span data-toggle="radio" class="radio btn btn-default" name="rd1" data-to="#input_tips" data-value="value1"></span>
+				Radio 1
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<span data-toggle="radio" class="radio btn btn-default" name="rd1" data-to="#input_tips" data-value="value2"></span>
+				Radio 2
+			</label>
+		</div>
+		<input id="input_tips" type="text" />
+	</body>
+</html>

@@ -1,0 +1,37 @@
+.radio[data-toggle="radio"] {
+	display: inline-block;
+	margin: 0 0 1px 0;
+	padding: 0;
+	border: 1px solid #adadad;
+	border-radius: 10px;
+
+	width: 16px;
+	height: 16px;
+	min-height: inherit;
+	line-height: 100%;
+
+	position: relative;
+	top: 0;
+
+	font-family: 'Glyphicons Halflings';
+	-webkit-font-smoothing: antialiased;
+}
+
+.radio[data-toggle="radio"]:before {
+	content: "\e013";
+	position: relative;
+	top: -1px;
+
+	font-size: 10px;
+	opacity: 0;
+
+	transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+}
+
+.radio[data-toggle="radio"][checked]:before {
+	font-size: 15px;
+	opacity: 1;
+}
