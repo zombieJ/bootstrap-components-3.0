@@ -1,7 +1,5 @@
 /* options:
 	to:			element			set the value of target element
-
-	checked:	boolean			set radio checked or not
 */
 
 !function ($) {

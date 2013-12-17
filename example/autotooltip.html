@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/autotooltip/bootstrap-autotooltip.js"></script>
+		<link href="../src/autotooltip/bootstrap-autotooltip.css" rel="stylesheet" media="screen">
+
+		<script>
+			$(document).ready(function(){
+				$("#btn_open").click(function() {
+					$.autotooltip(true);
+					$("#btn_open").prop("disabled", true);
+					$("#btn_close").prop("disabled", false);
+				});
+				$("#btn_close").click(function() {
+					$.autotooltip(false);
+					$("#btn_open").prop("disabled", false);
+					$("#btn_close").prop("disabled", true);
+				});
+			});
+		</script>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<h3>Auto tooltip everywhere</h3>
+		<p>Hello <a data-toggle="tooltip" title="Hello Wolrd!">world</a>.</p>
+		<p>
+			This is an <a data-toggle="tooltip" title="I'm example!">example</a> for auto-tooltips.
+			<strong data-toggle="tooltip" title="You can open auto-tooltip and close it if you needn't it anymore.">Do not open it if you need take of performance</strong>.
+		</p>
+		<p>Open auto-tooltip as <code data-toggle="tooltip" title="Code Here">$.autotooltip(true);</code>.</p>
+		<p>
+			After open <a data-toggle="tooltip" title="GoGoGo!">auto-tooltips</a>,
+			it will auto <a data-toggle="tooltip" title="Bind Event!">bind</a> tooltip when user move mouse over the tooltipped element.
+			<a data-toggle="tooltip" title="Revent Before">After</a> close it, element which not bind tooltip will not auto-tooltip <a data-toggle="tooltip" title="Last tooltip here">untill</a> your open it again.
+		</p>
+		<button class="btn btn-primary" id="btn_open">Open AutoToolTips</button>
+		<button class="btn btn-danger" id="btn_close" disabled="disabled"
+				data-toggle="tooltip" title="Oh! Close it!">Close AutoToolTips</button>
+	</body>
+</html>

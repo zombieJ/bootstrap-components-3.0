@@ -1,0 +1,19 @@
+.progress [data-toggle="slider"] {
+	height: 100%;
+	vertical-align: top;
+	float: left;
+}
+
+.progress[data-slider-container] {
+	position: relative;
+}
+
+.progress[data-slider-container] [data-toggle="slider"] {
+	position: absolute;
+	height: 20px;
+}
+
+.progress[data-slider-container] [data-toggle="slider-background"] {
+	position: absolute;
+	height: 20px;
+}
