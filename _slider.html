@@ -1,2 +1,95 @@
 ﻿<h1>Slider</h1>
-<p></p>
+<p class="lead">Slider is a useful component which display number as a slider.</p>
+<p>You can use it through html defination.</p>
+<div class="bs-example">
+	<div class="content">
+		<div class="progress">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
+		</div>
+		<div class="progress">
+			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
+			<button type="button" class="btn btn-primary slider" data-toggle="slider"></button>
+		</div>
+	</div>
+	<pre>
+&lt;div class="progress"&gt;
+    &lt;button type="button" class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;
+&lt;/div&gt;</pre>
+	<pre>
+&lt;div class="progress"&gt;
+    &lt;button type="button" class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;
+&lt;/div&gt;</pre>
+</div>
+
+<p>But if you want to get more powerful slider support. Please call function to initial it.</p>
+<div class="bs-example">
+	<div class="content">
+		<div id="ex_slider_1" class="progress"></div>
+		<div id="ex_slider" class="progress"></div>
+	</div>
+	<pre>
+$(element).slider();
+</pre>
+	<pre>
+$(element).slider({value: [0, 25, 50, 75]});
+</pre>
+</div>
+
+<h2>Usage</h2>
+<p>Slider container <code>&lt;div&gt;</code> use class of <code>.progress</code></p>
+
+<h3>Via data attributes</h3>
+<p>For slider <code>&lt;button&gt;</code> use class of <code>.btn</code> and <code>.slider</code>, so you can using buton class for the slider style. Addtinally, to trigger the slider movable, you need set <code>data-toggle="slider"</code> on the slider button.</p>
+<pre>
+&lt;button class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;</pre>
+
+<h3>Via JavaScript</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	$("#ex_slider").slider({
+		value: [0, 25, 50, 75],
+		single: true,
+	});
+	$("#ex_slider_1").slider();
+</script>
+<style>
+#ex_slider [data-toggle="slider-background"]:nth-child(1) {
+	background: #FCC;
+}
+#ex_slider [data-toggle="slider-background"]:nth-child(2) {
+	background: #CFC;
+}
+#ex_slider [data-toggle="slider-background"]:nth-child(3) {
+	background: #CFF;
+}
+#ex_slider [data-toggle="slider-background"]:nth-child(4) {
+	background: #FFC;
+}
+
+#ex_slider_1 {
+	border-radius: 20px;
+	height: 8px;
+	overflow: visible;
+}
+#ex_slider_1 button {
+	margin-top: -6px;
+	margin-left: -6px;
+	border-radius: 20px;
+	padding: 0;
+	width: 20px;
+	height: 20px;
+}
+</style>
