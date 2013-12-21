@@ -1,0 +1,49 @@
+.callout {
+	margin: 0 0 18px 0;
+	padding: 20px;
+	border-left: 3px solid #eee;
+}
+
+.callout h1,
+.callout h2,
+.callout h3,
+.callout h4,
+.callout h5,
+.callout h6,
+.callout h7 {
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+
+.callout p,
+.callout span {
+	color: #333;
+}
+
+.callout p:last-child {
+	margin-bottom: 0;
+}
+
+.callout-success {
+	background-color: #f4fff4;
+	border-color: #bcf1c8;
+	color: #3c763d;
+}
+
+.callout-info {
+	background-color: #f4f8fa;
+	border-color: #bce8f1;
+	color: #34789a;
+}
+
+.callout-warning {
+	background-color: #faf8f0;
+	border-color: #faebcc;
+	color: #8a6d3b;
+}
+
+.callout-danger {
+	background-color: #fdf7f7;
+	border-color: #eed3d7;
+	color: #b94a48;
+}
