@@ -44,10 +44,14 @@ color: #fff;
 }
 
 
+.row .chapter {
+	margin-top: -70px;
+}
+
 .row h1 {
 	border-bottom: 1px solid #DDD;
 	margin: 40px 0 10px 0;
-	padding: 15px 0;
+	padding: 65px 0 15px 0;
 }
 
 .row h2 {
