@@ -13,6 +13,7 @@
 !function ($) {
 	$.fn.extend({
 		slider:function(options){
+			if(options == null) options = {number: 1};
 			// get options
 			var _my = $(this);
 			var vars = $._bc.vars(options);
