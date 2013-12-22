@@ -6,6 +6,12 @@ $(document).ready(function(){
 	loadPage("gettingStarted", "Getting Started");
 	loadPage("slider", "Slider");
 
+	// bind width of left nav bar
+	$(window).resize(function() {
+		$("#nav_left").width($("#ctnr_nav").width());
+	});
+	$(window).resize();
+
 	function loadPage(page, name) {
 		_total += 1;
 
@@ -25,7 +31,11 @@ $(document).ready(function(){
 		// add container
 		var $div = $("<div>");
 		$div.text("loading '" + name + "'...");
-		$(".container .row").append($div);
+		$("#ctnr_content").append($div);
+
+		// add left nav
+		var $ul = $("<ul class='nav bs-sidenav'>");
+		$("#nav_left").append($ul);
 
 		$.get('_' + page + '.html', function(data) {
 			_loaded += 1;
@@ -33,8 +43,46 @@ $(document).ready(function(){
 			.addClass("chapter").html(data)
 			.find("h1").attr("id", page);
 
+			// bind to left nav bar
+			$div.find("h1").add($div.find("h2")).each(function() {
+				var _title =  $(this).text();
+				var _id = $(this).attr("id") != null ? $(this).attr("id") : page + "_" + _title.replace(/[ '\?]/g, "");
+				$(this).attr("id", _id);
+
+				var $li = $("<li>");
+				var $a = $("<a>");
+				$li.append($a);
+				$a
+				.text(_title)
+				.attr("href", "#" + _id)
+				.click(function() {
+					scrollTop("#" + _id);
+					return false;
+				});
+				$ul.append($li);
+			});
+
 			if(_loaded == _total) {
-				$('body').scrollspy({ target: '#nav_lst' });
+				$('body').scrollspy({ target: '#ctnr_nav' });
+
+				// hide all left nav
+				$("#nav_left ul").hide();
+
+				// refresh left nav bar
+				$("#nav_left li").on('activate.bs.scrollspy', function () {
+					var _my = $(this);
+					var _ul = _my.closest("ul");
+					if(_ul.is(":hidden")) {
+						$("#nav_left ul").slideUp();
+						_ul.slideDown();
+						
+						// top nav highlight
+						var _h1 = _ul.find("a:first").attr("href");
+						$("#nav_lst li")
+						.removeClass("active")
+						.find("[href=" + _h1 + "]").closest("li").addClass("active");
+					}
+				});
 			}
 		});
 	}

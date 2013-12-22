@@ -44,21 +44,106 @@ color: #fff;
 }
 
 
-.row .chapter {
+
+
+#nav_left {
+	margin-top: 30px;
+}
+#nav_left.affix {
+	top: 50px;
+}
+/* All levels of nav */
+.bs-sidebar .nav {
+	border-radius: 6px;
+	background-color: #f7f5fa;
+	padding: 10px 0 20px 0;
+}
+.bs-sidebar .nav > li > a {
+	display: block;
+	color: #716b7a;
+	padding: 5px 0 5px 25px;
+	cursor: pointer;
+}
+.bs-sidebar .nav > li:first-child > a {
+	padding-left: 20px;
+	font-weight: bolder;
+}
+.bs-sidebar .nav > li > a:hover,
+.bs-sidebar .nav > li > a:focus {
+	text-decoration: none;
+	background-color: #e5e3e9;
+	border-right: 1px solid #dbd8e0;
+}
+.bs-sidebar .nav > .active > a,
+.bs-sidebar .nav > .active:hover > a,
+.bs-sidebar .nav > .active:focus > a {
+	font-weight: bold;
+	color: #563d7c;
+	background-color: transparent;
+	border-right: 1px solid #563d7c;
+}
+/* Nav: second level (shown on .active) */
+.bs-sidebar .nav .nav {
+	display: none; /* Hide by default, but at >768px, show it */
+	margin-bottom: 8px;
+}
+.bs-sidebar .nav .nav > li > a {
+	padding-top:		3px;
+	padding-bottom: 3px;
+	padding-left: 30px;
+	font-size: 90%;
+}
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+	.bs-sidebar .nav > .active > ul {
+		display: block;
+	}
+	/* Widen the fixed sidebar */
+	.bs-sidebar.affix,
+	.bs-sidebar.affix-bottom {
+		width: 213px;
+	}
+	.bs-sidebar.affix {
+		position: fixed; /* Undo the static from mobile first approach */
+		top: 80px;
+	}
+	.bs-sidebar.affix-bottom {
+		position: absolute; /* Undo the static from mobile first approach */
+	}
+	.bs-sidebar.affix-bottom .bs-sidenav,
+	.bs-sidebar.affix .bs-sidenav {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+@media (min-width: 1200px) {
+	/* Widen the fixed sidebar again */
+	.bs-sidebar.affix-bottom,
+	.bs-sidebar.affix {
+		width: 263px;
+	}
+}
+
+
+
+
+
+#ctnr_content .chapter {
 	margin-top: -70px;
 }
 
-.row h1 {
+#ctnr_content h1 {
 	border-bottom: 1px solid #DDD;
 	margin: 40px 0 10px 0;
 	padding: 65px 0 15px 0;
 }
 
-.row h2 {
-	padding: 15px 0 5px 0;
+#ctnr_content h2 {
+	padding: 75px 0 5px 0;
+	margin-top: -50px;
 }
 
-.bs-example {
+#ctnr_content .bs-example {
 	position: relative;
 	margin: 0 0 18px 0;
 	background-color: #fff;
@@ -66,7 +151,7 @@ color: #fff;
 	border-radius: 4px;
 	overflow-y: hidden;
 }
-.bs-example:after {
+#ctnr_content .bs-example:after {
 	content: "Example";
 	position: absolute;
 	top: 15px;
@@ -77,10 +162,10 @@ color: #fff;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
-.bs-example .content {
+#ctnr_content .bs-example .content {
 	padding: 45px 15px 15px;
 }
-.bs-example pre {
+#ctnr_content .bs-example pre {
 	margin: 0;
 	border: none;
 	border-radius: 0;
