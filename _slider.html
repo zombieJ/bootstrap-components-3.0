@@ -51,11 +51,11 @@ $("#sliderContainer").slider(options)</pre>
 
 <h3>Options</h3>
 <p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to <code>data-</code>, as in <code>data-to=""</code>.</p>
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Type</th>
+			<th width="10%">Type</th>
 			<th>Default</th>
 			<th>Description</th>
 		</tr>
@@ -85,9 +85,62 @@ $("#sliderContainer").slider(options)</pre>
 			<td>1</td>
 			<td>Set number of slider button displayed in the slider container.</td>
 		</tr>
+		<tr>
+			<td>value</td>
+			<td>array of number</td>
+			<td>null</td>
+			<td>Set value for each slider button. If not set the <code>number</code> of slider buttons, slider will auto generate correct number of slider buttons when you give the values.</td>
+		</tr>
+		<tr>
+			<td>single</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td>Move slider button will not influence others if <code>true</code>.</td>
+		</tr>
+		<tr>
+			<td>mixed</td>
+			<td>boolean</td>
+			<td>false</td>
+			<td>
+				<p>Slider button can move every where without order if <code>true</code>.</p>
+				<p>PS: If set mixed as <code>true</code>, <code>single</code> will always be <code>true</code>.</p>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
+<h3>Methods</h3>
+<h4>.slider(option)</h4>
+<p>Activates your content as a slider. Accepts an optional options <code>object</code>.</p>
+<pre>
+$(<span class="string">'#mySliderContainer'</span>).slider({
+    min: <span class="number">0</span>,
+    max: <span class="number">100</span>,
+    value: [<span class="number">5</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">25</span>, <span class="number">38</span>],
+    single: <span class="boolean">true</span>
+})
+</pre>
+
+<h3>Events</h3>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Event Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>change</td>
+			<td>Trigger on each slider button when user move it. It will also trigger <code>change</code> event for <code>data-to</code> element.</td>
+		</tr>
+	</tbody>
+</table>
+<pre>
+$(<span class="string">'#mySliderButton'</span>).change(<span class="function">function</span> (e) {
+    <span class="comment">// do something...</span>
+})
+</pre>
 
 
 

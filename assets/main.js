@@ -44,7 +44,10 @@ $(document).ready(function(){
 			.find("h1").attr("id", page);
 
 			// bind to left nav bar
-			$div.find("h1").add($div.find("h2")).each(function() {
+			$div.find("h1")
+			.add($div.find("h2"))
+			.add($div.find("h3")).each(function() {
+				var _my = $(this);
 				var _title =  $(this).text();
 				var _id = $(this).attr("id") != null ? $(this).attr("id") : page + "_" + _title.replace(/[ '\?]/g, "");
 				$(this).attr("id", _id);
@@ -53,12 +56,20 @@ $(document).ready(function(){
 				var $a = $("<a>");
 				$li.append($a);
 				$a
-				.text(_title)
+				.text(function() {
+					if(_my.is("h3"))
+						return "- " + _title;
+					else
+						return _title;
+				})
 				.attr("href", "#" + _id)
 				.click(function() {
 					scrollTop("#" + _id);
 					return false;
 				});
+				if(_my.is("h1")) {
+					$li.addClass("title");
+				}
 				$ul.append($li);
 			});
 
@@ -66,7 +77,7 @@ $(document).ready(function(){
 				$('body').scrollspy({ target: '#ctnr_nav' });
 
 				// hide all left nav
-				$("#nav_left ul").hide();
+				$($("#nav_left ul").hide()[0]).show();
 
 				// refresh left nav bar
 				$("#nav_left li").on('activate.bs.scrollspy', function () {
@@ -88,6 +99,7 @@ $(document).ready(function(){
 	}
 
 	function scrollTop(element) {
+		$("#nav_left").addClass("lock");
 		_top = $(element).offset().top;
 		var $win = $(window);
 		if(t_id != null) {
@@ -103,6 +115,7 @@ $(document).ready(function(){
 			var w_top_now = $win.scrollTop();
 			if(Math.abs(w_top_now - _top) < 3 ||
 			Math.abs(w_top_now - w_top) < 3) {
+				$("#nav_left").removeClass("lock");
 				$win.scrollTop(_top);
 				clearInterval(t_id);
 				t_id = null;

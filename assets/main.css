@@ -64,9 +64,9 @@ color: #fff;
 	padding: 5px 0 5px 25px;
 	cursor: pointer;
 }
-.bs-sidebar .nav > li:first-child > a {
+.bs-sidebar .nav > li.title > a {
 	padding-left: 20px;
-	font-weight: bolder;
+	font-weight: bolder!important;
 }
 .bs-sidebar .nav > li > a:hover,
 .bs-sidebar .nav > li > a:focus {
@@ -77,10 +77,11 @@ color: #fff;
 .bs-sidebar .nav > .active > a,
 .bs-sidebar .nav > .active:hover > a,
 .bs-sidebar .nav > .active:focus > a {
-	font-weight: bold;
+	/*font-weight: bold;*/
+	text-shadow: 1px 0 0 #ddd;
 	color: #563d7c;
 	background-color: transparent;
-	border-right: 1px solid #563d7c;
+	border-right: 2px solid #563d7c;
 }
 /* Nav: second level (shown on .active) */
 .bs-sidebar .nav .nav {
@@ -88,7 +89,7 @@ color: #fff;
 	margin-bottom: 8px;
 }
 .bs-sidebar .nav .nav > li > a {
-	padding-top:		3px;
+	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 30px;
 	font-size: 90%;
@@ -123,7 +124,15 @@ color: #fff;
 		width: 263px;
 	}
 }
-
+/* -------- lock the nav -------- */
+#nav_left.lock .nav > .active > a,
+#nav_left.lock .nav > .active:hover > a,
+#nav_left.lock .nav > .active:focus > a {
+	font-weight: normal;
+	color: #716b7a;
+	border-right: none;
+	text-shadow: none;
+}
 
 
 
@@ -141,6 +150,15 @@ color: #fff;
 #ctnr_content h2 {
 	padding: 75px 0 5px 0;
 	margin-top: -50px;
+}
+#ctnr_content h3 {
+	padding: 65px 0 5px 0;
+	margin: -40px 0 5px 0;
+}
+#ctnr_content h4 {
+	padding: 0;
+	margin: 10px 0;
+	font-weight: normal;
 }
 
 #ctnr_content .bs-example {
@@ -171,7 +189,22 @@ color: #fff;
 	border-radius: 0;
 	border-top: 1px solid #ddd;
 }
-
+#ctnr_content .table tbody {
+	font-size: 13px;
+}
+#ctnr_content pre .number {
+	color: #FF6600;
+}
+#ctnr_content pre .string {
+	color: #CC3300;
+}
+#ctnr_content pre .function,
+#ctnr_content pre .boolean {
+	color: #006699;
+}
+#ctnr_content pre .comment {
+	color: #999;
+}
 
 
 
