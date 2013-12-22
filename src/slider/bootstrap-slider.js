@@ -14,71 +14,73 @@
 	$.fn.extend({
 		slider:function(options){
 			if(options == null) options = {number: 1};
-			// get options
-			var _my = $(this);
-			var vars = $._bc.vars(options);
-			var _options = vars.options;
+			$(this).each(function() {
+				// get options
+				var _my = $(this);
+				var vars = $._bc.vars(options);
+				var _options = vars.options;
 
-			// set min / max value
-			var _min = $._bc.get(_options, "min", 0);
-			var _max = $._bc.get(_options, "max", 100);
-			_my.attr("data-min", _min);
-			_my.attr("data-max", _max);
+				// set min / max value
+				var _min = $._bc.get(_options, "min", 0);
+				var _max = $._bc.get(_options, "max", 100);
+				_my.attr("data-min", _min);
+				_my.attr("data-max", _max);
 
-			// get values
-			var _values = $._bc.get(_options, "value", []);
-			var _single = $._bc.get(_options, "single", false);
-			var _mixed = $._bc.get(_options, "mixed", false);
+				// get values
+				var _values = $._bc.get(_options, "value", []);
+				var _single = $._bc.get(_options, "single", false);
+				var _mixed = $._bc.get(_options, "mixed", false);
 
-			// set number
-			var _number = _options.number;
-			if(_number == null && _values.length != 0) {
-				_number = _values.length;
-			}
-			// create sliders with given number
-			if(_number != null) {
-				_my.empty();
-				for(var i = 0 ; i < _number ; i += 1) {
-					var $slider = $("<button type='button' class='btn btn-primary slider' data-toggle='slider'>");
-					_my.append($slider);
+				// set number
+				var _number = _options.number;
+				if(_number == null && _values.length != 0) {
+					_number = _values.length;
 				}
-			}
-
-			// mark as enhanced slider
-			_my.attr("data-slider-container", "");
-			if(_single) _my.attr("data-slider-single", "");
-			if(_mixed) _my.attr("data-slider-mixed", "");
-
-			// create the background between sliders
-			var _sliders = _my.find("button[data-toggle='slider']");
-			{
-				var _len = _sliders.length;
-				for(var i = _len - 1 ; i > 0  ; i -= 1) {
-					var $bac = $("<div data-toggle='slider-background'>");
-					$bac.attr("data-from", i - 1);
-					$bac.attr("data-to", i);
-					_my.prepend($bac);
-				}
-			}
-
-			// set default value & set margin-left as left
-			{
-				var _len = _values.length;
-				var _default = _len == 0 ? _min : _values[_len - 1];
-				$.each(_sliders, function(i, ele) {
-					var _element = $(ele);
-					var _val = i < _len ? _values[i] : _default;
-					setValue(_element, _val);
-
-					var _style = _element.attr("style");
-					if(_style != null) {
-						_element.attr("style", _style.replace(/margin-left/g, "left"));
+				// create sliders with given number
+				if(_number != null) {
+					_my.empty();
+					for(var i = 0 ; i < _number ; i += 1) {
+						var $slider = $("<button type='button' class='btn btn-primary slider' data-toggle='slider'>");
+						_my.append($slider);
 					}
-				});
-			}
+				}
 
-			// refresh background for user draw color
-			refreshBackfround(_my);
+				// mark as enhanced slider
+				_my.attr("data-slider-container", "");
+				if(_single) _my.attr("data-slider-single", "");
+				if(_mixed) _my.attr("data-slider-mixed", "");
+
+				// create the background between sliders
+				var _sliders = _my.find("button[data-toggle='slider']");
+				{
+					var _len = _sliders.length;
+					for(var i = _len - 1 ; i > 0  ; i -= 1) {
+						var $bac = $("<div data-toggle='slider-background'>");
+						$bac.attr("data-from", i - 1);
+						$bac.attr("data-to", i);
+						_my.prepend($bac);
+					}
+				}
+
+				// set default value & set margin-left as left
+				{
+					var _len = _values.length;
+					var _default = _len == 0 ? _min : _values[_len - 1];
+					$.each(_sliders, function(i, ele) {
+						var _element = $(ele);
+						var _val = i < _len ? _values[i] : _default;
+						setValue(_element, _val);
+
+						var _style = _element.attr("style");
+						if(_style != null) {
+							_element.attr("style", _style.replace(/margin-left/g, "left"));
+						}
+					});
+				}
+
+				// refresh background for user draw color
+				refreshBackfround(_my);
+			});
 		}
 	});
 
