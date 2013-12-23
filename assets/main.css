@@ -141,21 +141,21 @@ color: #fff;
 	margin-top: -70px;
 }
 
-#ctnr_content h1 {
+#ctnr_content .chapter > h1 {
 	border-bottom: 1px solid #DDD;
 	margin: 40px 0 10px 0;
 	padding: 65px 0 15px 0;
 }
 
-#ctnr_content h2 {
+#ctnr_content .chapter > h2 {
 	padding: 75px 0 5px 0;
 	margin-top: -50px;
 }
-#ctnr_content h3 {
+#ctnr_content .chapter > h3 {
 	padding: 65px 0 5px 0;
 	margin: -40px 0 5px 0;
 }
-#ctnr_content h4 {
+#ctnr_content .chapter > h4 {
 	padding: 0;
 	margin: 10px 0;
 	font-weight: normal;
@@ -191,6 +191,10 @@ color: #fff;
 }
 #ctnr_content .table tbody {
 	font-size: 13px;
+}
+#ctnr_content pre .strong {
+	color: #FF6600;
+	font-weight: bolder;
 }
 #ctnr_content pre .number {
 	color: #FF6600;

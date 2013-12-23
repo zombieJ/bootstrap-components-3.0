@@ -5,6 +5,7 @@ $(document).ready(function(){
 	var _nav = $("#nav_bar");
 	loadPage("gettingStarted", "Getting Started");
 	loadPage("slider", "Slider");
+	loadPage("autotooltip", "Auto Tooltip");
 
 	// bind width of left nav bar
 	$(window).resize(function() {

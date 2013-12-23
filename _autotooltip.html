@@ -1,0 +1,38 @@
+﻿<h1>Auto Tooltips</h1>
+<p class="lead">Auto Tooltips enable tooltip workable using attr of <code>data-toggle="tooltip"</code> <strong>without js initialize</strong>.</p>
+<div class="bs-example">
+	<div class="content">
+		<p>Tight pants next level keffiyeh <a href="#" data-toggle="tooltip" title="Default tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="#" data-toggle="tooltip" title="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A really ironic artisan <a href="#" data-toggle="tooltip" title="Another one here too">whatever keytar</a>, scenester farm-to-table banksy Austin <a href="#" data-toggle="tooltip" title="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.</p>
+	</div>
+</div>
+
+<h2>Usage</h2>
+<p>Auto Tooltips is an enhancement function of Tooltip. Through <code>autotooltip</code> to open &amp; close it. Auto Tooltip will enable all of the tooltip element with user's mouse hover. After close it, tooltip without hover will not be initialized.</p>
+<div class="callout callout-warning">
+	<h4>Opt-in functionality</h4>
+	<p>For performance reasons, the Auto Tooltip are opt-in, meaning it's closed by default and you need call to open it explicitly.</p>
+</div>
+
+<h3>Methods</h3>
+<h4>.autotooltip(option)</h4>
+<p>Open &amp; close autotooltip. Accepts a <code>boolean</code> option.</p>
+<pre>
+<span class="comment">// enable auto tooltip</span>
+$.autotooltip(<span class="boolean">true</span>);
+</pre>
+<pre>
+<span class="comment">// disable auto tooltip</span>
+$.autotooltip(<span class="boolean">false</span>);
+</pre>
+
+
+
+
+
+
+
+
+
+<script>
+	$.autotooltip(true);
+</script>

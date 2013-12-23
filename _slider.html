@@ -12,13 +12,13 @@
 		</div>
 	</div>
 	<pre>
-&lt;div class="progress"&gt;
-    &lt;button type="button" class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;
+&lt;div <span class="strong">class="progress"</span>&gt;
+    &lt;button type="button" class="btn btn-primary <span class="strong">slider</span>" <span class="strong">data-toggle="slider"</span>&gt;&lt;/button&gt;
 &lt;/div&gt;</pre>
 	<pre>
-&lt;div class="progress"&gt;
-    &lt;button type="button" class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;
-    &lt;button type="button" class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;
+&lt;div <span class="strong">class="progress"</span>&gt;
+    &lt;button type="button" class="btn btn-primary <span class="strong">slider</span>" <span class="strong">data-toggle="slider"</span>&gt;&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary <span class="strong">slider</span>" <span class="strong">data-toggle="slider"</span>&gt;&lt;/button&gt;
 &lt;/div&gt;</pre>
 </div>
 
@@ -29,10 +29,10 @@
 		<div id="ex_slider" class="progress"></div>
 	</div>
 	<pre>
-$(element).slider();
+$(<span class="string">'#myElement'</span>).slider();
 </pre>
 	<pre>
-$(element).slider({value: [0, 25, 50, 75]});
+$(<span class="string">'#myElement'</span>).slider({value: [<span class="number">0</span>, <span class="number">25</span>, <span class="number">50</span>, <span class="number">75</span>]});
 </pre>
 </div>
 
@@ -42,12 +42,12 @@ $(element).slider({value: [0, 25, 50, 75]});
 <h3>Via data attributes</h3>
 <p>For slider <code>&lt;button&gt;</code> use class of <code>.btn</code> and <code>.slider</code>, so you can using buton class for the slider style. Addtinally, to trigger the slider movable, you need set <code>data-toggle="slider"</code> on the slider button.</p>
 <pre>
-&lt;button class="btn btn-primary slider" data-toggle="slider"&gt;&lt;/button&gt;</pre>
+&lt;button class="btn btn-primary <span class="strong">slider</span>" <span class="strong">data-toggle="slider"</span>&gt;&lt;/button&gt;</pre>
 
 <h3>Via JavaScript</h3>
 <p>Call a modal with id <code>sliderContainer</code> with a single line of JavaScript:</p>
 <pre>
-$("#sliderContainer").slider(options)</pre>
+$(<span class="string">'#sliderContainer'</span>).slider(options)</pre>
 
 <h3>Options</h3>
 <p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to <code>data-</code>, as in <code>data-to=""</code>.</p>
