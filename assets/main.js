@@ -38,7 +38,7 @@ $(document).ready(function(){
 		var $ul = $("<ul class='nav bs-sidenav'>");
 		$("#nav_left").append($ul);
 
-		$.get('_' + page + '.html', function(data) {
+		$.get('pages/' + page + '.html', function(data) {
 			_loaded += 1;
 			$div
 			.addClass("chapter").html(data)
