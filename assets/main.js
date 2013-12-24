@@ -6,6 +6,7 @@ $(document).ready(function(){
 	loadPage("gettingStarted", "Getting Started");
 	loadPage("slider", "Slider");
 	loadPage("autotooltip", "Auto Tooltip");
+	loadPage("datepicker", "Datepicker");
 
 	// bind width of left nav bar
 	$(window).resize(function() {
@@ -37,6 +38,7 @@ $(document).ready(function(){
 		// add left nav
 		var $ul = $("<ul class='nav bs-sidenav'>");
 		$("#nav_left").append($ul);
+		$ul.hide();
 
 		$.get('pages/' + page + '.html', function(data) {
 			_loaded += 1;
