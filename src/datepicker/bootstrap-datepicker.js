@@ -288,7 +288,7 @@ $._bc.vals.datepicker.index = 1;
 			$datepicker.append($datepicker_body);
 				$datepicker_body.append($datepicker_body_description);
 					$.each(['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'], function(i, _description) {
-						var $element = $('<span>');
+						var $element = $('<span class="disabled">');
 						$element.text(_description);
 						$datepicker_body_description.append($element);
 					});
@@ -497,8 +497,8 @@ $._bc.vals.datepicker.index = 1;
 				if(i == _year) {
 					$element.addClass('active');
 				}
-				if(		before.getFullYear() < i || 
-						after.getFullYear() > i) {
+				if(		(before != null && before.getFullYear() < i) || 
+						( after != null && after.getFullYear() > i)) {
 					$element.addClass('disabled');
 				}
 				$yearpicker_body.append($element);
@@ -513,8 +513,8 @@ $._bc.vals.datepicker.index = 1;
 				if(i == _month) {
 					$element.addClass("active");
 				}
-				if(		before.getFullYear() * 100 + before.getMonth() < _year * 100 + i || 
-						after.getFullYear() * 100 + after.getMonth() > _year * 100 + i) {
+				if(		(before != null && before.getFullYear() * 100 + before.getMonth() < _year * 100 + i) || 
+						( after != null && after.getFullYear() * 100 + after.getMonth() > _year * 100 + i)) {
 					$element.addClass('disabled');
 				}
 			});
@@ -533,8 +533,8 @@ $._bc.vals.datepicker.index = 1;
 				if(i == _date) {
 					$element.addClass('active');
 				}
-				if(		before.getFullYear() * 10000 + before.getMonth() * 100 + before.getDate() < _year * 10000 + _month * 100 + i || 
-						after.getFullYear() * 10000 + after.getMonth() * 100 + after.getDate() > _year * 10000 + _month * 100 + i) {
+				if(		(before != null && before.getFullYear() * 10000 + before.getMonth() * 100 + before.getDate() < _year * 10000 + _month * 100 + i) || 
+						( after != null && after.getFullYear() * 10000 + after.getMonth() * 100 + after.getDate() > _year * 10000 + _month * 100 + i)) {
 					$element.addClass('disabled');
 				}
 				$datepicker_body_date.append($element);
