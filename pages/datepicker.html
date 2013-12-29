@@ -9,3 +9,94 @@
 		<input type="text" class="form-control" data-container="body" data-toggle="datepicker" placeholder="fullpicker" data-type="all" />
 	</div>
 </div>
+
+<h2>Usage</h2>
+<p>Datepicker will auto trigger when user focus on target element.</p>
+
+<h3>Via data attributes</h3>
+<p>Activate a datepicker without writing JavaScript. Set <code>data-toggle="datepicker"</code> on a controller element, like an text input.</p>
+<pre>
+&lt;input type="text" <span class="strong">data-toggle="datepicker"</span> /&gt;
+</pre>
+
+<h3>Options</h3>
+<p>Options can be passed via data attributes. Append the option name to <code>data-</code>, as in <code>data-target=""</code>.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">Type</th>
+			<th style="width: 50px;">Default</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>target</td>
+			<td>string</td>
+			<td>all</td>
+			<td>
+				Set type of datepicker. Support Type:
+				<ul>
+					<li><span class="type">all</span> contains date & time picker</li>
+					<li><span class="type">time</span> time picker only</li>
+					<li><span class="type">date</span> date picker only</li>
+					<li><span class="type">month</span> month picker only</li>
+					<li><span class="type">year</span> year picker only</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>to</td>
+			<td>element</td>
+			<td>null</td>
+			<td>Attr of Slider Button. Set target element value when slider button moves. (Suggest setting to <code>&lt;input&gt;</code> element)</td>
+		</tr>
+		<tr>
+			<td>container</td>
+			<td>string | false</td>
+			<td>false</td>
+			<td>Appends the tooltip to a specific element. Example: <code>container: 'body'</code></td>
+		</tr>
+		<tr>
+			<td>before</td>
+			<td>date</td>
+			<td>null</td>
+			<td>Set picker enable date before the <code>before</code>. Example: <code>before: '1990-09-03'</code></td>
+		</tr>
+		<tr>
+			<td>after</td>
+			<td>date</td>
+			<td>null</td>
+			<td>Set picker enable date after the <code>after</code>. Example: <code>after: '1989-11-28'</code></td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Events</h3>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 150px;">Event Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>change</td>
+			<td>Trigger on bind element when user change date/time. It will also trigger <code>change</code> event for <code>data-to</code> element.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<style>
+.bs-example .content input {
+	margin-bottom: 10px;
+}
+
+.table tbody td ul li .type {
+	display: inline-block;
+	width: 50px;
+}
+</style>
