@@ -2,6 +2,8 @@
 
 Bootstrap-Components-3.0 is a js lib support Bootstrap v3. Enhancement original Bootstrap.
 
+To get started, check out http://zombiej.github.io/bootstrap-components-3.0!
+
 ## Component List
 * Slider
 * Auto Tooltips
