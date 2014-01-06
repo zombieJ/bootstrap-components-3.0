@@ -1,0 +1,84 @@
+﻿<h1>Select</h1>
+<p class="lead">Select is a mockup <code>&lt;select&gt;</code> component which displayed as Bootstrap style. It enbales <code>&lt;img&gt;</code> in <code>&lt;option&gt;</code> which origin couldn't.</p>
+<div class="bs-example">
+	<div class="content">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-type="selector">
+				<span data-value>Select ...</span> <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu" data-type="selector">
+				<li><a>Option 1</a></li>
+				<li><a>Option 2</a></li>
+				<li class="divider"></li>
+				<li><a>Option 3</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<h2>Usage</h2>
+<h3>Via data attributes</h3>
+<p>Create as <code>dropdown</code>. For <code>dropdown-toggle</code> add attr <code>data-type="selector"</code>. Append <code>&lt;span data-value&gt;</code> inside. This element will be the container which display selected value. For <code>&lt;ul&gt;</code> list add attr <code>data-type="selector"</code>.</p>
+<pre>
+&lt;div class="btn-group"&gt;
+    &lt;button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" <span class="strong">data-type="selector"</span>&gt;
+        <span class="strong">&lt;span data-value&gt;&lt;/span&gt;</span> &lt;span class="caret"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" role="menu" <span class="strong">data-type="selector"</span>&gt;
+        &lt;li&gt;&lt;a&gt;Option 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a&gt;Option 2&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+<h3>Options</h3>
+<p>Options need be passed via data attributes. Append the option name to <code>data-</code>, as in <code>data-to=""</code>.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">Type</th>
+			<th style="width: 50px;">Default</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>to</td>
+			<td>element</td>
+			<td>null</td>
+			<td>Attr of <code>dropdown-toggle</code>. Set target element value when option selected. (Suggest setting to <code>&lt;input&gt;</code> element)</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Events</h3>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 150px;">Event Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>change</td>
+			<td>Trigger on changing select value. It will also trigger <code>change</code> event for <code>data-to</code> element.</td>
+		</tr>
+	</tbody>
+</table>
+<pre>
+$(<span class="string">'#mySelect'</span>).change(<span class="function">function</span> (e) {
+    <span class="comment">// do something...</span>
+})
+</pre>
+
+
+
+
+
+<style>
+button.dropdown-toggle {
+	width: 200px;
+}
+</style>

@@ -7,6 +7,7 @@ $(document).ready(function(){
 	loadPage("slider", "Slider");
 	loadPage("autotooltip", "Auto Tooltip");
 	loadPage("datepicker", "Datepicker");
+	loadPage("select", "Select");
 
 	// bind width of left nav bar
 	$(window).resize(function() {

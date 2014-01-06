@@ -167,7 +167,6 @@ color: #fff;
 	background-color: #fff;
 	border: 1px solid #ddd;
 	border-radius: 4px;
-	overflow-y: hidden;
 }
 #ctnr_content .bs-example:after {
 	content: "Example";
