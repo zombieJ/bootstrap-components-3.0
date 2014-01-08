@@ -1,0 +1,122 @@
+﻿<h1>Notify</h1>
+<p class="lead">Notify helps creating float alert box.</p>
+<div class="bs-example">
+	<div class="content">
+		<button id="btn_notify" class="btn btn-primary">Notify Me!</button>
+	</div>
+</div>
+
+<h2>Usage</h2>
+<h3>Via JavaScript</h3>
+<p>Create notify through <code>$.notify</code> function.</p>
+<pre>
+$.notify({
+    title: <span class="string">'Hi'</span>,
+    content: <span class="string">'This is a notify!'</span>,
+});
+</pre>
+
+<h3>Options</h3>
+<p>Options need be passed via JavaScript.</p>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">Type</th>
+			<th style="width: 50px;">Default</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>Notification</td>
+			<td>Set the notify box title.</td>
+		</tr>
+		<tr>
+			<td>content</td>
+			<td>string | html</td>
+			<td>null</td>
+			<td>Set the notify box content.</td>
+		</tr>
+		<tr>
+			<td>position</td>
+			<td>string</td>
+			<td>right,top</td>
+			<td>Set notify position: <code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code>. You can mix then up as <code>left,top</code> (it's same as <code>top,left</code>)</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>string</td>
+			<td>null</td>
+			<td>Set notify box style: <code>normal</code>, <code>warning</code>, <code>info</code>, <code>danger</code>, <code>success</code></td>
+		</tr>
+		<tr>
+			<td>timeout</td>
+			<td>number</td>
+			<td>4000</td>
+			<td>Set notify box hide time delay. <code>-1</code> make it never auto hide.</td>
+		</tr>
+		<tr>
+			<td>overtimeout</td>
+			<td>number</td>
+			<td>1000</td>
+			<td>Set notify box hide time delay after mouse move out.</td>
+		</tr>
+		<tr>
+			<td>queuetimeout</td>
+			<td>number</td>
+			<td>1000</td>
+			<td>Set notify box hiden speed interval between 2 notification in same the region.</td>
+		</tr>
+		<tr>
+			<td>region</td>
+			<td>string</td>
+			<td>''</td>
+			<td>Set region of notify box. Saming region notify box will not keep out other one in same region.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Events</h3>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 150px;">Event Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>callback</td>
+			<td>Trigger when notification created. Use <code>$(this)</code> to get created element.</td>
+		</tr>
+	</tbody>
+</table>
+<pre>
+$.notify({
+    title: <span class="string">'Hi Notify!'</span>,
+}, function() {
+    <span class="comment">// do something...</span>
+});
+</pre>
+
+
+
+
+
+
+<script>
+$("#btn_notify").click(function() {
+	$.notify({
+		title: "Hi",
+		content: "This is a notify!",
+		type: "info",
+		region: "demo",
+	}, function() {
+		console.log($(this));
+	});
+});
+</script>
