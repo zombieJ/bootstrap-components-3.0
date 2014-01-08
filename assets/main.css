@@ -53,6 +53,9 @@ color: #fff;
 	top: 50px;
 }
 /* All levels of nav */
+.bs-sidebar {
+	display: none;
+}
 .bs-sidebar .nav {
 	border-radius: 6px;
 	background-color: #f7f5fa;
@@ -96,6 +99,9 @@ color: #fff;
 }
 /* Show and affix the side nav when space allows it */
 @media (min-width: 992px) {
+	.bs-sidebar {
+		display: block;
+	}
 	.bs-sidebar .nav > .active > ul {
 		display: block;
 	}
