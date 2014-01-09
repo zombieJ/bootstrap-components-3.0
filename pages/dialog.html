@@ -1,0 +1,24 @@
+﻿<h1>Dialog</h1>
+<p class="lead">Support Bootstrap style alert box. Call by Javascript without dom init.</p>
+<div class="bs-example">
+	<div class="content">
+		<button id="btn_alertDialog" class="btn btn-primary">Alert</button>
+		<button id="btn_confirmDialog" class="btn btn-primary">Confirm</button>
+	</div>
+</div>
+
+<script>
+$("#btn_alertDialog").click(function() {
+	$.dialog({
+		title: 'Hello',
+		content: 'This is a dialog!',
+	});
+});
+$("#btn_confirmDialog").click(function() {
+	$.dialog({
+		title: 'Confirm it',
+		content: 'Are you sure?',
+		confirm: true,
+	});
+});
+</script>

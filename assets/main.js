@@ -6,6 +6,7 @@ $(document).ready(function(){
 	loadPage("gettingStarted", "Getting Started");
 	loadPage("slider", "Slider");
 	loadPage("autotooltip", "Auto Tooltip");
+	loadPage("dialog", "Dialog");
 	loadPage("datepicker", "Datepicker");
 	loadPage("select", "Select");
 	loadPage("notify", "Notify");
