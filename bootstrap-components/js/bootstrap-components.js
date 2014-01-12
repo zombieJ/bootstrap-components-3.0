@@ -127,7 +127,11 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 	// update data to target status
 	function updateTarget(_target, _checked) {
 		if(_target != null) {
-			_target.prop("checked", _checked);
+			if(_target.is("[type='checkbox']") || _target.is("[type='radio']")) {
+				_target.prop("checked", _checked);
+			} else {
+				_target.val(_checked);
+			}
 		}
 	}
 
