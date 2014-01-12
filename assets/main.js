@@ -10,6 +10,7 @@ $(document).ready(function(){
 	loadPage("notify", "Notify");
 	loadPage("datepicker", "Datepicker");
 	loadPage("select", "Select");
+	loadPage("callout", "Callout");
 
 	// bind width of left nav bar
 	$(window).resize(function() {
