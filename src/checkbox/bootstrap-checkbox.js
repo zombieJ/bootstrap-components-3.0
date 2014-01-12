@@ -45,18 +45,26 @@
 	}
 
 	// click on the label
-	$(document).on("click.bs.checkbox", "label", function(event){
+	$(document).on("click.bs.checkbox.label", "label", function(event) {
 		var _label = $(this);
 		var _my = _label.find(".checkbox[data-toggle='checkbox']");
 		var _checked = null;
 		if(_my.length != 0) {			// find checkbox to go on
+			var _disabled = _my.attr("disabled") != null;
 			var _target = $(_my.attr("data-to"));
 			var _checkbox = _label.find("input[type='checkbox']");
-			if(_checkbox.length != 0) {
-				_checked = _checkbox.prop("checked");
+			if(_disabled) {
+				if(_checkbox.length != 0) {
+					_checked = _my.attr("checked") != null;
+					_checkbox.prop("checked", _checked);
+				}
 			} else {
-				_checked = !(_my.attr("checked") != null);
-				updateTarget(_target, _checked);
+				if(_checkbox.length != 0) {
+					_checked = _checkbox.prop("checked");
+				} else {
+					_checked = !(_my.attr("checked") != null);
+					updateTarget(_target, _checked);
+				}
 			}
 			updateStatus(_my, _checked);
 

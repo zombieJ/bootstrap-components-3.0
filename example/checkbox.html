@@ -30,11 +30,13 @@
 			});
 		</script>
 		<style>
-			
+			/*label input[type="checkbox"] {
+				display: none;
+			}*/
 		</style>
 	</head>
 	<body>
-		<h3>Checkbox in label</h3>
+		<h3>Checkbox and input in label</h3>
 		<div class="checkbox">
 			<label>
 				<input type="checkbox">
@@ -43,12 +45,26 @@
 			</label>
 		</div>
 
-		<h3>Checkbox in label and target checkbox out of label</h3>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox">
+				<span data-toggle="checkbox" class="checkbox btn btn-default" disabled></span>
+				Disabled
+			</label>
+		</div>
+
+		<h3>Checkbox in label and target input checkbox out of label</h3>
 		<div class="checkbox">
 			<input type="checkbox" id="chk_otlb">
 			<label>
 				<span data-toggle="checkbox" data-to="#chk_otlb" class="checkbox btn btn-default"></span>
 				Check me out
+			</label>
+			<br />
+			<input type="checkbox" id="chk_otlb_disable">
+			<label>
+				<span data-toggle="checkbox" data-to="#chk_otlb_disable" class="checkbox btn btn-default" disabled></span>
+				Disabled
 			</label>
 		</div>
 
