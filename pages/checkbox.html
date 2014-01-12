@@ -1,0 +1,81 @@
+﻿<h1>Checkbox</h1>
+
+<h3>Example</h3>
+<div class="bs-example">
+	<div class="content">
+		<label>
+			<span data-toggle="checkbox" class="checkbox btn btn-default"></span>
+			Check me out
+		</label>
+		<br />
+		<label>
+			<span data-toggle="checkbox" class="checkbox btn btn-default" disabled></span>
+			<span class="text-muted">Disabled Checkbox</span>
+		</label>
+	</div>
+<pre>
+&lt;span <span class="strong">data-toggle="checkbox"</span> class="<span class="strong">checkbox</span> btn btn-default"&gt;&lt;/span&gt;
+&lt;span <span class="strong">data-toggle="checkbox"</span> class="<span class="strong">checkbox</span> btn btn-default" <span class="strong">disabled</span>&gt;&lt;/span&gt;
+</pre>
+</div>
+
+<h3>Options</h3>
+<p>Options should be passed via data attributes. Append the option name to <code>data-</code>, as in <code>data-to=""</code>.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">Type</th>
+			<th style="width: 50px;">Default</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>to</td>
+			<td>element</td>
+			<td>null</td>
+			<td>Set target element value when checkbox clicked. (Suggest setting to <code>&lt;input&gt;</code> element)</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Methods</h3>
+<h4>.checkbox(option)</h4>
+<p>Set checkbox value.</p>
+<pre>
+$(<span class="string">'#myCheckbox'</span>).checkbox({
+    checked: <span class="number">true</span>
+})
+</pre>
+
+<h3>Events</h3>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 150px;">Event Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>change</td>
+			<td>Trigger when checkbox clicked. It will also trigger <code>change</code> event for <code>data-to</code> element.</td>
+		</tr>
+	</tbody>
+</table>
+<pre>
+$(<span class="string">'#myCheckbox'</span>).change(<span class="function">function</span> () {
+    <span class="comment">// do something...</span>
+})
+</pre>
+
+
+
+
+
+<style>
+label {
+	font-weight: normal;
+}
+</style>

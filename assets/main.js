@@ -11,6 +11,7 @@ $(document).ready(function(){
 	loadPage("datepicker", "Datepicker");
 	loadPage("select", "Select");
 	loadPage("callout", "Callout");
+	loadPage("checkbox", "Checkbox");
 
 	// bind width of left nav bar
 	$(window).resize(function() {
