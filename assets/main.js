@@ -12,6 +12,7 @@ $(document).ready(function(){
 	loadPage("select", "Select");
 	loadPage("callout", "Callout");
 	loadPage("checkbox", "Checkbox");
+	loadPage("radio", "Radio");
 
 	// bind width of left nav bar
 	$(window).resize(function() {

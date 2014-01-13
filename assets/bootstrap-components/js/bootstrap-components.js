@@ -1037,18 +1037,63 @@ $.extend({
 */
 
 !function ($) {
+	$.fn.extend({
+		radio:function(options){
+			// get options
+			var _my = $(this);
+			var vars = $._bc.vars(options);
+			var _options = vars.options;
+			var _checked = $._bc.get(_options, "checked", null);
+			var _to = $._bc.get(_options, "to", null);
+			var _val = $._bc.get(_options, "value", null);
+
+			// set target element
+			if(_to != null) {
+				_my.attr("data-to", _to);
+			}
+
+			// set radio value
+			if(_val != null) {
+				_my.attr("data-value", _val);
+			}
+
+			// set the value of radio and it will change target element too.
+			if(_checked === true) {
+				checkRadio(_my);
+			} else if(_checked === false) {
+				uncheckRadio(_my);
+			}
+		}
+	});
 	// change radios status
 	function checkRadio(_instance) {
 		if(_instance.attr("checked") != null) return;
+
+		updateTarget(_instance, true);
+	}
+	// remove radios status
+	function uncheckRadio(_instance) {
+		if(_instance.attr("checked") == null) return;
+
+		updateTarget(_instance, false);
+	}
+	// update target input
+	function updateTarget(_instance, checked) {
+		var _val = _instance.attr("data-value");
 
 		// update all the radios
 		var _name = _instance.attr("name");
 		var _radios = $(".radio[data-toggle='radio'][name='" + _name + "']");
 		_radios.removeAttr("checked");
-		_instance.attr("checked", "checked");
+
+		// if checked, update radio check status
+		if(checked) {
+			_instance.attr("checked", "checked");
+		} else {
+			_val = "";
+		}
 
 		// update target element
-		var _val = _instance.attr("data-value");
 		var _target = $(_instance.attr("data-to"));
 		var _pre_val = _target.val();
 		_target.val(_val);
@@ -1071,47 +1116,10 @@ $.extend({
 		var _label = $(this);
 		var _my = _label.find(".radio[data-toggle='radio']");
 		if(_my.length != 0) {			// find checkbox to go on
-			checkRadio(_my);
+			var _disabled = _my.attr("disabled") != null;
+			if(!_disabled) checkRadio(_my);
 		}
 	});
-
-	/*// change checkbox status
-	function updateStatus(_instance, _checked) {
-		if(_checked) {
-			_instance.attr("checked", "checked");
-		} else {
-			_instance.removeAttr("checked", "checked");
-		}
-	}
-
-	// update data to target status
-	function updateTarget(_target, _checked) {
-		if(_target != null) {
-			_target.prop("checked", _checked);
-		}
-	}
-
-	// click on the label
-	$(document).on("click.bs.radio", "label", function(event){
-		var _label = $(this);
-		var _my = _label.find(".radio[data-toggle='radio']");
-		var _checked = null;
-		if(_my.length != 0) {			// find radio to go on
-			var _target = $(_my.attr("data-to"));
-			var _radio = _label.find("input[type='radio']");
-			if(_radio.length != 0) {
-				_checked = _radio.prop("checked");
-			} else {
-				_checked = !(_my.attr("checked") != null);
-				updateTarget(_target, _checked);
-			}
-			updateStatus(_my, _checked);
-
-			// change event
-			_my.add(_target).change();
-		}
-	});
-	*/
 }(window.jQuery);
 /* options:
 	to:			element			set the value of target element

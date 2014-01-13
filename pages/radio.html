@@ -1,0 +1,96 @@
+﻿<h1>Radio</h1>
+
+<h3>Example</h3>
+<div class="bs-example">
+	<div class="content">
+		<div class="radio">
+			<label>
+				<span data-toggle="radio" class="radio btn btn-default" name="rd1" data-value="value1"></span>
+				Radio 1
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<span data-toggle="radio" class="radio btn btn-default" name="rd1" data-value="value2"></span>
+				Radio 2
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<span data-toggle="radio" class="radio btn btn-default" name="rd1" disabled></span>
+				<span class="text-muted">Disabled Radio</span>
+			</label>
+		</div>
+	</div>
+<pre>
+&lt;span <span class="strong">data-toggle="radio"</span> class="<span class="strong">radio</span> btn btn-default"&gt;&lt;/span&gt;
+&lt;span <span class="strong">data-toggle="radio"</span> class="<span class="strong">radio</span> btn btn-default" <span class="strong">disabled</span>&gt;&lt;/span&gt;
+</pre>
+</div>
+
+<h3>Options</h3>
+<p>Options should be passed via data attributes. Append the option name to <code>data-</code>, as in <code>data-to=""</code>.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 100px;">Name</th>
+			<th style="width: 100px;">Type</th>
+			<th style="width: 50px;">Default</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>to</td>
+			<td>element</td>
+			<td>null</td>
+			<td>Set target element value when checkbox clicked. (Suggest setting to <code>&lt;input&gt;</code> element)</td>
+		</tr>
+		<tr>
+			<td>value</td>
+			<td>string</td>
+			<td>null</td>
+			<td>Set radio button value.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Methods</h3>
+<h4>.radio(option)</h4>
+<p>Set radio check status.</p>
+<pre>
+$(<span class="string">'#myRadio'</span>).radio({
+    checked: <span class="number">true</span>
+})
+</pre>
+
+<h3>Events</h3>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 150px;">Event Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>change</td>
+			<td>Trigger when checkbox clicked. It will also trigger <code>change</code> event for <code>data-to</code> element.</td>
+		</tr>
+	</tbody>
+</table>
+<pre>
+$(<span class="string">'#myRadio'</span>).change(<span class="function">function</span> () {
+    <span class="comment">// do something...</span>
+})
+</pre>
+
+
+
+
+
+<style>
+label {
+	font-weight: normal;
+}
+</style>
