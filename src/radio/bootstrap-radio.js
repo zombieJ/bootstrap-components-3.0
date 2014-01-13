@@ -30,32 +30,31 @@
 	function checkRadio(_instance) {
 		if(_instance.attr("checked") != null) return;
 
-		// update all the radios
-		var _name = _instance.attr("name");
-		cleanRadios(_name);
-		_instance.attr("checked", "checked");
-
-		updateTarget(_instance);
+		updateTarget(_instance, true);
 	}
 	// remove radios status
 	function uncheckRadio(_instance) {
 		if(_instance.attr("checked") == null) return;
 
-		// update all the radios
-		var _name = _instance.attr("name");
-		cleanRadios(_name);
-
-		updateTarget(_instance, "");
-	}
-	// clean radios
-	function cleanRadios(_name) {
-		var _radios = $(".radio[data-toggle='radio'][name='" + _name + "']");
-		_radios.removeAttr("checked");
+		updateTarget(_instance, false);
 	}
 	// update target input
-	function updateTarget(_instance, _val) {
+	function updateTarget(_instance, checked) {
+		var _val = _instance.attr("data-value");
+
+		// update all the radios
+		var _name = _instance.attr("name");
+		var _radios = $(".radio[data-toggle='radio'][name='" + _name + "']");
+		_radios.removeAttr("checked");
+
+		// if checked, update radio check status
+		if(checked) {
+			_instance.attr("checked", "checked");
+		} else {
+			_val = "";
+		}
+
 		// update target element
-		_val = _val == null ? _instance.attr("data-value") : _val;
 		var _target = $(_instance.attr("data-to"));
 		var _pre_val = _target.val();
 		_target.val(_val);
