@@ -15,7 +15,12 @@
 
 		<script>
 			$(document).ready(function(){
-				
+				$("#btn_checked").click(function() {
+					$("[data-value='value1']").radio({checked: true});
+				});
+				$("#btn_unchecked").click(function() {
+					$("[data-value='value1']").radio({checked: false});
+				});
 			});
 		</script>
 		<style>
@@ -43,5 +48,8 @@
 			</label>
 		</div>
 		<input id="input_tips" type="text" />
+
+		<button id="btn_checked" class="btn btn-default">Check Radio 1</button>
+		<button id="btn_unchecked" class="btn btn-default">Uncheck Radio 1</button>
 	</body>
 </html>
