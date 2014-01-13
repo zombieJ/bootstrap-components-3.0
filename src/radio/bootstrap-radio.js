@@ -11,11 +11,16 @@
 			var _options = vars.options;
 			var _checked = $._bc.get(_options, "checked", null);
 			var _to = $._bc.get(_options, "to", null);
-				var _target = _to != null ? $(_to) : $(_my.attr("data-to"));
+			var _val = $._bc.get(_options, "value", null);
 
 			// set target element
 			if(_to != null) {
 				_my.attr("data-to", _to);
+			}
+
+			// set radio value
+			if(_val != null) {
+				_my.attr("data-value", _val);
 			}
 
 			// set the value of radio and it will change target element too.
