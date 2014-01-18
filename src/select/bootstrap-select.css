@@ -1,10 +1,12 @@
 .dropdown-toggle[data-toggle="dropdown"][data-type="selector"] {
 	text-align: left;
+	padding-right: 25px;
 }
 
 .dropdown-toggle[data-toggle="dropdown"][data-type="selector"] .caret {
-	float: right;
 	margin-top: 9px;
+	position: absolute;
+	right: 9px;
 }
 
 ul.dropdown-menu[role="menu"][data-type="selector"] li a {
