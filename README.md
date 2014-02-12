@@ -14,6 +14,7 @@ To get started, check out http://zombiej.github.io/bootstrap-components-3.0!
 * Callout
 * Checkbox
 * Radio
+* Editable
 
 ========================
 
@@ -48,3 +49,6 @@ Bootstrap style checkbox.
 
 ### Radio
 Bootstrap style radio box.
+
+### Editable
+Enable element to be editable.
