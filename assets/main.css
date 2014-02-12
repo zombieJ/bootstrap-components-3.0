@@ -188,7 +188,7 @@ color: #fff;
 #ctnr_content .bs-example .content {
 	padding: 45px 15px 15px;
 }
-#ctnr_content .bs-example pre {
+#ctnr_content .bs-example > pre {
 	margin: 0;
 	border: none;
 	border-radius: 0;
