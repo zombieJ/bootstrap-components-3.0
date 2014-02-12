@@ -12,25 +12,33 @@
 	function updateElement() {
 		// Update content
 		if(_input != null && _target != null) {
-			_target.text(_input.val());
+			var _html = _target.attr("data-editable") == "html";
+			if(_html)
+				_target.html(_input.val());
+			else
+				_target.text(_input.val());
 		}
 
 		// Clean element & input
-		if(_input != null) _input.remove();
-		_input = null;
 		if(_target != null) _target.show();
 		_target = null;
+		if(_input != null) _input.remove();
+		_input = null;
 	}
 
 	// Create input for editable element
 	$(document).on("click.bs.editable", "[data-editable]", function() {
 		var _my = $(this);
+		var _html = _my.attr("data-editable") == "html";
+		var $input = $("<input type='text'>");
+
+		// Set input content
+		var content = _html ? _my.html() : _my.text();
+		$input.val(content);
 
 		// Update CSS of input
-		var $input = $("<input type='text'>");
 		_my.after($input);
 		$input.addClass("form-control")
-		.val(_my.text())
 		.css("margin", _my.css("margin"))
 		.css("padding", _my.css("padding"))
 		.css("font-size", _my.css("font-size"))
