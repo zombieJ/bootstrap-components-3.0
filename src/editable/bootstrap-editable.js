@@ -38,6 +38,9 @@
 		var _html = _my.attr("data-editable") == "html";
 		var $input = _my.is("pre") ? $("<textarea>") : $("<input type='text'>");
 
+		// Cleanup pre content
+		updateElement();
+
 		// Set input content
 		var content = _html ? _my.html() : _my.text();
 		$input.val(content);
