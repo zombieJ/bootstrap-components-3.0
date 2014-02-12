@@ -11,12 +11,25 @@
 		<!-- src -->
 		<script src="../src/common/bootstrap-common.js"></script>
 		<script src="../src/editable/bootstrap-editable.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				var num = 0;
+				$("#pre2").change(function() {
+					num++;
+					$("#tips").text("Change " + num + " times.");
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container">
 			<h1 data-editable>Editable Title</h1>
 			<p>Hello World! <b data-editable>Hello You!</b></p>
 			<p data-editable="html">This field support <code>html</code> content</p>
+			<pre data-editable>This is <b>pre</b> element.</pre>
+			<pre id="pre2" data-editable="html">This is <b>pre</b> element support html with change event listener.</pre>
+			<p id="tips"></p>
 		</div>
 	</body>
 </html>

@@ -6,6 +6,7 @@
 !function ($) {
 	var _input = null;
 	var _target = null;
+	var _preContent = null;
 	var preventPopup = false;
 
 	// Update element content
@@ -13,10 +14,15 @@
 		// Update content
 		if(_input != null && _target != null) {
 			var _html = _target.attr("data-editable") == "html";
+			var content = _input.val();
 			if(_html)
-				_target.html(_input.val());
+				_target.html(content);
 			else
-				_target.text(_input.val());
+				_target.text(content);
+
+			if(_preContent != content) {
+				_target.change();
+			}
 		}
 
 		// Clean element & input
@@ -30,7 +36,7 @@
 	$(document).on("click.bs.editable", "[data-editable]", function() {
 		var _my = $(this);
 		var _html = _my.attr("data-editable") == "html";
-		var $input = $("<input type='text'>");
+		var $input = _my.is("pre") ? $("<textarea>") : $("<input type='text'>");
 
 		// Set input content
 		var content = _html ? _my.html() : _my.text();
@@ -42,6 +48,7 @@
 		.css("margin", _my.css("margin"))
 		.css("padding", _my.css("padding"))
 		.css("font-size", _my.css("font-size"))
+		.css("font-family", _my.css("font-family"))
 		.css("line-height",  _my.css("line-height"))
 		.css("display", _my.css("display"))
 		.css("min-width", _my.css("width"))
@@ -62,6 +69,7 @@
 
 		_input = $input;
 		_target = _my;
+		_preContent = content;
 	});
 
 	// Remove input
