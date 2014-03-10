@@ -91,4 +91,23 @@
 			_my.add(_target).change();
 		}
 	});
+
+	// select all
+	$(document).on("click.bs.checkbox_selectAll", "input[type='checkbox'][data-checkbox-all]", function(event){
+		var _name = $(this).attr("data-checkbox-all");
+		var _value = $(this).prop("checked");
+		$("[data-checkbox-entity='" + _name + "']").prop("checked", _value);
+	});
+	$(document).on("click.bs.checkbox_selectAll", "input[type='checkbox'][data-checkbox-entity]", function(event){
+		var _name = $(this).attr("data-checkbox-entity");
+		var _checked = true;
+
+		$("[data-checkbox-entity='" + _name + "']").each(function() {
+			if(!$(this).prop("checked")) {
+				_checked = false;
+				return false;
+			}
+		});
+		$("[data-checkbox-all='" + _name + "']").prop("checked", _checked);
+	});
 }(window.jQuery);
