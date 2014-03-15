@@ -178,6 +178,39 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			_my.add(_target).change();
 		}
 	});
+
+	// select all
+	function elementValue(ele, val) {
+		var _my = $(ele);
+		if(_my.is("input[type='checkbox']")) {
+			if(val != null) _my.prop("checked", val);
+			return _my.prop("checked");
+		} else {
+			if(val != null) _my.checkbox({checked: val});
+			return _my.attr("checked") == "checked";
+		}
+	}
+	$(document).on("change.bs.checkbox_selectAll", "[data-checkbox-all]", function(event){
+		var _name = $(this).attr("data-checkbox-all");
+		var _value = elementValue(this);
+		$("[data-checkbox-entity='" + _name + "']").each(function() {
+			elementValue(this, _value);
+		});
+	});
+	$(document).on("change.bs.checkbox_selectAll", "[data-checkbox-entity]", function(event){
+		var _name = $(this).attr("data-checkbox-entity");
+		var _checked = true;
+
+		$("[data-checkbox-entity='" + _name + "']").each(function() {
+			if(!elementValue(this)) {
+				_checked = false;
+				return false;
+			}
+		});
+		$("[data-checkbox-all='" + _name + "']").each(function() {
+			elementValue(this, _checked);
+		});
+	});
 }(window.jQuery);
 /* options:
 	target:		all(default)	contains date & time picker
