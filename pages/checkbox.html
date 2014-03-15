@@ -37,8 +37,56 @@
 			<td>null</td>
 			<td>Set target element value when checkbox clicked. (Suggest setting to <code>&lt;input&gt;</code> element)</td>
 		</tr>
+		<tr>
+			<td>checkbox-all</td>
+			<td>string</td>
+			<td>null</td>
+			<td>Set this select box as <code>Select All</code> functional. Set by the region name will control all the checkbox which are in the same region.</td>
+		</tr>
+		<tr>
+			<td>checkbox-entity</td>
+			<td>string</td>
+			<td>null</td>
+			<td>Support this select box answer the <code>Select All</code> call. Set the region which you want to be as the same group region.</td>
+		</tr>
 	</tbody>
 </table>
+
+<div class="bs-example">
+	<div class="content">
+		<label>
+			<span data-toggle="checkbox" class="checkbox btn btn-default" data-checkbox-all="rg1"></span> Select All
+		</label>
+		<br/>
+		<label>
+			<span data-toggle="checkbox" class="checkbox btn btn-default" data-checkbox-entity="rg1"></span> Checkbox A
+		</label>
+		<br/>
+		<label>
+			<span data-toggle="checkbox" class="checkbox btn btn-default" data-checkbox-entity="rg1"></span> Checkbox B
+		</label>
+	</div>
+<pre>
+&lt;span data-toggle="checkbox" class="checkbox btn btn-default" <span class="strong">data-checkbox-all="rg1"</span>&gt;&lt;/span&gt; Select All
+&lt;span data-toggle="checkbox" class="checkbox btn btn-default" <span class="strong">data-checkbox-entity="rg1"</span>&gt;&lt;/span&gt; Checkbox A
+&lt;span data-toggle="checkbox" class="checkbox btn btn-default" <span class="strong">data-checkbox-entity="rg1"</span>&gt;&lt;/span&gt; Checkbox B
+</pre>
+</div>
+<div class="callout callout-warning">
+	<h4>"Select All" is also enabled on original input element</h4>
+	<p>You can also set <code>data-checkbox-all</code> and <code>data-checkbox-entity</code> to the <code>&lt;input type="checkbox" /&gt;</code> element. "Select All" will also works.</p>
+	<div class="chk-grp">
+		<label>
+			<input type="checkbox" data-checkbox-all="rg_chkbox" /> Select All
+		</label>
+		<label>
+			<input type="checkbox" data-checkbox-entity="rg_chkbox" /> Checkbox A
+		</label>
+		<label>
+			<input type="checkbox" data-checkbox-entity="rg_chkbox" /> Checkbox B
+		</label>
+</div>
+</div>
 
 <h3>Methods</h3>
 <h4>.checkbox(option)</h4>
@@ -77,5 +125,21 @@ $(<span class="string">'#myCheckbox'</span>).change(<span class="function">funct
 <style>
 label {
 	font-weight: normal;
+}
+
+.callout .chk-grp {
+	border-radius: 3px;
+	border: 1px solid #CCC;
+	background: #FFF;
+	padding: 10px;
+}
+
+.callout .chk-grp label {
+	margin: 0 20px 0 0;
+}
+
+.callout .chk-grp label input {
+	margin: 0 0 2px 0;
+	vertical-align: middle;
 }
 </style>
