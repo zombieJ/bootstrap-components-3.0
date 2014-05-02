@@ -175,6 +175,7 @@ $._bc.vals.datepicker.index = 1;
 		// Skip refresh if container work for the same element
 		if($(_instance).data("trigger") === this) return;
 
+		var _autoclose = my.attr("data-autoclose") === "true";
 		var _target = $(my.attr("data-to"));
 			var target = _target.length != 0 ? _target : my;
 		var _container = $(my.attr("data-container"));
@@ -366,6 +367,7 @@ $._bc.vals.datepicker.index = 1;
 				dateShadow = setDays(dateShadow, year);
 				refreshCurrentDate();
 				draw();
+				if(_type === "year" && _autoclose) refreshInstance(null);
 
 				if(!enable_yearpicker) {
 					$yearpicker.slideUp();
@@ -389,6 +391,7 @@ $._bc.vals.datepicker.index = 1;
 				dateShadow = setDays(dateShadow, null, _month);
 				refreshCurrentDate();
 				draw();
+				if(_type === "month" && _autoclose) refreshInstance(null);
 
 				if(!enable_monthpicker) {
 					$monthpicker.slideUp();
@@ -412,6 +415,7 @@ $._bc.vals.datepicker.index = 1;
 				dateShadow = setDays(dateShadow, null, null, _date);
 				refreshCurrentDate();
 				draw();
+				if(_type === "date" && _autoclose) refreshInstance(null);
 			});
 
 			// time picker
