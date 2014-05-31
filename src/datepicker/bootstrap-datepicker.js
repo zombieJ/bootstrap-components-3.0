@@ -27,26 +27,12 @@ $._bc.vals.datepicker.index = 1;
 			var _type = _instance.getType();
 			var _date = _instance.getDate();
 			var _target = _instance.getTarget();
+			var _format = _instance.getFormat();
 			var _preVal = _target.val();
 			var _val = null;
-			switch(_type) {
-			case "year":
-				_val = _date.getFullYear();
-				break;
-			case "month":
-				_val = _date.getFullYear() + "-" + fillZero(_date.getMonth() + 1);
-				break;
-			case "date":
-				_val = _date.getFullYear() + "-" + fillZero(_date.getMonth() + 1) + "-" + fillZero(_date.getDate());
-				break;
-			case "time":
-				_val = fillZero(_date.getHours()) + ":" + fillZero(_date.getMinutes()) + ":" + fillZero(_date.getSeconds());
-				break;
-			default:
-				_val = _date.getFullYear() + "-" + fillZero(_date.getMonth() + 1) + "-" + fillZero(_date.getDate()) + " ";
-				_val += fillZero(_date.getHours()) + ":" + fillZero(_date.getMinutes()) + ":" + fillZero(_date.getSeconds());
-				break;
-			}
+			var lst = ["d", "M", "y", "H", "m", "s"];
+			_val = _format.replace(/y+/,_date.getFullYear()).replace(/M+/, fillZero(_date.getMonth() + 1)).replace(/d+/, fillZero(_date.getDate()))
+			.replace(/H+/, fillZero(_date.getHours())).replace(/m+/, fillZero(_date.getMinutes())).replace(/s+/, fillZero(_date.getSeconds()));
 			_target.val(_val);
 			_instance.remove();
 			_instance = null;
@@ -58,22 +44,28 @@ $._bc.vals.datepicker.index = 1;
 		}
 		_instance = instance;
 	}
-	function toDate(str) {
-		if(str == null) {
+	function toDate(str, format) {
+		var date = new Date();
+		try {
+			var lst = ["d", "M", "y", "H", "m", "s"];
+			var dc = {};
+
+			$.each(lst, function(i, c) {
+				var _fmt = format.replace(new RegExp(c + "+"), "[TARGET]");
+				$.each(lst, function(i, c) {
+					_fmt = _fmt.replace(new RegExp(c + "+"), "\\d+");
+				});
+				_fmt = _fmt.replace("[TARGET]", "(\\d+)");
+				var reg = new RegExp(_fmt);
+				dc[c] = Number(str.match(reg)[1]);
+			});
+
+			date.setFullYear(dc["y"] || 1990, (dc["M"] || 9) - 1, dc["d"] || 3);
+			date.setHours(dc["H"] || 1, dc["m"] || 2, dc["s"] || 3);
+		} catch(err) {
 			return new Date();
 		}
-		var _str = str.trim().replace(/-/g,"/");
-		if(_str.match(/^\d{4}$/)) {
-			_str = _str + "/01/01";
-		} else if(_str.match(/^\d{4}\/\d{1,2}$/)) {
-			_str = _str + "/01";
-		} else if(_str.match(/^\d{1,2}:\d{1,2}:\d{1,2}$/)) {
-			_str = "2013/11/14 " + _str;
-		}
-		var date = new Date(_str);
-		if(date == null || isNaN(date)) {
-			return new Date();
-		}
+		if(date == null || isNaN(date)) return new Date();
 		return date;
 	}
 	function getDaysOfMonth(date) {
@@ -133,13 +125,11 @@ $._bc.vals.datepicker.index = 1;
 		if(day == null) {
 			day = date.getDate();
 		}
+
 		var _ret = new Date(date.getTime());
-		_ret.setFullYear(year, month, 1);
-		var _days = getDaysOfMonth(_ret);
-		if(day > _days) {
-			day = _days;
-		}
 		_ret.setFullYear(year, month, day);
+		_ret.setFullYear(year, month);
+		_ret.setFullYear(year);
 		return _ret;
 	}
 	function digitization(str, mix, max) {
@@ -178,6 +168,7 @@ $._bc.vals.datepicker.index = 1;
 		var _autoclose = my.attr("data-autoclose") === "true";
 		var _target = $(my.attr("data-to"));
 			var target = _target.length != 0 ? _target : my;
+		var _format = my.attr("data-format");
 		var _container = $(my.attr("data-container"));
 			var container = target.parent();
 			if(container.hasClass("input-group-btn")) {
@@ -195,29 +186,34 @@ $._bc.vals.datepicker.index = 1;
 			switch(_type) {
 			case "year":
 				enable_yearpicker = true;
+				_format = _format || "yyyy";
 				break;
 			case "month":
 				enable_monthpicker = true;
+				_format = _format || "yyyy-MM";
 				break;
 			case "date":
 				enable_datepicker = true;
+				_format = _format || "yyyy-MM-dd";
 				break;
 			case "time":
 				enable_timepicker = true;
+				_format = _format || "HH:mm:ss";
 				break;
 			default:
 				_type = "all";
 				enable_datepicker = true;
 				enable_timepicker = true;
+				_format = _format || "yyyy-MM-dd HH:mm:ss";
 			}
 		var _date = target.val();
-			var date = toDate(_date);
+			var date = toDate(_date, _format);
 			var dateShadow = new Date(date.getTime());		// an date which is display the current view
 			var dateCurrent = new Date(date.getTime());		// an date which is mark as current date
 		var _before = my.attr("data-before");
-			var before = _before == null ? null : toDate(_before);
+			var before = _before == null ? null : toDate(_before, _format);
 		var _after = my.attr("data-after");
-			var after = _after == null ? null : toDate(_after);
+			var after = _after == null ? null : toDate(_after, _format);
 
 		// generate datepicker component
 		var $container = $('<div class="bsc-datepicker">');
@@ -326,6 +322,9 @@ $._bc.vals.datepicker.index = 1;
 		});
 
 		// bind data
+		$container.getFormat = function() {
+			return _format;
+		}
 		$container.getTarget = function() {
 			return target;
 		}
@@ -333,7 +332,6 @@ $._bc.vals.datepicker.index = 1;
 			return _type;
 		}
 		$container.getDate = function() {
-			//return dateShadow;
 			return dateCurrent;
 		}
 
