@@ -1399,7 +1399,7 @@ $.extend({
 		var _index = index(_instance);
 		var _mixed = _process.attr("data-slider-mixed") != null;
 		var _value = 0;
-		var _total_width = _process.outerWidth();
+		var _total_width = _process.outerWidth() - 1;
 		if(_mixed) {
 			_total_width -= getWidth(_instance);
 		} else {
@@ -1478,7 +1478,7 @@ $.extend({
 		var _sliders = _process.find("button[data-toggle='slider']");
 		var _len = _sliders.length;
 		var _index = index(_instance);
-		var _total_width = _process.outerWidth();
+		var _total_width = _process.outerWidth() - 1;
 		if(_process.attr("data-slider-container") == null) {	// run as simple mode
 			$.each(_sliders, function(i, ele) {
 				var _element = $(ele);
