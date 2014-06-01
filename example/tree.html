@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Component Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- jQuery -->
+		<script src="assets/jquery-1.10.2.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- src -->
+		<script src="../src/common/bootstrap-common.js"></script>
+		<script src="../src/tree/bootstrap-tree.js"></script>
+		<link href="../src/tree/bootstrap-tree.css" rel="stylesheet" media="screen">
+
+		<script>
+			$(document).ready(function(){
+				$("#treeCntr").tree({
+					name: "level1",
+					list: [
+						{name: "level2 - a"},
+						{name: "level2 - b"},
+						{
+							name: "level2 - c",
+							list: [
+								{name: "level3 - a"},
+								{name: "level3 - b"},
+								{name: "level3 - c"},
+								{name: "level3 - d"},
+								{name: "level3 - e"}
+							]
+						},
+					],
+				});
+			});
+		</script>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<ul class="treeView">
+			<li>
+				<a data-toggle='tree' class="tree-icon glyphicon glyphicon-folder-open"> </a>home
+				<ul class="tree-list">
+					<li><a class="tree-icon glyphicon glyphicon-file"> </a>dp</li>
+					<li>
+						<a data-toggle='tree' class="tree-icon glyphicon glyphicon-folder-open"> </a>zombieJ
+						<ul class="tree-list">
+							<li><a class="tree-icon glyphicon glyphicon-file"> </a>documents</li>
+							<li><a class="tree-icon glyphicon glyphicon-file"> </a>pictures</li>
+							<li><a class="tree-icon glyphicon glyphicon-file"> </a>videos</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div id="treeCntr">
+		</div>
+	</body>
+</html>
