@@ -54,7 +54,9 @@ $._bc.vals.datepicker.index = 1;
 				var _val = _format.replace(/y+/,date.getFullYear()).replace(/M+/, fillZero(date.getMonth() + 1)).replace(/d+/, fillZero(date.getDate()))
 				.replace(/H+/, fillZero(date.getHours())).replace(/m+/, fillZero(date.getMinutes())).replace(/s+/, fillZero(date.getSeconds()));
 				return _val;
-			}
+			},
+			monthName: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+			yearMonthTitle: "${month}-${year}",
 		},
 	});
 
@@ -543,7 +545,11 @@ $._bc.vals.datepicker.index = 1;
 			});
 
 			// date picker
-			$datepicker_header_title.text(_year + "-" + fillZero(month));
+			$datepicker_header_title.text(
+				$.datepicker.yearMonthTitle
+				.replace(/\$\{month\}/g, $.datepicker.monthName[month - 1])
+				.replace(/\$\{year\}/g, _year)
+			);
 			$datepicker_body_date.empty();
 			for(var i = 0; i < days[0] ; i+= 1) {
 				var $element = $('<span class="inactive">');
