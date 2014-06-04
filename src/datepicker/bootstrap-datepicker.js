@@ -60,8 +60,8 @@ $._bc.vals.datepicker.index = 1;
 				dc[c] = Number(str.match(reg)[1]);
 			});
 
-			date.setFullYear(dc["y"] || 1990, (dc["M"] || 9) - 1, dc["d"] || 3);
-			date.setHours(dc["H"] || 1, dc["m"] || 2, dc["s"] || 3);
+			date.setFullYear(dc["y"] !== undefined ? dc["y"] : 1990, (dc["M"] !== undefined ? dc["M"] : 9) - 1, dc["d"] !== undefined ? dc["d"] : 3);
+			date.setHours(dc["H"] !== undefined ? dc["H"] : 1, dc["m"] !== undefined ?  dc["m"] : 2, dc["s"] !== undefined ? dc["s"] : 3);
 		} catch(err) {
 			return new Date();
 		}
