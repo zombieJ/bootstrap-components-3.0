@@ -231,6 +231,49 @@ $._bc.vals.datepicker.index = 1;
 
 // init function
 !function ($) {
+	$.extend({
+		datepicker: {
+			toDate: function(str, format) {
+				var date = new Date();
+				try {
+					var lst = ["d", "M", "y", "H", "m", "s"];
+					var dc = {};
+
+					$.each(lst, function(i, c) {
+						var _fmt = format.replace(new RegExp(c + "+"), "[TARGET]");
+						$.each(lst, function(i, c) {
+							_fmt = _fmt.replace(new RegExp(c + "+"), "\\d+");
+						});
+						_fmt = _fmt.replace("[TARGET]", "(\\d+)");
+						var reg = new RegExp(_fmt);
+						dc[c] = Number(str.match(reg)[1]);
+					});
+
+					function val(val, def) {
+						if(val === undefined || val === null || isNaN(val))
+							return def;
+						return val;
+					}
+
+					date.setFullYear(val(dc["y"], 1990), (val(dc["M"], 1)) - 1, val(dc["d"], 1));
+					date.setHours(val(dc["H"], 0), val(dc["m"], 0), val(dc["s"], 0));
+				} catch(err) {
+					return new Date();
+				}
+				if(date == null || isNaN(date)) return new Date();
+				return date;
+			},
+			dateToStrng: function(date, _format) {
+				var lst = ["d", "M", "y", "H", "m", "s"];
+				var _val = _format.replace(/y+/,date.getFullYear()).replace(/M+/, fillZero(date.getMonth() + 1)).replace(/d+/, fillZero(date.getDate()))
+				.replace(/H+/, fillZero(date.getHours())).replace(/m+/, fillZero(date.getMinutes())).replace(/s+/, fillZero(date.getSeconds()));
+				return _val;
+			},
+			monthName: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+			yearMonthTitle: "${month}-${year}",
+		},
+	});
+
 	// var
 	var _instance = null;
 	var _preventEvent = false;
@@ -244,9 +287,7 @@ $._bc.vals.datepicker.index = 1;
 			var _format = _instance.getFormat();
 			var _preVal = _target.val();
 			var _val = null;
-			var lst = ["d", "M", "y", "H", "m", "s"];
-			_val = _format.replace(/y+/,_date.getFullYear()).replace(/M+/, fillZero(_date.getMonth() + 1)).replace(/d+/, fillZero(_date.getDate()))
-			.replace(/H+/, fillZero(_date.getHours())).replace(/m+/, fillZero(_date.getMinutes())).replace(/s+/, fillZero(_date.getSeconds()));
+			_val = $.datepicker.dateToStrng(_date, _format);
 			_target.val(_val);
 			_instance.remove();
 			_instance = null;
@@ -257,30 +298,6 @@ $._bc.vals.datepicker.index = 1;
 			}
 		}
 		_instance = instance;
-	}
-	function toDate(str, format) {
-		var date = new Date();
-		try {
-			var lst = ["d", "M", "y", "H", "m", "s"];
-			var dc = {};
-
-			$.each(lst, function(i, c) {
-				var _fmt = format.replace(new RegExp(c + "+"), "[TARGET]");
-				$.each(lst, function(i, c) {
-					_fmt = _fmt.replace(new RegExp(c + "+"), "\\d+");
-				});
-				_fmt = _fmt.replace("[TARGET]", "(\\d+)");
-				var reg = new RegExp(_fmt);
-				dc[c] = Number(str.match(reg)[1]);
-			});
-
-			date.setFullYear(dc["y"] || 1990, (dc["M"] || 9) - 1, dc["d"] || 3);
-			date.setHours(dc["H"] || 1, dc["m"] || 2, dc["s"] || 3);
-		} catch(err) {
-			return new Date();
-		}
-		if(date == null || isNaN(date)) return new Date();
-		return date;
 	}
 	function getDaysOfMonth(date) {
 		var _startDay, _days;
@@ -421,13 +438,13 @@ $._bc.vals.datepicker.index = 1;
 				_format = _format || "yyyy-MM-dd HH:mm:ss";
 			}
 		var _date = target.val();
-			var date = toDate(_date, _format);
+			var date = $.datepicker.toDate(_date, _format);
 			var dateShadow = new Date(date.getTime());		// an date which is display the current view
 			var dateCurrent = new Date(date.getTime());		// an date which is mark as current date
 		var _before = my.attr("data-before");
-			var before = _before == null ? null : toDate(_before, _format);
+			var before = _before == null ? null : $.datepicker.toDate(_before, _format);
 		var _after = my.attr("data-after");
-			var after = _after == null ? null : toDate(_after, _format);
+			var after = _after == null ? null : $.datepicker.toDate(_after, _format);
 
 		// generate datepicker component
 		var $container = $('<div class="bsc-datepicker">');
@@ -742,7 +759,11 @@ $._bc.vals.datepicker.index = 1;
 			});
 
 			// date picker
-			$datepicker_header_title.text(_year + "-" + fillZero(month));
+			$datepicker_header_title.text(
+				$.datepicker.yearMonthTitle
+				.replace(/\$\{month\}/g, $.datepicker.monthName[month - 1])
+				.replace(/\$\{year\}/g, _year)
+			);
 			$datepicker_body_date.empty();
 			for(var i = 0; i < days[0] ; i+= 1) {
 				var $element = $('<span class="inactive">');
@@ -1599,6 +1620,47 @@ $.extend({
 	$(document).on("mouseup.bs.slider", function(event){
 		if(event.button == 0) {
 			_instance = null;
+		}
+	});
+}(window.jQuery);
+!function ($) {
+	$.fn.extend({
+		tree: function(data, options){
+			var _my = $(this);
+			options = options || {};
+
+			var _name = data.name;
+			var _list = data.list || [];
+
+			var $ul = _my.is("ul") ? _my : $("<ul class='treeView'>").appendTo(_my);
+			var $li = $("<li>").appendTo($ul);
+			var $a = $("<a class='tree-icon glyphicon'>").appendTo($li);
+			var $name = $("<span>").html(_name).insertAfter($a);
+
+			if(_list.length) {
+				$a.attr("data-toggle", "tree")
+				.addClass("glyphicon-folder-open");
+
+				var $sub_ul = $("<ul class='tree-list'>").appendTo($li);
+				$.each(_list, function(i, data) {
+					$sub_ul.tree(data, options);
+				});
+			} else {
+				$a.addClass("glyphicon-file");
+			}
+			return _my;
+		},
+	});
+
+	$(document).on("click.bs.treeView", "[data-toggle='tree']", function(event) {
+		event.preventDefault();
+
+		var _my = $(this);
+		var $list = _my.parent().find("> .tree-list");
+		if($list.is(":hidden")) {
+			$list.slideDown();
+		} else {
+			$list.slideUp();
 		}
 	});
 }(window.jQuery);
