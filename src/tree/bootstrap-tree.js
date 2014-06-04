@@ -5,6 +5,7 @@
 			options = options || {};
 
 			var _name = data.name;
+			var _open = data.open !== false;
 			var _list = data.list || [];
 
 			var $ul = _my.is("ul") ? _my : $("<ul class='treeView'>").appendTo(_my);
@@ -13,15 +14,26 @@
 			var $name = $("<span>").html(_name).insertAfter($a);
 
 			if(_list.length) {
+				var cls_folder_open = options.folderOpenIcon || 'glyphicon-folder-close';
+				var cls_folder_close = options.folderCloseIcon || 'glyphicon-folder-open';
+
 				$a.attr("data-toggle", "tree")
-				.addClass("glyphicon-folder-open");
+				.attr("data-icon-open", cls_folder_open)
+				.attr("data-icon-close", cls_folder_close)
+				.addClass("glyphicon")
+				.addClass(_open ? cls_folder_close : cls_folder_open);
 
 				var $sub_ul = $("<ul class='tree-list'>").appendTo($li);
 				$.each(_list, function(i, data) {
 					$sub_ul.tree(data, options);
 				});
+				if(!_open) {
+					$sub_ul.hide();
+				}
 			} else {
-				$a.addClass("glyphicon-file");
+				var cls_file = options.itemIcon || 'glyphicon-file';
+
+				$a.addClass(cls_file);
 			}
 			return _my;
 		},
@@ -32,9 +44,16 @@
 
 		var _my = $(this);
 		var $list = _my.parent().find("> .tree-list");
+		var clsOpen = _my.attr("data-icon-open");
+		var clsClose = _my.attr("data-icon-close");
+
 		if($list.is(":hidden")) {
+			_my.removeClass(clsOpen);
+			_my.addClass(clsClose);
 			$list.slideDown();
 		} else {
+			_my.addClass(clsOpen);
+			_my.removeClass(clsClose);
 			$list.slideUp();
 		}
 	});

@@ -18,7 +18,14 @@
 				$("#treeCntr").tree({
 					name: "level1",
 					list: [
-						{name: "level2 - a"},
+						{
+							name: "level2 - a",
+							open: false,
+							list: [
+								{name: "level3 - 1"},
+								{name: "level3 - 2"},
+							],
+						},
 						{name: "level2 - b"},
 						{
 							name: "level2 - c",
@@ -31,6 +38,10 @@
 							]
 						},
 					],
+				}, {
+					folderOpenIcon: 'glyphicon-plus',
+					folderCloseIcon: 'glyphicon-minus',
+					itemIcon: 'glyphicon-star-empty',
 				});
 			});
 		</script>
