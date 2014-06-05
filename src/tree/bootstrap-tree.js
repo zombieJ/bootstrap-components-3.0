@@ -5,14 +5,18 @@
 			options = options || {};
 
 			var _name = data.name;
-			var _open = data.open !== false;
 			var _list = data.list || [];
+			var _enabled = data.enabled !== false;
+			var _open = _enabled ? data.open !== false : data.open === true;
 
 			var $ul = _my.is("ul") ? _my : $("<ul class='treeView'>").appendTo(_my);
 			var $li = $("<li>").appendTo($ul);
 			var $a = $("<a class='tree-icon glyphicon'>").appendTo($li);
-			var $name = $("<span>").html(_name).insertAfter($a);
+			var $name = (data.url ? $("<a>").attr("href", data.url) : $("<span>")).html(_name).insertAfter($a);
 
+			if(!_enabled) $li.addClass("disabled");
+
+			// Generate as list
 			if(_list.length) {
 				var cls_folder_open = options.folderOpenIcon || 'glyphicon-folder-close';
 				var cls_folder_close = options.folderCloseIcon || 'glyphicon-folder-open';
@@ -43,6 +47,8 @@
 		event.preventDefault();
 
 		var _my = $(this);
+		if(_my.closest("li").hasClass("disabled")) return;
+
 		var $list = _my.parent().find("> .tree-list");
 		var clsOpen = _my.attr("data-icon-open");
 		var clsClose = _my.attr("data-icon-close");

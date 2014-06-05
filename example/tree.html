@@ -30,11 +30,18 @@
 						{
 							name: "level2 - c",
 							list: [
-								{name: "level3 - a"},
+								{name: "level3 - a", enabled: false},
 								{name: "level3 - b"},
-								{name: "level3 - c"},
+								{
+									name: "level3 - c",
+									enabled: false,
+									list: [
+										{name: "level4 - a"},
+										{name: "level4 - b"},
+									],
+								},
 								{name: "level3 - d"},
-								{name: "level3 - e"}
+								{name: "level3 - e", url: "http://github.com"}
 							]
 						},
 					],
