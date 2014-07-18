@@ -30,6 +30,7 @@ $.extend({
 		var _close = $._bc.get(_options, "close", true);
 		var _confirm = $._bc.get(_options, "confirm", false);
 		var _buttons = $._bc.get(_options, "buttons", null);
+		var _fade = $._bc.get(_options, "fade", true);
 
 		var _ret = null;
 
@@ -55,6 +56,10 @@ $.extend({
 		// fill title & content
 		$modal_header_head.html(_title);
 		$modal_body.html(_content);
+
+		if (_fade) {
+			$modal.addClass('fade');
+		}
 
 		// fill buttons in footer
 		if(_buttons != null) {
