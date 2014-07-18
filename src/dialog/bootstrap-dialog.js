@@ -35,7 +35,7 @@ $.extend({
 		var _ret = null;
 
 		// generate modal
-		var $modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
+		var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
 		var $modal_dialog = $('<div class="modal-dialog">');
 		var $modal_content = $('<div class="modal-content">');
 		var $modal_header = $('<div class="modal-header">');
