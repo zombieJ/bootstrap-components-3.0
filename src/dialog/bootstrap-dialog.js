@@ -30,11 +30,12 @@ $.extend({
 		var _close = $._bc.get(_options, "close", true);
 		var _confirm = $._bc.get(_options, "confirm", false);
 		var _buttons = $._bc.get(_options, "buttons", null);
+		var _fade = $._bc.get(_options, "fade", true);
 
 		var _ret = null;
 
 		// generate modal
-		var $modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
+		var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
 		var $modal_dialog = $('<div class="modal-dialog">');
 		var $modal_content = $('<div class="modal-content">');
 		var $modal_header = $('<div class="modal-header">');
@@ -55,6 +56,10 @@ $.extend({
 		// fill title & content
 		$modal_header_head.html(_title);
 		$modal_body.html(_content);
+
+		if (_fade) {
+			$modal.addClass('fade');
+		}
 
 		// fill buttons in footer
 		if(_buttons != null) {
