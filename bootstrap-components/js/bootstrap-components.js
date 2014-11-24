@@ -1,3 +1,4 @@
+/*Bootstrap Components 3.0 - Created By ZombieJ*/
 $.extend({_bc: new Object()});
 // init vars for bootstrap-component use
 $._bc.vals = new Object();
@@ -58,8 +59,7 @@ safari: /webkit/.test( userAgent ),
 opera: /opera/.test( userAgent ), 
 msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
 mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
-};
-/* options:
+};/* options:
 				boolean			default false. true to open auto tooltips else to close it.
 */
 
@@ -84,8 +84,7 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			_my.tooltip('show');
 		}
 	};
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	to:			element			set the value of target element(only for checkbox)
 
 	checked:	boolean			set checkbox checked or not
@@ -211,8 +210,7 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			elementValue(this, _checked);
 		});
 	});
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	target:		all(default)	contains date & time picker
 				time			time picker only
 				date			date picker only
@@ -804,8 +802,7 @@ $._bc.vals.datepicker.index = 1;
 			refreshInstance(null);
 		}
 	});
-}(window.jQuery);
-/*	this is to help hightlight target element with dark background.
+}(window.jQuery);/*	this is to help hightlight target element with dark background.
 options:
 	title:			string				specify title of dialog.
 	content:		element				specify content of dialog.
@@ -837,11 +834,12 @@ $.extend({
 		var _close = $._bc.get(_options, "close", true);
 		var _confirm = $._bc.get(_options, "confirm", false);
 		var _buttons = $._bc.get(_options, "buttons", null);
+		var _fade = $._bc.get(_options, "fade", true);
 
 		var _ret = null;
 
 		// generate modal
-		var $modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
+		var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
 		var $modal_dialog = $('<div class="modal-dialog">');
 		var $modal_content = $('<div class="modal-content">');
 		var $modal_header = $('<div class="modal-header">');
@@ -862,6 +860,10 @@ $.extend({
 		// fill title & content
 		$modal_header_head.html(_title);
 		$modal_body.html(_content);
+
+		if (_fade) {
+			$modal.addClass('fade');
+		}
 
 		// fill buttons in footer
 		if(_buttons != null) {
@@ -887,7 +889,7 @@ $.extend({
 			}
 		} else if(_confirm) {
 			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
-			var $btn_confirm = $('<button type="button" class="btn btn-primary">Comfirm</button>').data("value", true);
+			var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
 			$modal_footer.append($btn_cancel);
 			$modal_footer.append($btn_confirm);
 
@@ -1014,8 +1016,7 @@ $.extend({
 		}
 		updateElement();
 	});
-}(window.jQuery);
-/*	this is to help hightlight target element with dark background.
+}(window.jQuery);/*	this is to help hightlight target element with dark background.
 options:
 	title:			string				specify title of notification.
 	content:		element				specify content of notification.
@@ -1178,8 +1179,7 @@ $.extend({
 
 		return $notification;
 	}
-});
-/* options:
+});/* options:
 	to:			element			set the value of target element
 */
 
@@ -1267,20 +1267,19 @@ $.extend({
 			if(!_disabled) checkRadio(_my);
 		}
 	});
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	to:			element			set the value of target element
 */
 
 !function ($) {
-	$(document).on("click.bs.select", ".btn-group ul.dropdown-menu[role='menu'][data-type='selector'] li a", function(event){
+	$(document).on("click.bs.select", "ul.dropdown-menu[role='menu'][data-type='selector'] li a", function(event){
 		var my = $(this);
 		var _val = my.attr("value");
 		var _text = my.text();
 		if(_val == null) {
 			_val = _text;
 		}
-		var $field = $(this).closest(".btn-group").find("[data-toggle='dropdown'][data-type='selector']");
+		var $field = $(this).closest(".dropdown, .btn-group").find("[data-toggle='dropdown'][data-type='selector']");
 		var $field_val = $field.find("[data-value]");
 		var $field_target = $($field.attr("data-to"));
 		var pre_val = $field_val.attr("data-value");
@@ -1295,8 +1294,7 @@ $.extend({
 			$field_target.change();
 		}
 	});
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	to:			element			set the value of target element
 
 	min:		number			set min value
@@ -1622,8 +1620,7 @@ $.extend({
 			_instance = null;
 		}
 	});
-}(window.jQuery);
-!function ($) {
+}(window.jQuery);!function ($) {
 	$.fn.extend({
 		tree: function(data, options){
 			var _my = $(this);
