@@ -1,6 +1,7 @@
 .dropdown-toggle[data-toggle="dropdown"][data-type="selector"] {
 	text-align: left;
 	padding-right: 25px;
+	position: relative;
 }
 
 .dropdown-toggle[data-toggle="dropdown"][data-type="selector"] .caret {

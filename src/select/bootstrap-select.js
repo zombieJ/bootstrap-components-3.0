@@ -3,14 +3,14 @@
 */
 
 !function ($) {
-	$(document).on("click.bs.select", ".btn-group ul.dropdown-menu[role='menu'][data-type='selector'] li a", function(event){
+	$(document).on("click.bs.select", "ul.dropdown-menu[role='menu'][data-type='selector'] li a", function(event){
 		var my = $(this);
 		var _val = my.attr("value");
 		var _text = my.text();
 		if(_val == null) {
 			_val = _text;
 		}
-		var $field = $(this).closest(".btn-group").find("[data-toggle='dropdown'][data-type='selector']");
+		var $field = $(this).closest(".dropdown, .btn-group").find("[data-toggle='dropdown'][data-type='selector']");
 		var $field_val = $field.find("[data-value]");
 		var $field_target = $($field.attr("data-to"));
 		var pre_val = $field_val.attr("data-value");

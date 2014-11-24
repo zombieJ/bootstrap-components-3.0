@@ -85,7 +85,7 @@ $.extend({
 			}
 		} else if(_confirm) {
 			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
-			var $btn_confirm = $('<button type="button" class="btn btn-primary">Comfirm</button>').data("value", true);
+			var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
 			$modal_footer.append($btn_cancel);
 			$modal_footer.append($btn_confirm);
 
