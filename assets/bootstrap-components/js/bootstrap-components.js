@@ -1,3 +1,4 @@
+/*Bootstrap Components 3.0 - Created By ZombieJ*/
 $.extend({_bc: new Object()});
 // init vars for bootstrap-component use
 $._bc.vals = new Object();
@@ -58,8 +59,7 @@ safari: /webkit/.test( userAgent ),
 opera: /opera/.test( userAgent ), 
 msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
 mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
-};
-/* options:
+};/* options:
 				boolean			default false. true to open auto tooltips else to close it.
 */
 
@@ -84,8 +84,7 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			_my.tooltip('show');
 		}
 	};
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	to:			element			set the value of target element(only for checkbox)
 
 	checked:	boolean			set checkbox checked or not
@@ -211,8 +210,7 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			elementValue(this, _checked);
 		});
 	});
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	target:		all(default)	contains date & time picker
 				time			time picker only
 				date			date picker only
@@ -231,6 +229,49 @@ $._bc.vals.datepicker.index = 1;
 
 // init function
 !function ($) {
+	$.extend({
+		datepicker: {
+			toDate: function(str, format) {
+				var date = new Date();
+				try {
+					var lst = ["d", "M", "y", "H", "m", "s"];
+					var dc = {};
+
+					$.each(lst, function(i, c) {
+						var _fmt = format.replace(new RegExp(c + "+"), "[TARGET]");
+						$.each(lst, function(i, c) {
+							_fmt = _fmt.replace(new RegExp(c + "+"), "\\d+");
+						});
+						_fmt = _fmt.replace("[TARGET]", "(\\d+)");
+						var reg = new RegExp(_fmt);
+						dc[c] = Number(str.match(reg)[1]);
+					});
+
+					function val(val, def) {
+						if(val === undefined || val === null || isNaN(val))
+							return def;
+						return val;
+					}
+
+					date.setFullYear(val(dc["y"], 1990), (val(dc["M"], 1)) - 1, val(dc["d"], 1));
+					date.setHours(val(dc["H"], 0), val(dc["m"], 0), val(dc["s"], 0));
+				} catch(err) {
+					return new Date();
+				}
+				if(date == null || isNaN(date)) return new Date();
+				return date;
+			},
+			dateToStrng: function(date, _format) {
+				var lst = ["d", "M", "y", "H", "m", "s"];
+				var _val = _format.replace(/y+/,date.getFullYear()).replace(/M+/, fillZero(date.getMonth() + 1)).replace(/d+/, fillZero(date.getDate()))
+				.replace(/H+/, fillZero(date.getHours())).replace(/m+/, fillZero(date.getMinutes())).replace(/s+/, fillZero(date.getSeconds()));
+				return _val;
+			},
+			monthName: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+			yearMonthTitle: "${month}-${year}",
+		},
+	});
+
 	// var
 	var _instance = null;
 	var _preventEvent = false;
@@ -244,9 +285,7 @@ $._bc.vals.datepicker.index = 1;
 			var _format = _instance.getFormat();
 			var _preVal = _target.val();
 			var _val = null;
-			var lst = ["d", "M", "y", "H", "m", "s"];
-			_val = _format.replace(/y+/,_date.getFullYear()).replace(/M+/, fillZero(_date.getMonth() + 1)).replace(/d+/, fillZero(_date.getDate()))
-			.replace(/H+/, fillZero(_date.getHours())).replace(/m+/, fillZero(_date.getMinutes())).replace(/s+/, fillZero(_date.getSeconds()));
+			_val = $.datepicker.dateToStrng(_date, _format);
 			_target.val(_val);
 			_instance.remove();
 			_instance = null;
@@ -257,30 +296,6 @@ $._bc.vals.datepicker.index = 1;
 			}
 		}
 		_instance = instance;
-	}
-	function toDate(str, format) {
-		var date = new Date();
-		try {
-			var lst = ["d", "M", "y", "H", "m", "s"];
-			var dc = {};
-
-			$.each(lst, function(i, c) {
-				var _fmt = format.replace(new RegExp(c + "+"), "[TARGET]");
-				$.each(lst, function(i, c) {
-					_fmt = _fmt.replace(new RegExp(c + "+"), "\\d+");
-				});
-				_fmt = _fmt.replace("[TARGET]", "(\\d+)");
-				var reg = new RegExp(_fmt);
-				dc[c] = Number(str.match(reg)[1]);
-			});
-
-			date.setFullYear(dc["y"] || 1990, (dc["M"] || 9) - 1, dc["d"] || 3);
-			date.setHours(dc["H"] || 1, dc["m"] || 2, dc["s"] || 3);
-		} catch(err) {
-			return new Date();
-		}
-		if(date == null || isNaN(date)) return new Date();
-		return date;
 	}
 	function getDaysOfMonth(date) {
 		var _startDay, _days;
@@ -421,13 +436,13 @@ $._bc.vals.datepicker.index = 1;
 				_format = _format || "yyyy-MM-dd HH:mm:ss";
 			}
 		var _date = target.val();
-			var date = toDate(_date, _format);
+			var date = $.datepicker.toDate(_date, _format);
 			var dateShadow = new Date(date.getTime());		// an date which is display the current view
 			var dateCurrent = new Date(date.getTime());		// an date which is mark as current date
 		var _before = my.attr("data-before");
-			var before = _before == null ? null : toDate(_before, _format);
+			var before = _before == null ? null : $.datepicker.toDate(_before, _format);
 		var _after = my.attr("data-after");
-			var after = _after == null ? null : toDate(_after, _format);
+			var after = _after == null ? null : $.datepicker.toDate(_after, _format);
 
 		// generate datepicker component
 		var $container = $('<div class="bsc-datepicker">');
@@ -742,7 +757,11 @@ $._bc.vals.datepicker.index = 1;
 			});
 
 			// date picker
-			$datepicker_header_title.text(_year + "-" + fillZero(month));
+			$datepicker_header_title.text(
+				$.datepicker.yearMonthTitle
+				.replace(/\$\{month\}/g, $.datepicker.monthName[month - 1])
+				.replace(/\$\{year\}/g, _year)
+			);
 			$datepicker_body_date.empty();
 			for(var i = 0; i < days[0] ; i+= 1) {
 				var $element = $('<span class="inactive">');
@@ -783,8 +802,7 @@ $._bc.vals.datepicker.index = 1;
 			refreshInstance(null);
 		}
 	});
-}(window.jQuery);
-/*	this is to help hightlight target element with dark background.
+}(window.jQuery);/*	this is to help hightlight target element with dark background.
 options:
 	title:			string				specify title of dialog.
 	content:		element				specify content of dialog.
@@ -816,11 +834,12 @@ $.extend({
 		var _close = $._bc.get(_options, "close", true);
 		var _confirm = $._bc.get(_options, "confirm", false);
 		var _buttons = $._bc.get(_options, "buttons", null);
+		var _fade = $._bc.get(_options, "fade", true);
 
 		var _ret = null;
 
 		// generate modal
-		var $modal = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
+		var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
 		var $modal_dialog = $('<div class="modal-dialog">');
 		var $modal_content = $('<div class="modal-content">');
 		var $modal_header = $('<div class="modal-header">');
@@ -841,6 +860,10 @@ $.extend({
 		// fill title & content
 		$modal_header_head.html(_title);
 		$modal_body.html(_content);
+
+		if (_fade) {
+			$modal.addClass('fade');
+		}
 
 		// fill buttons in footer
 		if(_buttons != null) {
@@ -866,7 +889,7 @@ $.extend({
 			}
 		} else if(_confirm) {
 			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
-			var $btn_confirm = $('<button type="button" class="btn btn-primary">Comfirm</button>').data("value", true);
+			var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
 			$modal_footer.append($btn_cancel);
 			$modal_footer.append($btn_confirm);
 
@@ -993,8 +1016,7 @@ $.extend({
 		}
 		updateElement();
 	});
-}(window.jQuery);
-/*	this is to help hightlight target element with dark background.
+}(window.jQuery);/*	this is to help hightlight target element with dark background.
 options:
 	title:			string				specify title of notification.
 	content:		element				specify content of notification.
@@ -1157,8 +1179,7 @@ $.extend({
 
 		return $notification;
 	}
-});
-/* options:
+});/* options:
 	to:			element			set the value of target element
 */
 
@@ -1246,20 +1267,19 @@ $.extend({
 			if(!_disabled) checkRadio(_my);
 		}
 	});
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	to:			element			set the value of target element
 */
 
 !function ($) {
-	$(document).on("click.bs.select", ".btn-group ul.dropdown-menu[role='menu'][data-type='selector'] li a", function(event){
+	$(document).on("click.bs.select", "ul.dropdown-menu[role='menu'][data-type='selector'] li a", function(event){
 		var my = $(this);
 		var _val = my.attr("value");
 		var _text = my.text();
 		if(_val == null) {
 			_val = _text;
 		}
-		var $field = $(this).closest(".btn-group").find("[data-toggle='dropdown'][data-type='selector']");
+		var $field = $(this).closest(".dropdown, .btn-group").find("[data-toggle='dropdown'][data-type='selector']");
 		var $field_val = $field.find("[data-value]");
 		var $field_target = $($field.attr("data-to"));
 		var pre_val = $field_val.attr("data-value");
@@ -1274,8 +1294,7 @@ $.extend({
 			$field_target.change();
 		}
 	});
-}(window.jQuery);
-/* options:
+}(window.jQuery);/* options:
 	to:			element			set the value of target element
 
 	min:		number			set min value
@@ -1599,6 +1618,71 @@ $.extend({
 	$(document).on("mouseup.bs.slider", function(event){
 		if(event.button == 0) {
 			_instance = null;
+		}
+	});
+}(window.jQuery);!function ($) {
+	$.fn.extend({
+		tree: function(data, options){
+			var _my = $(this);
+			options = options || {};
+
+			var _name = data.name;
+			var _list = data.list || [];
+			var _enabled = data.enabled !== false;
+			var _open = _enabled ? data.open !== false : data.open === true;
+
+			var $ul = _my.is("ul") ? _my : $("<ul class='treeView'>").appendTo(_my);
+			var $li = $("<li>").appendTo($ul);
+			var $a = $("<a class='tree-icon glyphicon'>").appendTo($li);
+			var $name = (data.url ? $("<a>").attr("href", data.url) : $("<span>")).html(_name).insertAfter($a);
+
+			if(!_enabled) $li.addClass("disabled");
+
+			// Generate as list
+			if(_list.length) {
+				var cls_folder_open = options.folderOpenIcon || 'glyphicon-folder-close';
+				var cls_folder_close = options.folderCloseIcon || 'glyphicon-folder-open';
+
+				$a.attr("data-toggle", "tree")
+				.attr("data-icon-open", cls_folder_open)
+				.attr("data-icon-close", cls_folder_close)
+				.addClass("glyphicon")
+				.addClass(_open ? cls_folder_close : cls_folder_open);
+
+				var $sub_ul = $("<ul class='tree-list'>").appendTo($li);
+				$.each(_list, function(i, data) {
+					$sub_ul.tree(data, options);
+				});
+				if(!_open) {
+					$sub_ul.hide();
+				}
+			} else {
+				var cls_file = options.itemIcon || 'glyphicon-file';
+
+				$a.addClass(cls_file);
+			}
+			return _my;
+		},
+	});
+
+	$(document).on("click.bs.treeView", "[data-toggle='tree']", function(event) {
+		event.preventDefault();
+
+		var _my = $(this);
+		if(_my.closest("li").hasClass("disabled")) return;
+
+		var $list = _my.parent().find("> .tree-list");
+		var clsOpen = _my.attr("data-icon-open");
+		var clsClose = _my.attr("data-icon-close");
+
+		if($list.is(":hidden")) {
+			_my.removeClass(clsOpen);
+			_my.addClass(clsClose);
+			$list.slideDown();
+		} else {
+			_my.addClass(clsOpen);
+			_my.removeClass(clsClose);
+			$list.slideUp();
 		}
 	});
 }(window.jQuery);

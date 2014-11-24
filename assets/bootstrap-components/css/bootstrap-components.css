@@ -1,4 +1,4 @@
-
+/*Bootstrap Components 3.0 - Created By ZombieJ*/
 .progress [data-toggle="slider"] {
 	height: 100%;
 	vertical-align: top;
@@ -17,8 +17,7 @@
 .progress[data-slider-container] [data-toggle="slider-background"] {
 	position: absolute;
 	height: 20px;
-}
-.callout {
+}.callout {
 	margin: 0 0 18px 0;
 	padding: 20px;
 	border-left: 3px solid #eee;
@@ -66,8 +65,7 @@
 	background-color: #fdf7f7;
 	border-color: #eed3d7;
 	color: #b94a48;
-}
-.checkbox[data-toggle="checkbox"] {
+}.checkbox[data-toggle="checkbox"] {
 	margin: 0 0 1px 0;
 	padding: 0 0 0 0;
 	min-height: inherit;
@@ -99,8 +97,7 @@
 .checkbox[data-toggle="checkbox"][checked]:before {
 	font-size: 15px;
 	opacity: 1;
-}
-.bsc-datepicker {
+}.bsc-datepicker {
 	background: white;
 	display: inline-block;
 	border: 1px solid #CCC;
@@ -260,8 +257,7 @@
 	display: inline-block;
 	width: 29px;
 	text-align: center;
-}
-.notification-body {
+}.notification-body {
 	display: inline-block;
 	position: fixed;
 	padding: 7px 10px 7px 10px;
@@ -306,8 +302,7 @@
 
 .notification-body.bottom {
 	bottom: 0;
-}
-.radio[data-toggle="radio"] {
+}.radio[data-toggle="radio"] {
 	display: inline-block;
 	margin: 0 0 1px 0;
 	padding: 0;
@@ -343,10 +338,10 @@
 .radio[data-toggle="radio"][checked]:before {
 	font-size: 15px;
 	opacity: 1;
-}
-.dropdown-toggle[data-toggle="dropdown"][data-type="selector"] {
+}.dropdown-toggle[data-toggle="dropdown"][data-type="selector"] {
 	text-align: left;
 	padding-right: 25px;
+	position: relative;
 }
 
 .dropdown-toggle[data-toggle="dropdown"][data-type="selector"] .caret {
@@ -357,8 +352,7 @@
 
 ul.dropdown-menu[role="menu"][data-type="selector"] li a {
 	cursor: default;
-}
-.progress [data-toggle="slider"] {
+}.progress [data-toggle="slider"] {
 	height: 100%;
 	vertical-align: top;
 	float: left;
@@ -376,4 +370,27 @@ ul.dropdown-menu[role="menu"][data-type="selector"] li a {
 .progress[data-slider-container] [data-toggle="slider-background"] {
 	position: absolute;
 	height: 20px;
+}ul.treeView ul {
+	margin: 0;
+	padding: 0 0 0 25px;
+}
+
+ul.treeView li {
+	list-style: none;
+}
+
+ul.treeView li.disabled, 
+ul.treeView li.disabled .tree-icon {
+	color: #999;
+}
+
+ul.treeView li .tree-icon {
+	color: #333;
+	text-decoration: none;
+	margin-left: 3px;
+	margin-right: 5px;
+}
+
+ul.treeView li [data-toggle='tree'] {
+	cursor: pointer;
 }
