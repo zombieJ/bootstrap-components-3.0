@@ -71,6 +71,20 @@
 						return ret;
 					});
 				});
+
+				// dialog - small or large
+				$("#dlg_sm").click(function() {
+					$.dialog({
+						title: "Small Dialog",
+						size: "small"
+					});
+				});
+				$("#dlg_lg").click(function() {
+					$.dialog({
+						title: "Large Dialog",
+						size: "large"
+					});
+				});
 			});
 		</script>
 		<!-- Button to trigger modal -->
@@ -82,6 +96,9 @@
 		<span id="dlg_customize_tips"></span>
 		<br /><br />
 		<a id="dlg_confirm_notClose" class="btn btn-default">confirm - Click cancel not close dialog</a>
+		<br /><br />
+		<a id="dlg_sm" class="btn btn-default">Small Dialog</a>
+		<a id="dlg_lg" class="btn btn-default">Large Dialog</a>
 
 		<div id="sample" class="hide">
 			<div>

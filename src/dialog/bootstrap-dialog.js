@@ -1,12 +1,14 @@
 /*	this is to help hightlight target element with dark background.
 options:
-	title:			string				specify title of dialog.
-	content:		element				specify content of dialog.
-	close:			boolean				default is true for alert window contains close button
-	confirm:		boolean				default is false for dialog can check yes or no
-	buttons:		array				if setted will disable confirm, e.x.
-										[{name: "delete", class: "btn btn-danger", left: true},
-										{name: "Not Yet", value: -1}, {name: "That's Time!"}]
+	title:			string						specify title of dialog.
+	content:		element						specify content of dialog.
+	close:			boolean						default is true for alert window contains close button
+	confirm:		boolean						default is false for dialog can check yes or no
+	buttons:		array						if setted will disable confirm, e.x.
+												[{name: "delete", class: "btn btn-danger", left: true},
+												{name: "Not Yet", value: -1}, {name: "That's Time!"}]
+	fade:			boolean						default is true for dialog fade animation
+	size:			"small","normal","large"	default is "normal" for dialog size
 	!other options which contains in modal
 
 callback:			[function]			it will trigger event when user close this dialog by click the return button.
@@ -31,6 +33,7 @@ $.extend({
 		var _confirm = $._bc.get(_options, "confirm", false);
 		var _buttons = $._bc.get(_options, "buttons", null);
 		var _fade = $._bc.get(_options, "fade", true);
+		var _size = $._bc.get(_options, "size", "");
 
 		var _ret = null;
 
@@ -59,6 +62,15 @@ $.extend({
 
 		if (_fade) {
 			$modal.addClass('fade');
+		}
+
+		switch(_size) {
+		case "small":
+			$modal_dialog.addClass("modal-sm");
+			break;
+		case "large":
+			$modal_dialog.addClass("modal-lg");
+			break;
 		}
 
 		// fill buttons in footer
