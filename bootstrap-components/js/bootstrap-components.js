@@ -928,6 +928,13 @@ $.extend({
 		$modal.css("z-index", $._bc.vals.dialog.z_index+1);
 		$._bc.vals.dialog.z_index += 2;
 
+		// Fix dialog position if exist multi-modal
+		$back.one('bsTransitionEnd', function() {
+			if($(".modal.in").length > 1) {
+				$modal.css("padding-right", $("body").css("padding-right"));
+			}
+		});
+
 		// begin hide window, return callback
 		$modal.on('hide.bs.modal', function () {
 			if(_callback != null) {
@@ -939,7 +946,12 @@ $.extend({
 		$modal.on('hidden.bs.modal', function () {
 			$(this).remove();
 			$._bc.vals.dialog.z_index -= 2;
+
+			if($(".modal-backdrop").length) {
+				$("body").addClass("modal-open");
+			}
 		});
+
 		return $modal;
 	}
 });
