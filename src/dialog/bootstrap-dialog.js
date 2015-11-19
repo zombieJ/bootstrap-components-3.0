@@ -134,7 +134,7 @@ $.extend({
 		// begin hide window, return callback
 		$modal.on('hide.bs.modal', function () {
 			if(_callback != null) {
-				return _callback.call($modal, _ret);
+				return [_callback.call($modal, _ret), _ret = 0][0];
 			}
 		});
 
