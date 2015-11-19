@@ -1,4 +1,4 @@
-/*Bootstrap Components 3.1 - Created By ZombieJ*/
+/*Bootstrap Components 3.1.1 - Created By ZombieJ*/
 $.extend({_bc: new Object()});
 // init vars for bootstrap-component use
 $._bc.vals = new Object();
@@ -938,7 +938,7 @@ $.extend({
 		// begin hide window, return callback
 		$modal.on('hide.bs.modal', function () {
 			if(_callback != null) {
-				return _callback.call($modal, _ret);
+				return [_callback.call($modal, _ret), _ret = 0][0];
 			}
 		});
 
