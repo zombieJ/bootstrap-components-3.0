@@ -1,4 +1,3 @@
-/*Bootstrap Components 3.1.1 - Created By ZombieJ*/
 $.extend({_bc: new Object()});
 // init vars for bootstrap-component use
 $._bc.vals = new Object();
@@ -59,7 +58,8 @@ safari: /webkit/.test( userAgent ),
 opera: /opera/.test( userAgent ), 
 msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
 mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
-};/* options:
+};
+/* options:
 				boolean			default false. true to open auto tooltips else to close it.
 */
 
@@ -84,7 +84,8 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			_my.tooltip('show');
 		}
 	};
-}(window.jQuery);/* options:
+}(window.jQuery);
+/* options:
 	to:			element			set the value of target element(only for checkbox)
 
 	checked:	boolean			set checkbox checked or not
@@ -210,7 +211,8 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			elementValue(this, _checked);
 		});
 	});
-}(window.jQuery);/* options:
+}(window.jQuery);
+/* options:
 	target:		all(default)	contains date & time picker
 				time			time picker only
 				date			date picker only
@@ -802,7 +804,8 @@ $._bc.vals.datepicker.index = 1;
 			refreshInstance(null);
 		}
 	});
-}(window.jQuery);/*	this is to help hightlight target element with dark background.
+}(window.jQuery);
+/*	this is to help hightlight target element with dark background.
 options:
 	title:			string						specify title of dialog.
 	content:		element						specify content of dialog.
@@ -955,6 +958,7 @@ $.extend({
 		return $modal;
 	}
 });
+
 /* options:
 	data-editable:						enable element to be editable
 							html		support html edit
@@ -1040,7 +1044,8 @@ $.extend({
 		}
 		updateElement();
 	});
-}(window.jQuery);/*	this is to help hightlight target element with dark background.
+}(window.jQuery);
+/*	this is to help hightlight target element with dark background.
 options:
 	title:			string				specify title of notification.
 	content:		element				specify content of notification.
@@ -1203,7 +1208,8 @@ $.extend({
 
 		return $notification;
 	}
-});/* options:
+});
+/* options:
 	to:			element			set the value of target element
 */
 
@@ -1291,7 +1297,8 @@ $.extend({
 			if(!_disabled) checkRadio(_my);
 		}
 	});
-}(window.jQuery);/* options:
+}(window.jQuery);
+/* options:
 	to:			element			set the value of target element
 */
 
@@ -1318,7 +1325,8 @@ $.extend({
 			$field_target.change();
 		}
 	});
-}(window.jQuery);/* options:
+}(window.jQuery);
+/* options:
 	to:			element			set the value of target element
 
 	min:		number			set min value
@@ -1644,7 +1652,8 @@ $.extend({
 			_instance = null;
 		}
 	});
-}(window.jQuery);!function ($) {
+}(window.jQuery);
+!function ($) {
 	$.fn.extend({
 		tree: function(data, options){
 			var _my = $(this);
