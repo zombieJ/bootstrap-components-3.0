@@ -25,4 +25,4 @@
 			$field_target.change();
 		}
 	});
-}(window.jQuery);
+}(jQuery);

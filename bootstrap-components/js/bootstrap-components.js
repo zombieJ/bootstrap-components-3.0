@@ -84,7 +84,7 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			_my.tooltip('show');
 		}
 	};
-}(window.jQuery);
+}(jQuery);
 /* options:
 	to:			element			set the value of target element(only for checkbox)
 
@@ -211,7 +211,7 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 			elementValue(this, _checked);
 		});
 	});
-}(window.jQuery);
+}(jQuery);
 /* options:
 	target:		all(default)	contains date & time picker
 				time			time picker only
@@ -804,7 +804,7 @@ $._bc.vals.datepicker.index = 1;
 			refreshInstance(null);
 		}
 	});
-}(window.jQuery);
+}(jQuery);
 /*	this is to help hightlight target element with dark background.
 options:
 	title:			string						specify title of dialog.
@@ -1044,7 +1044,7 @@ $.extend({
 		}
 		updateElement();
 	});
-}(window.jQuery);
+}(jQuery);
 /*	this is to help hightlight target element with dark background.
 options:
 	title:			string				specify title of notification.
@@ -1297,7 +1297,7 @@ $.extend({
 			if(!_disabled) checkRadio(_my);
 		}
 	});
-}(window.jQuery);
+}(jQuery);
 /* options:
 	to:			element			set the value of target element
 */
@@ -1325,7 +1325,7 @@ $.extend({
 			$field_target.change();
 		}
 	});
-}(window.jQuery);
+}(jQuery);
 /* options:
 	to:			element			set the value of target element
 
@@ -1652,7 +1652,7 @@ $.extend({
 			_instance = null;
 		}
 	});
-}(window.jQuery);
+}(jQuery);
 !function ($) {
 	$.fn.extend({
 		tree: function(data, options){
@@ -1718,4 +1718,4 @@ $.extend({
 			$list.slideUp();
 		}
 	});
-}(window.jQuery);
+}(jQuery);

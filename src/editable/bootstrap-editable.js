@@ -83,4 +83,4 @@
 		}
 		updateElement();
 	});
-}(window.jQuery);
+}(jQuery);

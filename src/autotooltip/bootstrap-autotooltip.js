@@ -23,4 +23,4 @@
 			_my.tooltip('show');
 		}
 	};
-}(window.jQuery);
+}(jQuery);

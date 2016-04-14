@@ -590,4 +590,4 @@ $._bc.vals.datepicker.index = 1;
 			refreshInstance(null);
 		}
 	});
-}(window.jQuery);
+}(jQuery);

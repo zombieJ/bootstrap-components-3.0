@@ -124,4 +124,4 @@
 			elementValue(this, _checked);
 		});
 	});
-}(window.jQuery);
+}(jQuery);

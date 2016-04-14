@@ -86,4 +86,4 @@
 			if(!_disabled) checkRadio(_my);
 		}
 	});
-}(window.jQuery);
+}(jQuery);

@@ -324,4 +324,4 @@
 			_instance = null;
 		}
 	});
-}(window.jQuery);
+}(jQuery);

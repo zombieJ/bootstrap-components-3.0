@@ -63,4 +63,4 @@
 			$list.slideUp();
 		}
 	});
-}(window.jQuery);
+}(jQuery);
