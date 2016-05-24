@@ -1,64 +1,66 @@
-$.extend({_bc: new Object()});
+!function ($) {
+	$.extend({_bc: new Object()});
 // init vars for bootstrap-component use
-$._bc.vals = new Object();
+	$._bc.vals = new Object();
 
 // get the setting & callback
-$._bc.vars = function(options, callback){
-	var vars = new Object();
-	if(typeof(options) == 'object') {
-		vars.options = options;
-	} else if(typeof(options) == 'function') {
-		vars.callback = options;
-	} else if(typeof(options) == 'string') {
-		vars.key = options;
+	$._bc.vars = function (options, callback) {
+		var vars = new Object();
+		if (typeof(options) == 'object') {
+			vars.options = options;
+		} else if (typeof(options) == 'function') {
+			vars.callback = options;
+		} else if (typeof(options) == 'string') {
+			vars.key = options;
+		}
+		if (typeof(callback) == 'function') {
+			vars.callback = callback;
+		}
+		return vars;
 	}
-	if(typeof(callback) == 'function') {
-		vars.callback = callback;
-	}
-	return vars;
-}
 // get the option by key and return default if not set
-$._bc.get = function(options, key, defaultValue) {
-	if(options != null) {
-		if(options[key] != null) {
-			return options[key];
+	$._bc.get = function (options, key, defaultValue) {
+		if (options != null) {
+			if (options[key] != null) {
+				return options[key];
+			} else {
+				return defaultValue;
+			}
 		} else {
 			return defaultValue;
 		}
-	} else {
-		return defaultValue;
 	}
-}
 
 // get a simple list to add / remove element
-$._bc.list = function() {
-	var list = new Array();
-	list.add = function(obj) {
-		list.push(obj);
-	}
-	list.remove = function(obj) {
-		var loc = null;
-		for (var i = 0; i < list.length; i++) {
-			var _o = list[i];
-			if(obj == _o) {
-				loc = i;
-				break;
-			}
+	$._bc.list = function () {
+		var list = new Array();
+		list.add = function (obj) {
+			list.push(obj);
 		}
-		if(loc != null) list.splice(loc, 1);
-	}
-	return list;
-}
+		list.remove = function (obj) {
+			var loc = null;
+			for (var i = 0; i < list.length; i++) {
+				var _o = list[i];
+				if (obj == _o) {
+					loc = i;
+					break;
+				}
+			}
+			if (loc != null) list.splice(loc, 1);
+		}
+		return list;
+	};
 
 // get the broswer version
-var userAgent = navigator.userAgent.toLowerCase();
-$._bc.browser = { 
-version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1], 
-safari: /webkit/.test( userAgent ), 
-opera: /opera/.test( userAgent ), 
-msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
-mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
-};
+	var userAgent = navigator.userAgent.toLowerCase();
+	$._bc.browser = {
+		version: (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1],
+		safari: /webkit/.test(userAgent),
+		opera: /opera/.test(userAgent),
+		msie: /msie/.test(userAgent) && !/opera/.test(userAgent),
+		mozilla: /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent)
+	};
+}(jQuery);
 /* options:
 				boolean			default false. true to open auto tooltips else to close it.
 */
@@ -225,12 +227,12 @@ mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
 	goon:		boolean			default false. True will change value immediately when click. - TODO
 */
 
-// init env
-$._bc.vals.datepicker = new Object();
-$._bc.vals.datepicker.index = 1;
-
-// init function
 !function ($) {
+	// init env
+	$._bc.vals.datepicker = new Object();
+	$._bc.vals.datepicker.index = 1;
+
+	// init function
 	$.extend({
 		datepicker: {
 			toDate: function(str, format) {
@@ -822,143 +824,144 @@ callback:			[function]			it will trigger event when user close this dialog by cl
 										return boolean of confirm, and false of alert and close button.
 */
 
+!function ($) {
 // init env
-$._bc.vals.dialog = new Object();
-$._bc.vals.dialog.z_index = 1051;
+	$._bc.vals.dialog = new Object();
+	$._bc.vals.dialog.z_index = 1051;
 
 // init function
-$.extend({
-	dialog:function(options, callback){
-		// get options
-		var vars = $._bc.vars(options, callback);
-		var _options = vars.options;
-		var _callback = vars.callback;
+	$.extend({
+		dialog: function (options, callback) {
+			// get options
+			var vars = $._bc.vars(options, callback);
+			var _options = vars.options;
+			var _callback = vars.callback;
 
-		var _title = $._bc.get(_options, "title", "");
-		var _content = $._bc.get(_options, "content", "");
-		var _close = $._bc.get(_options, "close", true);
-		var _confirm = $._bc.get(_options, "confirm", false);
-		var _buttons = $._bc.get(_options, "buttons", null);
-		var _fade = $._bc.get(_options, "fade", true);
-		var _size = $._bc.get(_options, "size", "");
+			var _title = $._bc.get(_options, "title", "");
+			var _content = $._bc.get(_options, "content", "");
+			var _close = $._bc.get(_options, "close", true);
+			var _confirm = $._bc.get(_options, "confirm", false);
+			var _buttons = $._bc.get(_options, "buttons", null);
+			var _fade = $._bc.get(_options, "fade", true);
+			var _size = $._bc.get(_options, "size", "");
 
-		var _ret = null;
+			var _ret = null;
 
-		// generate modal
-		var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
-		var $modal_dialog = $('<div class="modal-dialog">');
-		var $modal_content = $('<div class="modal-content">');
-		var $modal_header = $('<div class="modal-header">');
-		var $modal_header_close = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>');
-		var $modal_header_head = $('<h4 class="modal-title" id="myModalLabel">');
-		var $modal_body = $('<div class="modal-body">');
-		var $modal_footer = $('<div class="modal-footer">');
+			// generate modal
+			var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
+			var $modal_dialog = $('<div class="modal-dialog">');
+			var $modal_content = $('<div class="modal-content">');
+			var $modal_header = $('<div class="modal-header">');
+			var $modal_header_close = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>');
+			var $modal_header_head = $('<h4 class="modal-title" id="myModalLabel">');
+			var $modal_body = $('<div class="modal-body">');
+			var $modal_footer = $('<div class="modal-footer">');
 
-		$modal.appendTo("body");
-		$modal.append($modal_dialog);
-		$modal_dialog.append($modal_content);
-		$modal_content.append($modal_header);
-			if(_close) $modal_header.append($modal_header_close);
+			$modal.appendTo("body");
+			$modal.append($modal_dialog);
+			$modal_dialog.append($modal_content);
+			$modal_content.append($modal_header);
+			if (_close) $modal_header.append($modal_header_close);
 			$modal_header.append($modal_header_head);
-		$modal_content.append($modal_body);
-		$modal_content.append($modal_footer);
+			$modal_content.append($modal_body);
+			$modal_content.append($modal_footer);
 
-		// fill title & content
-		$modal_header_head.html(_title);
-		$modal_body.html(_content);
+			// fill title & content
+			$modal_header_head.html(_title);
+			$modal_body.html(_content);
 
-		if (_fade) {
-			$modal.addClass('fade');
-		}
+			if (_fade) {
+				$modal.addClass('fade');
+			}
 
-		switch(_size) {
-		case "small":
-			$modal_dialog.addClass("modal-sm");
-			break;
-		case "large":
-			$modal_dialog.addClass("modal-lg");
-			break;
-		}
+			switch (_size) {
+				case "small":
+					$modal_dialog.addClass("modal-sm");
+					break;
+				case "large":
+					$modal_dialog.addClass("modal-lg");
+					break;
+			}
 
-		// fill buttons in footer
-		if(_buttons != null) {
-			var _len = _buttons.length;
-			for(var i = 0 ; i < _len ; i += 1) {
-				var _btn = _buttons[i];
-				var _name = _btn.name;
-				var _class = $._bc.get(_btn, "class", "btn-default");
-				var _left = _btn.left === true;
-				var _value = $._bc.get(_btn, "value", _name);
+			// fill buttons in footer
+			if (_buttons != null) {
+				var _len = _buttons.length;
+				for (var i = 0; i < _len; i += 1) {
+					var _btn = _buttons[i];
+					var _name = _btn.name;
+					var _class = $._bc.get(_btn, "class", "btn-default");
+					var _left = _btn.left === true;
+					var _value = $._bc.get(_btn, "value", _name);
 
-				var $btn = $('<button type="button" class="btn">');
-				$btn.text(_name);
-				$btn.addClass(_class);
-				if(_left) $btn.addClass("pull-left");
-				$btn.data("value", _value);
-				$modal_footer.append($btn);
+					var $btn = $('<button type="button" class="btn">');
+					$btn.text(_name);
+					$btn.addClass(_class);
+					if (_left) $btn.addClass("pull-left");
+					$btn.data("value", _value);
+					$modal_footer.append($btn);
 
-				$btn.add($btn_confirm).click(function() {
-				_ret = $(this).data("value");
-				$modal.modal('hide');
+					$btn.add($btn_confirm).click(function () {
+						_ret = $(this).data("value");
+						$modal.modal('hide');
+					});
+				}
+			} else if (_confirm) {
+				var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
+				var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
+				$modal_footer.append($btn_cancel);
+				$modal_footer.append($btn_confirm);
+
+				$btn_cancel.add($btn_confirm).click(function () {
+					_ret = $(this).data("value");
+					$modal.modal('hide');
+				});
+			} else {
+				var $btn_close = $('<button type="button" class="btn btn-default">Close</button>').data("value", true);
+				$modal_footer.append($btn_close);
+
+				$btn_close.click(function () {
+					_ret = $(this).data("value");
+					$modal.modal('hide');
+				});
+			}
+
+			// show dialog with options
+			$modal.modal(_options);
+
+			// move modal-backdrop to top
+			var $back = $("body div.modal-backdrop:last");
+			$back.css("z-index", $._bc.vals.dialog.z_index);
+			$modal.css("z-index", $._bc.vals.dialog.z_index + 1);
+			$._bc.vals.dialog.z_index += 2;
+
+			// Fix dialog position if exist multi-modal
+			$back.one('bsTransitionEnd', function () {
+				if ($(".modal.in").length > 1) {
+					$modal.css("padding-right", $("body").css("padding-right"));
+				}
 			});
-			}
-		} else if(_confirm) {
-			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
-			var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
-			$modal_footer.append($btn_cancel);
-			$modal_footer.append($btn_confirm);
 
-			$btn_cancel.add($btn_confirm).click(function() {
-				_ret = $(this).data("value");
-				$modal.modal('hide');
+			// begin hide window, return callback
+			$modal.on('hide.bs.modal', function () {
+				if (_callback != null) {
+					return [_callback.call($modal, _ret), _ret = 0][0];
+				}
 			});
-		} else {
-			var $btn_close = $('<button type="button" class="btn btn-default">Close</button>').data("value", true);
-			$modal_footer.append($btn_close);
 
-			$btn_close.click(function() {
-				_ret = $(this).data("value");
-				$modal.modal('hide');
+			// when show hidden, remove it
+			$modal.on('hidden.bs.modal', function () {
+				$(this).remove();
+				$._bc.vals.dialog.z_index -= 2;
+
+				if ($(".modal-backdrop").length) {
+					$("body").addClass("modal-open");
+				}
 			});
+
+			return $modal;
 		}
-
-		// show dialog with options
-		$modal.modal(_options);
-
-		// move modal-backdrop to top
-		var $back = $("body div.modal-backdrop:last");
-		$back.css("z-index", $._bc.vals.dialog.z_index);
-		$modal.css("z-index", $._bc.vals.dialog.z_index+1);
-		$._bc.vals.dialog.z_index += 2;
-
-		// Fix dialog position if exist multi-modal
-		$back.one('bsTransitionEnd', function() {
-			if($(".modal.in").length > 1) {
-				$modal.css("padding-right", $("body").css("padding-right"));
-			}
-		});
-
-		// begin hide window, return callback
-		$modal.on('hide.bs.modal', function () {
-			if(_callback != null) {
-				return [_callback.call($modal, _ret), _ret = 0][0];
-			}
-		});
-
-		// when show hidden, remove it
-		$modal.on('hidden.bs.modal', function () {
-			$(this).remove();
-			$._bc.vals.dialog.z_index -= 2;
-
-			if($(".modal-backdrop").length) {
-				$("body").addClass("modal-open");
-			}
-		});
-
-		return $modal;
-	}
-});
-
+	});
+}(jQuery);
 /* options:
 	data-editable:						enable element to be editable
 							html		support html edit
@@ -1061,154 +1064,157 @@ callback:			[function]			It will trigger when notification created.
 return:				[element]			return notification element
 */
 
+!function ($) {
 // init env
-$._bc.vals.notify = new Object();
-$._bc.vals.notify.region = new Object();	// record by region
+	$._bc.vals.notify = new Object();
+	$._bc.vals.notify.region = new Object();	// record by region
 
 // init function
-$.extend({
-	notify:function(options, callback){
-		// get options
-		var vars = $._bc.vars(options, callback);
-		var _options = vars.options;
-		var _callback = vars.callback;
+	$.extend({
+		notify: function (options, callback) {
+			// get options
+			var vars = $._bc.vars(options, callback);
+			var _options = vars.options;
+			var _callback = vars.callback;
 
-		var _title = $._bc.get(_options, "title", "Notification");
-		var _content = $._bc.get(_options, "content", "");
-		var _position = $._bc.get(_options, "position", "right,top");
-		var _type = $._bc.get(_options, "type", "normal");
-		var _timeout = $._bc.get(_options, "timeout", 4000);
-		var _overtimeout = $._bc.get(_options, "overtimeout", 1000);
-		var _queuetimeout = $._bc.get(_options, "queuetimeout", 1000);
-		var _region = $._bc.get(_options, "region", "");
-		var _list = null;
+			var _title = $._bc.get(_options, "title", "Notification");
+			var _content = $._bc.get(_options, "content", "");
+			var _position = $._bc.get(_options, "position", "right,top");
+			var _type = $._bc.get(_options, "type", "normal");
+			var _timeout = $._bc.get(_options, "timeout", 4000);
+			var _overtimeout = $._bc.get(_options, "overtimeout", 1000);
+			var _queuetimeout = $._bc.get(_options, "queuetimeout", 1000);
+			var _region = $._bc.get(_options, "region", "");
+			var _list = null;
 
-		var _tt = null;
+			var _tt = null;
 
-		var $notification = $("<div class='alert notification-body'>");
-		var $btn = $("<button type='button' class='close'>x</button>");
+			var $notification = $("<div class='alert notification-body'>");
+			var $btn = $("<button type='button' class='close'>x</button>");
 
-		// get the notification list for region
-		if(_region != "") {
-			$notification.attr("data-region", _region);
-			_list = $._bc.vals.notify.region[_region];
-			if(_list == null) {
-				_list = $._bc.list();
-				$._bc.vals.notify.region[_region] = _list;
+			// get the notification list for region
+			if (_region != "") {
+				$notification.attr("data-region", _region);
+				_list = $._bc.vals.notify.region[_region];
+				if (_list == null) {
+					_list = $._bc.list();
+					$._bc.vals.notify.region[_region] = _list;
+				}
+				_list.add($notification);
 			}
-			_list.add($notification);
-		}
 
-		// alert position
-		if(_position.indexOf("left") != -1) $notification.addClass("left");
-		if(_position.indexOf("right") != -1) $notification.addClass("right");
-		if(_position.indexOf("top") != -1) $notification.addClass("top");
-		if(_position.indexOf("bottom") != -1) $notification.addClass("bottom");
+			// alert position
+			if (_position.indexOf("left") != -1) $notification.addClass("left");
+			if (_position.indexOf("right") != -1) $notification.addClass("right");
+			if (_position.indexOf("top") != -1) $notification.addClass("top");
+			if (_position.indexOf("bottom") != -1) $notification.addClass("bottom");
 
-		// alert color
-		if(_type == "normal") $notification.addClass("alert-normal");
-		if(_type == "warning") $notification.addClass("alert-warning");
-		if(_type == "danger") $notification.addClass("alert-danger");
-		if(_type == "success") $notification.addClass("alert-success");
-		if(_type == "info") $notification.addClass("alert-info");
+			// alert color
+			if (_type == "normal") $notification.addClass("alert-normal");
+			if (_type == "warning") $notification.addClass("alert-warning");
+			if (_type == "danger") $notification.addClass("alert-danger");
+			if (_type == "success") $notification.addClass("alert-success");
+			if (_type == "info") $notification.addClass("alert-info");
 
-		$notification.append($btn);
+			$notification.append($btn);
 
-		if(_title == "") _title = "&nbsp;";
-		if(typeof(_title) == 'string') _title = "<h5>" + _title + "</h5>";
-		$notification.append(_title);
-		if(_content != "") $notification.append(_content);
+			if (_title == "") _title = "&nbsp;";
+			if (typeof(_title) == 'string') _title = "<h5>" + _title + "</h5>";
+			$notification.append(_title);
+			if (_content != "") $notification.append(_content);
 
-		// append notification
-		$("body").append($notification);
+			// append notification
+			$("body").append($notification);
 
-		// fade in
-		$notification.hide();
-		$notification.fadeIn();
+			// fade in
+			$notification.hide();
+			$notification.fadeIn();
 
-		// fade out
-		function close() {
-			if(_list != null) _list.remove($notification);
-			$notification.fadeOut(function(){
-				$notification.remove();
+			// fade out
+			function close() {
+				if (_list != null) _list.remove($notification);
+				$notification.fadeOut(function () {
+					$notification.remove();
+				});
+			}
+
+			$btn.click(function () {
+				close();
+				refreshAllRelated();
 			});
-		}
 
-		$btn.click(function(){
-			close();
-			refreshAllRelated();
-		});
+			// auto fade out
+			$notification.stopAutoFadeOut = function () {
+				window.clearTimeout(_tt);
+			}
+			$notification.setAutoFadeOut = function (_delay) {
+				if (_timeout > 0) {
+					var _inner_delay = _delay == null ? _timeout : _delay;
 
-		// auto fade out
-		$notification.stopAutoFadeOut = function() {
-			window.clearTimeout(_tt);
-		}
-		$notification.setAutoFadeOut = function(_delay) {
-			if(_timeout > 0) {
+					$notification.stopAutoFadeOut();
+					_tt = window.setTimeout(function () {
+						close();
+					}, _inner_delay);
+				}
+			}
+
+			// refresh timeout if is hover
+			if (_timeout > 0) {
+				$notification.mouseenter(function () {
+					if (_list == null) {
+						$notification.stopAutoFadeOut();
+					} else {
+						for (var i = _list.length - 1; i >= 0; i--) {
+							var $element = _list[i];
+							$element.stopAutoFadeOut();
+						}
+					}
+				});
+				$notification.mouseleave(function () {
+					refreshAllRelated(_overtimeout);
+				});
+			}
+
+			// deal with notifications in same region
+			function refreshAllRelated(_delay) {
 				var _inner_delay = _delay == null ? _timeout : _delay;
 
-				$notification.stopAutoFadeOut();
-				_tt = window.setTimeout(function(){
-					close();
-				}, _inner_delay);
-			}
-		}
-
-		// refresh timeout if is hover
-		if(_timeout > 0) {
-			$notification.mouseenter(function(){
-				if(_list == null) {
-					$notification.stopAutoFadeOut();
+				if (_list == null) {
+					$notification.setAutoFadeOut(_inner_delay);
 				} else {
-					for(var i = _list.length - 1 ; i >= 0  ; i--) {
+					var _istop = _position.indexOf("top") != -1;
+					var _isbottom = _position.indexOf("bottom") != -1;
+
+					var _offset = 0;
+					for (var i = _list.length - 1; i >= 0; i--) {
 						var $element = _list[i];
-						$element.stopAutoFadeOut();
+
+						// move element
+						if (_istop) {
+							$element.animate({top: _offset,}, {queue: false});
+						} else if (_isbottom) {
+							$element.animate({bottom: _offset,}, {queue: false});
+						}
+						var _marginTop = parseInt($element.css("margin-top").replace("px", ""), 10);
+						_offset += $element.outerHeight() + _marginTop;
+
+						// set timeout
+						$element.setAutoFadeOut(_inner_delay + i * _queuetimeout);
 					}
-				}
-			});
-			$notification.mouseleave(function(){
-				refreshAllRelated(_overtimeout);
-			});
-		}
-
-		// deal with notifications in same region
-		function refreshAllRelated(_delay) {
-			var _inner_delay = _delay == null ? _timeout : _delay;
-
-			if(_list == null) {
-				$notification.setAutoFadeOut(_inner_delay);
-			} else {
-				var _istop = _position.indexOf("top") != -1;
-				var _isbottom = _position.indexOf("bottom") != -1;
-
-				var _offset = 0;
-				for(var i = _list.length - 1 ; i >= 0  ; i--) {
-					var $element = _list[i];
-
-					// move element
-					if(_istop) {
-						$element.animate({	top: _offset,},{queue: false});
-					} else if(_isbottom) {
-						$element.animate({	bottom: _offset,},{queue: false});
-					}
-					var _marginTop = parseInt($element.css("margin-top").replace("px",""), 10);
-					_offset += $element.outerHeight() + _marginTop;
-
-					// set timeout
-					$element.setAutoFadeOut(_inner_delay + i * _queuetimeout);
 				}
 			}
-		}
-		refreshAllRelated();
 
-		// call the callback
-		if(_callback != null) {
-			_callback.call($notification);
-		}
+			refreshAllRelated();
 
-		return $notification;
-	}
-});
+			// call the callback
+			if (_callback != null) {
+				_callback.call($notification);
+			}
+
+			return $notification;
+		}
+	});
+}(jQuery);
 /* options:
 	to:			element			set the value of target element
 */

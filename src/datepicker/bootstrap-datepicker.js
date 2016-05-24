@@ -11,12 +11,12 @@
 	goon:		boolean			default false. True will change value immediately when click. - TODO
 */
 
-// init env
-$._bc.vals.datepicker = new Object();
-$._bc.vals.datepicker.index = 1;
-
-// init function
 !function ($) {
+	// init env
+	$._bc.vals.datepicker = new Object();
+	$._bc.vals.datepicker.index = 1;
+
+	// init function
 	$.extend({
 		datepicker: {
 			toDate: function(str, format) {

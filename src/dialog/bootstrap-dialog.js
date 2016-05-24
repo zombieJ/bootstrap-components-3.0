@@ -15,139 +15,141 @@ callback:			[function]			it will trigger event when user close this dialog by cl
 										return boolean of confirm, and false of alert and close button.
 */
 
+!function ($) {
 // init env
-$._bc.vals.dialog = new Object();
-$._bc.vals.dialog.z_index = 1051;
+	$._bc.vals.dialog = new Object();
+	$._bc.vals.dialog.z_index = 1051;
 
 // init function
-$.extend({
-	dialog:function(options, callback){
-		// get options
-		var vars = $._bc.vars(options, callback);
-		var _options = vars.options;
-		var _callback = vars.callback;
+	$.extend({
+		dialog: function (options, callback) {
+			// get options
+			var vars = $._bc.vars(options, callback);
+			var _options = vars.options;
+			var _callback = vars.callback;
 
-		var _title = $._bc.get(_options, "title", "");
-		var _content = $._bc.get(_options, "content", "");
-		var _close = $._bc.get(_options, "close", true);
-		var _confirm = $._bc.get(_options, "confirm", false);
-		var _buttons = $._bc.get(_options, "buttons", null);
-		var _fade = $._bc.get(_options, "fade", true);
-		var _size = $._bc.get(_options, "size", "");
+			var _title = $._bc.get(_options, "title", "");
+			var _content = $._bc.get(_options, "content", "");
+			var _close = $._bc.get(_options, "close", true);
+			var _confirm = $._bc.get(_options, "confirm", false);
+			var _buttons = $._bc.get(_options, "buttons", null);
+			var _fade = $._bc.get(_options, "fade", true);
+			var _size = $._bc.get(_options, "size", "");
 
-		var _ret = null;
+			var _ret = null;
 
-		// generate modal
-		var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
-		var $modal_dialog = $('<div class="modal-dialog">');
-		var $modal_content = $('<div class="modal-content">');
-		var $modal_header = $('<div class="modal-header">');
-		var $modal_header_close = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>');
-		var $modal_header_head = $('<h4 class="modal-title" id="myModalLabel">');
-		var $modal_body = $('<div class="modal-body">');
-		var $modal_footer = $('<div class="modal-footer">');
+			// generate modal
+			var $modal = $('<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">');
+			var $modal_dialog = $('<div class="modal-dialog">');
+			var $modal_content = $('<div class="modal-content">');
+			var $modal_header = $('<div class="modal-header">');
+			var $modal_header_close = $('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>');
+			var $modal_header_head = $('<h4 class="modal-title" id="myModalLabel">');
+			var $modal_body = $('<div class="modal-body">');
+			var $modal_footer = $('<div class="modal-footer">');
 
-		$modal.appendTo("body");
-		$modal.append($modal_dialog);
-		$modal_dialog.append($modal_content);
-		$modal_content.append($modal_header);
-			if(_close) $modal_header.append($modal_header_close);
+			$modal.appendTo("body");
+			$modal.append($modal_dialog);
+			$modal_dialog.append($modal_content);
+			$modal_content.append($modal_header);
+			if (_close) $modal_header.append($modal_header_close);
 			$modal_header.append($modal_header_head);
-		$modal_content.append($modal_body);
-		$modal_content.append($modal_footer);
+			$modal_content.append($modal_body);
+			$modal_content.append($modal_footer);
 
-		// fill title & content
-		$modal_header_head.html(_title);
-		$modal_body.html(_content);
+			// fill title & content
+			$modal_header_head.html(_title);
+			$modal_body.html(_content);
 
-		if (_fade) {
-			$modal.addClass('fade');
-		}
+			if (_fade) {
+				$modal.addClass('fade');
+			}
 
-		switch(_size) {
-		case "small":
-			$modal_dialog.addClass("modal-sm");
-			break;
-		case "large":
-			$modal_dialog.addClass("modal-lg");
-			break;
-		}
+			switch (_size) {
+				case "small":
+					$modal_dialog.addClass("modal-sm");
+					break;
+				case "large":
+					$modal_dialog.addClass("modal-lg");
+					break;
+			}
 
-		// fill buttons in footer
-		if(_buttons != null) {
-			var _len = _buttons.length;
-			for(var i = 0 ; i < _len ; i += 1) {
-				var _btn = _buttons[i];
-				var _name = _btn.name;
-				var _class = $._bc.get(_btn, "class", "btn-default");
-				var _left = _btn.left === true;
-				var _value = $._bc.get(_btn, "value", _name);
+			// fill buttons in footer
+			if (_buttons != null) {
+				var _len = _buttons.length;
+				for (var i = 0; i < _len; i += 1) {
+					var _btn = _buttons[i];
+					var _name = _btn.name;
+					var _class = $._bc.get(_btn, "class", "btn-default");
+					var _left = _btn.left === true;
+					var _value = $._bc.get(_btn, "value", _name);
 
-				var $btn = $('<button type="button" class="btn">');
-				$btn.text(_name);
-				$btn.addClass(_class);
-				if(_left) $btn.addClass("pull-left");
-				$btn.data("value", _value);
-				$modal_footer.append($btn);
+					var $btn = $('<button type="button" class="btn">');
+					$btn.text(_name);
+					$btn.addClass(_class);
+					if (_left) $btn.addClass("pull-left");
+					$btn.data("value", _value);
+					$modal_footer.append($btn);
 
-				$btn.add($btn_confirm).click(function() {
-				_ret = $(this).data("value");
-				$modal.modal('hide');
+					$btn.add($btn_confirm).click(function () {
+						_ret = $(this).data("value");
+						$modal.modal('hide');
+					});
+				}
+			} else if (_confirm) {
+				var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
+				var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
+				$modal_footer.append($btn_cancel);
+				$modal_footer.append($btn_confirm);
+
+				$btn_cancel.add($btn_confirm).click(function () {
+					_ret = $(this).data("value");
+					$modal.modal('hide');
+				});
+			} else {
+				var $btn_close = $('<button type="button" class="btn btn-default">Close</button>').data("value", true);
+				$modal_footer.append($btn_close);
+
+				$btn_close.click(function () {
+					_ret = $(this).data("value");
+					$modal.modal('hide');
+				});
+			}
+
+			// show dialog with options
+			$modal.modal(_options);
+
+			// move modal-backdrop to top
+			var $back = $("body div.modal-backdrop:last");
+			$back.css("z-index", $._bc.vals.dialog.z_index);
+			$modal.css("z-index", $._bc.vals.dialog.z_index + 1);
+			$._bc.vals.dialog.z_index += 2;
+
+			// Fix dialog position if exist multi-modal
+			$back.one('bsTransitionEnd', function () {
+				if ($(".modal.in").length > 1) {
+					$modal.css("padding-right", $("body").css("padding-right"));
+				}
 			});
-			}
-		} else if(_confirm) {
-			var $btn_cancel = $('<button type="button" class="btn btn-default">Cancel</button>').data("value", false);
-			var $btn_confirm = $('<button type="button" class="btn btn-primary">Confirm</button>').data("value", true);
-			$modal_footer.append($btn_cancel);
-			$modal_footer.append($btn_confirm);
 
-			$btn_cancel.add($btn_confirm).click(function() {
-				_ret = $(this).data("value");
-				$modal.modal('hide');
+			// begin hide window, return callback
+			$modal.on('hide.bs.modal', function () {
+				if (_callback != null) {
+					return [_callback.call($modal, _ret), _ret = 0][0];
+				}
 			});
-		} else {
-			var $btn_close = $('<button type="button" class="btn btn-default">Close</button>').data("value", true);
-			$modal_footer.append($btn_close);
 
-			$btn_close.click(function() {
-				_ret = $(this).data("value");
-				$modal.modal('hide');
+			// when show hidden, remove it
+			$modal.on('hidden.bs.modal', function () {
+				$(this).remove();
+				$._bc.vals.dialog.z_index -= 2;
+
+				if ($(".modal-backdrop").length) {
+					$("body").addClass("modal-open");
+				}
 			});
+
+			return $modal;
 		}
-
-		// show dialog with options
-		$modal.modal(_options);
-
-		// move modal-backdrop to top
-		var $back = $("body div.modal-backdrop:last");
-		$back.css("z-index", $._bc.vals.dialog.z_index);
-		$modal.css("z-index", $._bc.vals.dialog.z_index+1);
-		$._bc.vals.dialog.z_index += 2;
-
-		// Fix dialog position if exist multi-modal
-		$back.one('bsTransitionEnd', function() {
-			if($(".modal.in").length > 1) {
-				$modal.css("padding-right", $("body").css("padding-right"));
-			}
-		});
-
-		// begin hide window, return callback
-		$modal.on('hide.bs.modal', function () {
-			if(_callback != null) {
-				return [_callback.call($modal, _ret), _ret = 0][0];
-			}
-		});
-
-		// when show hidden, remove it
-		$modal.on('hidden.bs.modal', function () {
-			$(this).remove();
-			$._bc.vals.dialog.z_index -= 2;
-
-			if($(".modal-backdrop").length) {
-				$("body").addClass("modal-open");
-			}
-		});
-
-		return $modal;
-	}
-});
+	});
+}(jQuery);
