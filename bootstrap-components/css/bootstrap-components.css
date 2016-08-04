@@ -112,6 +112,10 @@
 	z-index: 10;
 }
 
+.bsc-datepicker.init {
+	opacity: 0;
+}
+
 /* picker-group */
 .bsc-datepicker .picker-group {
 	border-top: 1px solid gray;
