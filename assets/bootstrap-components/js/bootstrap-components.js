@@ -439,6 +439,9 @@
 				enable_timepicker = true;
 				_format = _format || "yyyy-MM-dd HH:mm:ss";
 			}
+		var _position = my.attr("data-position") || "";
+			var position_right = _position.indexOf("right") >= 0;
+			var position_top = _position.indexOf("top") >= 0;
 		var _date = target.val();
 			var date = $.datepicker.toDate(_date, _format);
 			var dateShadow = new Date(date.getTime());		// an date which is display the current view
@@ -546,13 +549,28 @@
 				$timepicker_group_seconds.append($timepicker_group_seconds_plus);
 
 		refreshInstance($container);
-		var pos = target.offset();
-		$container.offset({
-			left: pos.left,
-			top: pos.top + target.outerHeight(),
-		}).click(function() {
+
+		setTimeout(function () {
+			var pos = target.offset();
+			var offset = {
+				left: pos.left,
+				top: pos.top + target.outerHeight()
+			};
+			if(position_right) {
+				offset.left = pos.left + target.outerWidth() - $container.outerWidth();
+			}
+			if(position_top) {
+				offset.top = pos.top - $container.outerHeight();
+			}
+
+			$container.offset(offset);
+			$container.removeClass("init");
+		});
+
+		$container.click(function() {
 			_preventEvent = true;
 		});
+		$container.addClass("init");
 
 		// bind data
 		$container.getFormat = function() {
