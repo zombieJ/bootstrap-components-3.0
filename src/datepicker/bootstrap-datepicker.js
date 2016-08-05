@@ -75,6 +75,11 @@
 			var _val = null;
 			_val = $.datepicker.dateToStrng(_date, _format);
 			_target.val(_val);
+
+			// Remove hook function
+			_instance.getTarget().off("keyup.datepicker");
+
+			// Clen up
 			_instance.remove();
 			_instance = null;
 
@@ -82,6 +87,7 @@
 			if(_val != _preVal) {
 				_target.change();
 			}
+
 		}
 		_instance = instance;
 	}
@@ -334,6 +340,7 @@
 
 		refreshInstance($container);
 
+		// Popup position update
 		setTimeout(function () {
 			var pos = target.offset();
 			var offset = {
@@ -517,6 +524,13 @@
 		if(!enable_timepicker) {
 			$timepicker.hide();
 		}
+
+		// Listen if target input changed
+		target.on("keyup.datepicker", function () {
+			var date = $.datepicker.toDate($(this).val(), _format);
+			dateCurrent = dateShadow = new Date(date.getTime());
+			draw();
+		});
 
 		// fill date in the view
 		function draw() {
